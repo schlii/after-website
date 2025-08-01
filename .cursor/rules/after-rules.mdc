@@ -14,12 +14,13 @@ alwaysApply: true
 
 #### Required Reference Documents
 - Always consult `planning.md` before starting any new feature or module
+- Frequently consult "after-rules.mdc"
 - Reference `tasks.md` for step-by-step implementation order
 - Follow the exact workflow sequence defined in planning documentation
 - Check task completion status before moving to next module
 - when a message contains "/wait" , do not code anything until user responds with a message containing "/go"
 - frequently check tasks.md and planning.md to verify that everything is on track
-- the command /check makes you check planning.md, tasks.md, and after-rules.mdc and check convo history to make sure youre on track
+- the command /check makes you check planning.md, tasks.md, and after-rules.mdc and check convo history to make sure youre on track. do not forget to check all 3 of those documents.
 
 #### Development Workflow Requirements
 - Review relevant task module before beginning work
@@ -27,7 +28,7 @@ alwaysApply: true
 - Mark tasks as completed with timestamps
 - Update planning documents when requirements change
 - Cross-reference current work against project architecture in `planning.md`
-- if a message contains "/no", do not code anything until the user confirms or if a message contains "/go"
+- if a message contains "/no", do not code anything or try to run any commands until the user confirms or if a message contains "/go"
 - commit a new version when starting a new task number (ex, task 1.2, task 2.5). when the user says "lets get started on task x.x", commit a new version
 - commit a new version when user says "mark task x.x as complete" after updating tasks.md
 
@@ -104,24 +105,21 @@ alwaysApply: true
 
 ### Component Structure
 ```typescript
-// Component file structure for 2000s aesthetic components
-import { type FC, type ComponentProps } from 'react'
+import { type FC } from 'react'
 import styles from './ComponentName.module.css'
 
 interface ComponentNameProps {
-  variant?: '2000s-primary' | '2000s-secondary' | 'modern-fallback'
   className?: string
   // Other props
 }
 
 export const ComponentName: FC<ComponentNameProps> = ({
-  variant = '2000s-primary',
   className,
   ...props
 }) => {
   return (
     <div 
-      className={`${styles.container} ${styles[variant]} ${className || ''}`}
+      className={`${styles.container} ${className || ''}`}
       {...props}
     >
       {/* Component content */}
@@ -145,15 +143,6 @@ export const ComponentName: FC<ComponentNameProps> = ({
 - Avoid inline styles except for dynamic values
 - Use CSS Grid/Flexbox for layouts
 
-### 2000s Aesthetic Standards
-- Use CSS-based recreations over image assets for scalability
-- Implement chaotic layouts with absolute positioning on desktop
-- Use overlapping elements with proper z-index management
-- Color palette: Neon colors, gradients, high contrast combinations
-- Typography: Multiple fonts, varied sizes, decorative text effects
-- Animations: CSS transforms, hover effects, loading spinners
-- Backgrounds: CSS gradients, patterns, textured effects
-- Maintain aesthetic while ensuring accessibility (contrast ratios)
 
 ### Component Guidelines
 - Functional components only, no class components
@@ -468,13 +457,7 @@ Requirements:
 - Show progress indicators
 - Handle failed loads gracefully
 
-### 2000s Aesthetic Performance
-- Optimize CSS animations for 60fps
-- Use CSS transforms over changing layout properties
-- Implement will-change for animated elements
-- Keep decorative animations under 100ms duration
-- Test performance impact of overlapping elements
-- Monitor paint and composite layers
+
 
 ## Responsive Design Standards
 
@@ -486,13 +469,7 @@ Requirements:
 --breakpoint-wide: 1440px;
 ```
 
-### 2000s Responsive Strategy
-- Desktop: Full chaotic Flash-style layouts with absolute positioning
-- Mobile: Vertical stacking while maintaining 2000s visual identity
-- Tablet: Hybrid approach between desktop and mobile
-- Same color schemes, fonts, and energy across all devices
-- Different layouts, same vibe principle
-- Use CSS Grid for desktop chaos, Flexbox for mobile stacking
+
 
 ### Approach
 - Mobile-first development
@@ -525,11 +502,14 @@ Requirements:
 - Use proper naming convention:
   - NEXT_PUBLIC_* // Client-side
   - PRIVATE_* // Server-side
-- Environment files (.env.local) are protected by Cursor:
-  - Blocked from AI tool access via .cursorignore
-  - Must be edited directly or via terminal commands
-  - Still fully functional for application use
-  - Prevents accidental exposure of sensitive data
+- Environment files (.env.local) are strictly protected:
+  - File is listed in .cursorignore making it completely inaccessible to AI tools
+  - AI CANNOT read, modify, or access .env.local contents in any way
+  - AI should NEVER attempt to read or modify .env.local
+  - All .env.local changes must be done manually by the user
+  - File remains fully functional for application use
+  - This protection prevents any accidental exposure of sensitive data
+  - If environment variable values are needed, AI must ask the user to provide them
 
 ### Security Headers
 - Implement CSP headers
@@ -638,13 +618,19 @@ interface SecurityLog {
 
 #### LLM Assistant Guidelines
 - Never use emojis in code, comments, or documentation
-- Maintain professional, technical tone in all communications
+- Maintain strictly professional, technical tone in all communications
 - Keep explanations concise and focused on functionality
 - Avoid casual expressions, exclamations, or overly friendly language
 - Use direct, clear technical language without unnecessary enthusiasm
 - Focus on implementation details rather than motivational commentary
 - Code comments should be factual and implementation-focused
 - Error messages should be informative, not apologetic or casual
+- Do not use phrases like "You're absolutely right!", "Great question!", or similar validating statements
+- Avoid getting personal or building rapport - maintain professional distance
+- Present information objectively without emotional qualifiers
+- Skip pleasantries and get straight to technical substance
+- Provide direct answers without hedging or apologetic language
+- When errors occur, state facts and solutions without apologizing
 
 #### Documentation Tone
 - Use imperative mood for instructions: "Configure the API" not "Let's configure the API!"

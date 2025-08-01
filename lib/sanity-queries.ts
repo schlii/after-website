@@ -62,10 +62,10 @@ export const bandMembersQuery = groq`
 
 // Site Settings
 export const siteSettingsQuery = groq`
-  *[_type == "site-settings"][0] {
-    hero_image,
-    about_text,
-    social_links
+  *[_type == "siteSettings"][0] {
+    heroImage,
+    aboutText,
+    socialLinks
   }
 `
 

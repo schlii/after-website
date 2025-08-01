@@ -1,0 +1,5 @@
+[33mcommit b0d2710461693845a4f3c0ed78d0d963121d5fa0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeat/task-2.2-data-fetching[m[33m)[m
+Author: guy <guy@zipp.rip>
+Date:   Fri Aug 1 00:10:17 2025 -0400
+
+    feat: implement basic pages with Sanity data - Tour dates tested and working

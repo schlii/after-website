@@ -1,15 +1,14 @@
 # Band Website Project Planning Document
 
 ## Project Overview
-This project is a comprehensive band website featuring a mid-2000s Flash-inspired aesthetic with modern responsive design capabilities. The site includes content management, e-commerce functionality, music streaming, and an admin console for the band to manage all content independently.
+This project is a comprehensive band website with modern responsive design capabilities. The site includes content management, e-commerce functionality, music streaming, and an admin console for the band to manage all content independently.
 
 ### Core Requirements
-- Mid-2000s Flash website aesthetic with modern responsive implementation
 - Full content management system for band to update independently
 - E-commerce functionality for merchandise sales
 - Music streaming capabilities with custom player
 - Contact form and newsletter integration
-- Mobile-responsive design maintaining aesthetic integrity
+- Mobile-responsive design
 - Admin console for all content updates
 
 ### Target Audience
@@ -23,7 +22,7 @@ This project is a comprehensive band website featuring a mid-2000s Flash-inspire
 ### Frontend Framework
 - Next.js 14+ with App Router
 - React 18+ with TypeScript
-- CSS Modules for styling with 2000s aesthetic recreation
+- CSS Modules for styling
 
 ### Content Management
 - Sanity.io (Free tier: 3 users, 10GB bandwidth, 100K API requests/month)
@@ -314,62 +313,38 @@ This project is a comprehensive band website featuring a mid-2000s Flash-inspire
 --ultra-wide: 1920px;
 ```
 
-### Design Philosophy: "Same Vibe, Different Layout"
+### Design Philosophy: "Consistent Experience Across Devices"
 
 #### Desktop Experience (1024px+)
-**Visual Characteristics**:
-- Chaotic, overlapping module layouts
-- Absolute positioning for creative freedom
-- Multiple columns with varying heights
-- Background patterns and textures
-- Animated elements and transitions
-- Complex navigation systems
-- Heavy use of gradients and effects
-
 **Technical Implementation**:
 - CSS Grid for overall structure
-- Absolute positioning for overlapping elements
+- Responsive layouts with proper spacing
 - Transform properties for animations
-- Custom scrollbars and UI elements
-- Multiple z-index layers for depth
+- Custom UI elements where needed
+- Proper z-index management
 
 **Layout Examples**:
-- Homepage: Asymmetrical grid with floating modules
-- Music page: Sidebar player with chaotic track listing
-- Tour page: Calendar overlay with venue details popup
+- Homepage: Organized grid layout
+- Music page: Sidebar player with track listing
+- Tour page: Calendar with venue details
 
 #### Tablet Experience (768px - 1023px)
-**Visual Characteristics**:
-- Simplified chaos maintaining core aesthetic
-- Touch-friendly interface elements
-- Reduced overlapping, increased structure
-- Maintained color schemes and typography
-- Adapted navigation for touch interaction
-
 **Technical Implementation**:
 - Hybrid Grid/Flexbox approach
-- Larger touch targets (minimum 44px)
-- Simplified hover states (touch alternatives)
-- Optimized loading for varied connection speeds
+- Touch-friendly interface (minimum 44px targets)
+- Simplified hover states for touch
+- Optimized loading for varied connections
 
 #### Mobile Experience (320px - 767px)
-**Visual Characteristics**:
-- Vertical stacking with maintained energy
-- 2000s mobile/WAP site inspiration
-- Bold typography and color retention
-- Simplified but characteristic navigation
-- Finger-friendly interactive elements
-
 **Technical Implementation**:
 - Flexbox-based vertical layouts
 - Mobile-first responsive images
 - Touch gesture support
-- Optimized performance for mobile devices
-- Progressive enhancement approach
+- Optimized performance
+- Progressive enhancement
 
 #### Cross-Device Consistency Elements
-- Typography: Same font families across all devices
-- Color Palette: Identical color schemes and gradients
+- Typography: Consistent font families
 - Brand Elements: Consistent logos and iconography
 - Content Hierarchy: Maintained information architecture
 - User Experience: Adapted but equivalent functionality
@@ -544,15 +519,15 @@ This project is a comprehensive band website featuring a mid-2000s Flash-inspire
 - Email notification system
 
 ### Phase 5: Design Implementation (Week 5)
-**Objective**: Complete 2000s aesthetic implementation and responsive design
+**Objective**: Complete responsive design implementation
 
-#### Day 29-31: 2000s Design System
+#### Day 29-31: Design System
 **Tasks**:
 - Implement CSS custom properties for color schemes
-- Create retro typography and text effects
-- Build reusable component library with 2000s styling
-- Add CSS animations and hover effects
-- Create background patterns and decorative elements
+- Set up typography system
+- Build reusable component library
+- Add necessary animations and hover effects
+- Implement UI patterns and elements
 
 **Deliverables**:
 - Complete design system
@@ -561,11 +536,11 @@ This project is a comprehensive band website featuring a mid-2000s Flash-inspire
 
 #### Day 32-33: Desktop Layout Implementation
 **Tasks**:
-- Create chaotic desktop layouts with absolute positioning
-- Implement overlapping elements and z-index management
-- Add complex animations and transitions
+- Create responsive desktop layouts
+- Implement proper spacing and alignment
+- Add necessary animations and transitions
 - Test layouts across different screen resolutions
-- Optimize performance for complex layouts
+- Optimize performance
 
 **Deliverables**:
 - Desktop layouts for all pages

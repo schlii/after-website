@@ -62,13 +62,19 @@ export interface ContactSubmission extends SanityDocument {
 
 // Site Settings
 export interface SiteSettings extends SanityDocument {
-  _type: 'site-settings'
-  hero_image: SanityImageSource
-  about_text: any // Rich text content
-  social_links: {
-    platform: string
-    url: string
-  }[]
+  _type: 'siteSettings'
+  heroImage: SanityImageSource
+  aboutText: any // Rich text content
+  socialLinks: {
+    facebook?: string
+    twitter?: string
+    instagram?: string
+    youtube?: string
+    spotify?: string
+    appleMusic?: string
+    bandcamp?: string
+    soundcloud?: string
+  }
 }
 
 // Response Types
