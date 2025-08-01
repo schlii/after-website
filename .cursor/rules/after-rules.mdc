@@ -18,6 +18,8 @@ alwaysApply: true
 - Follow the exact workflow sequence defined in planning documentation
 - Check task completion status before moving to next module
 - when a message contains "/wait" , do not code anything until user responds with a message containing "/go"
+- frequently check tasks.md and planning.md to verify that everything is on track
+- the command /check makes you check planning.md, tasks.md, and after-rules.mdc and check convo history to make sure youre on track
 
 #### Development Workflow Requirements
 - Review relevant task module before beginning work
@@ -26,6 +28,8 @@ alwaysApply: true
 - Update planning documents when requirements change
 - Cross-reference current work against project architecture in `planning.md`
 - if a message contains "/no", do not code anything until the user confirms or if a message contains "/go"
+- commit a new version when starting a new task number (ex, task 1.2, task 2.5). when the user says "lets get started on task x.x", commit a new version
+- commit a new version when user says "mark task x.x as complete" after updating tasks.md
 
 #### Decision Making Process
 - Consult `planning.md` for architectural decisions

@@ -10,23 +10,23 @@
 - [x] Test development server runs successfully
 
 ### Task 1.2: Sanity Integration
-- [ ] Create new Sanity project: `npm create sanity@latest`
-- [ ] Configure Sanity Studio with band branding
-- [ ] Install Sanity client in Next.js: `npm install @sanity/client @sanity/image-url`
-- [ ] Create lib/sanity.js client configuration
-- [ ] Set up SANITY_PROJECT_ID and SANITY_DATASET environment variables
-- [ ] Test connection between Next.js and Sanity
-- [ ] Deploy Sanity Studio
+- [x] Create new Sanity project: `npm create sanity@latest`
+- [x] Configure Sanity Studio with band branding
+- [x] Install Sanity client in Next.js: `npm install @sanity/client @sanity/image-url`
+- [x] Create lib/sanity.js client configuration
+- [x] Set up SANITY_PROJECT_ID and SANITY_DATASET environment variables
+- [x] Test connection between Next.js and Sanity
+- [x] Deploy Sanity Studio
 
 ### Task 1.3: Basic Routing
-- [ ] Create app/layout.tsx with basic HTML structure
-- [ ] Create page.tsx for homepage
-- [ ] Create app/music/page.tsx
-- [ ] Create app/tour/page.tsx  
-- [ ] Create app/merch/page.tsx
-- [ ] Create app/about/page.tsx
-- [ ] Create app/contact/page.tsx
-- [ ] Test all routes load correctly
+- [x] Create app/layout.tsx with basic HTML structure
+- [x] Create page.tsx for homepage
+- [x] Create app/music/page.tsx
+- [x] Create app/tour/page.tsx  
+- [x] Create app/merch/page.tsx
+- [x] Create app/about/page.tsx
+- [x] Create app/contact/page.tsx
+- [x] Test all routes load correctly
 
 ### Task 1.4: Deployment Setup
 - [ ] Connect GitHub repository to Vercel
