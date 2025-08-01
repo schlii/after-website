@@ -1,0 +1,694 @@
+---
+description: rules for after
+globs:
+alwaysApply: true
+---
+---
+alwaysApply: true
+---
+# Band Website Project Rules & Standards
+
+## Project Structure & Organization
+
+### Project Documentation Adherence
+
+#### Required Reference Documents
+- Always consult `planning.md` before starting any new feature or module
+- Reference `tasks.md` for step-by-step implementation order
+- Follow the exact workflow sequence defined in planning documentation
+- Check task completion status before moving to next module
+- when a message contains "/wait" , do not code anything until user responds with a message containing "/go"
+
+#### Development Workflow Requirements
+- Review relevant task module before beginning work
+- Complete tasks in the order specified in `tasks.md`
+- Mark tasks as completed with timestamps
+- Update planning documents when requirements change
+- Cross-reference current work against project architecture in `planning.md`
+- if a message contains "/no", do not code anything until the user confirms or if a message contains "/go"
+
+#### Decision Making Process
+- Consult `planning.md` for architectural decisions
+- Verify tech stack choices against documented standards
+- Check integration patterns before implementing new features
+- Ensure all new code aligns with documented project phases
+- Reference established patterns for similar functionality
+
+#### Documentation Synchronization
+- Update `tasks.md` when task scope changes
+- Modify `planning.md` when architecture evolves
+- Keep .rules file aligned with project documentation
+- Document any deviations from planned workflow
+- Maintain consistency between all project documentation files
+
+#### Implementation Validation
+- Verify each completed task meets planning specifications
+- Ensure current module completion before advancing
+- Check dependencies outlined in planning documentation
+- Validate integration points defined in project architecture
+- Confirm feature implementation matches documented requirements
+
+### Folder Naming & Structure
+- Use kebab-case for all folder names: `components`, `api-routes`, `shared-types`
+- Group components by feature/module in subfolders: `components/music-player`, `components/shop`
+- Place shared utilities in `lib/` directory
+- Keep page components in `app/` directory following Next.js 14 conventions
+- Store types in `types/` directory with domain-specific subfolders
+- Place Sanity schemas in `schemas/` directory
+- Keep styles in `styles/` directory with component-specific modules
+
+### File Naming
+
+#### React Components: PascalCase with .tsx extension
+- `MusicPlayer.tsx`
+- `ProductCard.tsx`
+
+#### Utilities: camelCase with .ts extension
+- `formatDate.ts`
+- `sanityClient.ts`
+
+#### Pages: page.tsx in kebab-case folders
+- `app/about/page.tsx`
+- `app/tour-dates/page.tsx`
+
+#### Types: PascalCase with .types.ts extension
+- `Product.types.ts`
+- `SanitySchemas.types.ts`
+
+### Import/Export Standards
+- Use named exports by default
+- Reserve default exports for page components and main feature components
+- Group imports in the following order:
+  1. React and Next.js imports
+  2. Third-party libraries
+  3. Internal components
+  4. Types and interfaces
+  5. Utilities and helpers
+  6. Styles
+- Use absolute imports with @/ prefix for internal modules
+- Maintain clear separation between server and client imports
+
+## Code Style & Standards
+
+### TypeScript Usage
+- Strict mode enabled in tsconfig.json
+- No any types allowed without explicit justification
+- Use interface for object types, type for unions/intersections
+- Generic types must have descriptive names
+- Enums for fixed sets of values
+- Required props must be explicitly marked
+
+### Component Structure
+```typescript
+// Component file structure for 2000s aesthetic components
+import { type FC, type ComponentProps } from 'react'
+import styles from './ComponentName.module.css'
+
+interface ComponentNameProps {
+  variant?: '2000s-primary' | '2000s-secondary' | 'modern-fallback'
+  className?: string
+  // Other props
+}
+
+export const ComponentName: FC<ComponentNameProps> = ({
+  variant = '2000s-primary',
+  className,
+  ...props
+}) => {
+  return (
+    <div 
+      className={`${styles.container} ${styles[variant]} ${className || ''}`}
+      {...props}
+    >
+      {/* Component content */}
+    </div>
+  )
+}
+```
+
+### Props & Interfaces
+- Props interface named as ComponentNameProps
+- Use type for props with unions
+- Document complex props with JSDoc comments
+- Props should be as specific as possible
+- Avoid boolean trap props
+
+### Styling Approach
+- Use CSS Modules for component-specific styles
+- Global styles in styles/globals.css
+- Use CSS custom properties for theming
+- Follow BEM naming convention for classes
+- Avoid inline styles except for dynamic values
+- Use CSS Grid/Flexbox for layouts
+
+### 2000s Aesthetic Standards
+- Use CSS-based recreations over image assets for scalability
+- Implement chaotic layouts with absolute positioning on desktop
+- Use overlapping elements with proper z-index management
+- Color palette: Neon colors, gradients, high contrast combinations
+- Typography: Multiple fonts, varied sizes, decorative text effects
+- Animations: CSS transforms, hover effects, loading spinners
+- Backgrounds: CSS gradients, patterns, textured effects
+- Maintain aesthetic while ensuring accessibility (contrast ratios)
+
+### Component Guidelines
+- Functional components only, no class components
+- Keep components focused and single-responsibility
+- Extract reusable logic into custom hooks
+- Implement error boundaries for feature sections
+- Use composition over inheritance
+
+## Music Player Standards
+
+### HTML5 Audio Implementation
+```typescript
+// Use HTML5 audio API exclusively
+const audioRef = useRef<HTMLAudioElement>(null)
+
+// Basic player hook structure
+interface UseAudioPlayerProps {
+  src: string
+  onError: (error: Error) => void
+  onStateChange: (state: PlayerState) => void
+}
+```
+
+### Error Handling
+```typescript
+type AudioError = 
+  | 'MEDIA_ERR_ABORTED'
+  | 'MEDIA_ERR_NETWORK'
+  | 'MEDIA_ERR_DECODE'
+  | 'MEDIA_ERR_SRC_NOT_SUPPORTED'
+
+interface PlayerError {
+  code: AudioError
+  message: string
+  timestamp: Date
+}
+```
+- Show user-friendly error messages
+- Implement automatic retry logic
+- Log errors for debugging
+- Handle network interruptions
+
+### Loading States
+Display progress during:
+- Initial track load
+- Track switching
+- Seeking
+- Buffering
+
+Requirements:
+- Implement loading skeleton UI
+- Show buffer progress indicator
+- Maintain responsive UI during loads
+
+### State Persistence
+```typescript
+interface PlayerState {
+  currentTime: number
+  volume: number
+  muted: boolean
+  playbackRate: number
+  track: {
+    id: string
+    position: number
+  }
+}
+```
+- Persist across page navigation
+- Save user preferences
+- Remember playlist position
+- Handle page reloads gracefully
+
+### Keyboard Controls
+```typescript
+const PLAYER_SHORTCUTS = {
+  TOGGLE_PLAY: ' ',      // Space
+  NEXT_TRACK: 'ArrowRight',
+  PREV_TRACK: 'ArrowLeft',
+  VOLUME_UP: 'ArrowUp',
+  VOLUME_DOWN: 'ArrowDown',
+  MUTE: 'm'
+} as const
+```
+- Implement all standard shortcuts
+- Add shortcut overlay helper
+- Handle modifier keys
+- Prevent conflicts with browser shortcuts
+
+### Instance Management
+```typescript
+// Global player context
+interface PlayerContext {
+  activeInstance: string | null
+  instances: Map<string, PlayerState>
+  registerInstance: (id: string) => void
+  setActiveInstance: (id: string) => void
+}
+```
+- Track active player instance
+- Pause other instances on play
+- Manage system audio focus
+- Handle multiple playlist states
+
+### Format Support
+Required formats:
+```typescript
+const SUPPORTED_FORMATS = {
+  MP3: 'audio/mpeg',
+  AAC: 'audio/aac',
+  OGG: 'audio/ogg',
+  WAV: 'audio/wav'
+} as const
+```
+- Test browser compatibility
+- Implement format fallbacks
+- Check codec support
+- Handle unsupported formats
+
+### Performance Requirements
+
+#### Memory management:
+- Unload inactive tracks
+- Clear audio buffers
+- Limit playlist size
+
+#### Bandwidth optimization:
+- Implement proper preloading
+- Use adaptive bitrates
+- Cache frequently played tracks
+
+#### CPU usage:
+- Monitor visualization impact
+- Optimize waveform rendering
+- Limit concurrent operations
+
+### Accessibility
+- ARIA labels for all controls
+- Keyboard focus management
+- Screen reader announcements
+- High contrast visual states
+- Proper semantic markup
+
+### Testing Requirements
+- Unit tests for player logic
+- Integration tests for UI
+- Format compatibility tests
+- Network condition tests
+- Memory leak checks
+- Performance benchmarks
+
+## Next.js Specific Rules
+
+### App Router Usage
+- Use App Router exclusively (no Pages Router)
+- Implement route groups for feature organization
+- Use loading.tsx and error.tsx for each route
+- Implement proper metadata in layout.tsx files
+
+### Server vs Client Components
+- Default to Server Components
+- Use 'use client' directive only when needed:
+  - Interactive features
+  - Browser APIs
+  - React hooks
+  - Client-side state
+- Keep client-side code minimal
+
+### API Routes
+- Place in app/api directory
+- Use route.ts naming convention
+- Implement proper error handling
+- Return standardized response format:
+```typescript
+{
+  success: boolean
+  data?: any
+  error?: {
+    code: string
+    message: string
+  }
+}
+```
+
+### Metadata & SEO
+- Implement metadata in layout.tsx and page.tsx
+- Use dynamic metadata for content pages
+- Include OpenGraph and Twitter cards
+- Implement JSON-LD where appropriate
+
+## Sanity Integration Standards
+
+### Schema Organization
+- One schema per file
+- Use typed schema definitions
+- Implement proper validation rules
+- Document schema fields with descriptions
+
+### Band-Specific Content Rules
+
+#### Tour Dates
+- Store all dates in UTC
+- Include timezone information for each venue
+- Implement daylight savings handling
+- Add status field (upcoming/past/cancelled)
+- Require venue location coordinates
+
+#### News Posts
+- Featured image required (min 1200x630px)
+- Image alt text mandatory
+- Implement SEO-friendly slugs
+- Categories must be from predefined list
+- Support for embedded media
+
+#### Song Management
+Required metadata:
+- Duration (in seconds)
+- File size (in bytes)
+- Bit rate
+- Audio format
+- Release date
+- Copyright information
+
+Optional metadata:
+- Lyrics
+- Credits
+- BPM
+- Key signature
+
+#### Contact Submissions
+- Status tracking (new/in-progress/resolved)
+- Priority levels (low/medium/high)
+- Response tracking
+- Internal notes field
+- Auto-categorization
+
+### Global Content Requirements
+All content must include:
+```typescript
+{
+  _createdAt: string
+  _updatedAt: string
+  _lastModifiedBy: Reference
+  _version: number
+}
+```
+
+Version history for:
+- Song metadata
+- Tour information
+- Band member profiles
+- Important news posts
+
+Requirements:
+- Implement content validation hooks
+- Require alt text for all images
+- Enforce character limits on text fields
+
+### GROQ Queries
+- Store in lib/queries directory
+- Use typed query results
+- Implement proper error handling
+- Cache queries where appropriate
+- Use projections to limit returned fields
+
+### Type Generation
+- Use sanity-codegen for type generation
+- Keep generated types in types/sanity directory
+- Update types on schema changes
+- Use strict typing for query results
+
+## Shopify Integration Guidelines
+
+### API Organization
+- Centralize Shopify API calls in lib/shopify
+- Use typed API responses
+- Implement proper error handling
+- Cache product data where appropriate
+
+### Cart Management
+- Use React Context for cart state
+- Persist cart in localStorage
+- Implement proper type checking
+- Handle offline scenarios
+
+## BunnyCDN Integration Standards
+- Store all audio files in organized folder structure
+- Use descriptive naming: artist-song-title.mp3
+- Implement proper CORS headers for streaming
+- Handle audio loading states and errors
+- Implement progressive loading for large files
+- Test audio playback across all browsers
+- Implement basic hotlink protection
+
+## Performance & Optimization Rules
+
+### Image Requirements
+- Use Next.js Image component
+- Implement proper sizing and formats
+- Use responsive images with breakpoints
+- Lazy load below-the-fold images
+- Optimize image quality vs size
+
+### Bundle Optimization
+- Keep bundle size under 200KB initial load
+- Implement code splitting
+- Lazy load non-critical components
+- Monitor bundle size in CI/CD
+
+### Loading States
+- Implement loading skeletons
+- Use suspense boundaries
+- Show progress indicators
+- Handle failed loads gracefully
+
+### 2000s Aesthetic Performance
+- Optimize CSS animations for 60fps
+- Use CSS transforms over changing layout properties
+- Implement will-change for animated elements
+- Keep decorative animations under 100ms duration
+- Test performance impact of overlapping elements
+- Monitor paint and composite layers
+
+## Responsive Design Standards
+
+### Breakpoints
+```css
+--breakpoint-mobile: 320px;
+--breakpoint-tablet: 768px;
+--breakpoint-desktop: 1024px;
+--breakpoint-wide: 1440px;
+```
+
+### 2000s Responsive Strategy
+- Desktop: Full chaotic Flash-style layouts with absolute positioning
+- Mobile: Vertical stacking while maintaining 2000s visual identity
+- Tablet: Hybrid approach between desktop and mobile
+- Same color schemes, fonts, and energy across all devices
+- Different layouts, same vibe principle
+- Use CSS Grid for desktop chaos, Flexbox for mobile stacking
+
+### Approach
+- Mobile-first development
+- Use relative units (rem, em)
+- Implement fluid typography
+- Test all interactive elements
+- Ensure touch targets >= 44px
+
+## Error Handling & Validation
+
+### Form Validation
+- Use Zod for schema validation
+- Implement client-side validation
+- Show inline error messages
+- Maintain form state on error
+
+### API Errors
+- Implement proper status codes
+- Return descriptive error messages
+- Log errors server-side
+- Handle network failures
+- Implement retry logic where appropriate
+
+## Security & Best Practices
+
+### Environment Variables
+- Never commit .env files
+- Use strong typing for env vars
+- Validate env vars on startup
+- Use proper naming convention:
+  - NEXT_PUBLIC_* // Client-side
+  - PRIVATE_* // Server-side
+
+### Security Headers
+- Implement CSP headers
+- Enable CORS appropriately
+- Use HTTPS only
+- Implement rate limiting
+- Set secure cookie options
+
+### Audio Streaming Security
+
+#### Referrer Validation
+```typescript
+// Example referrer check middleware
+export const validateReferrer = (req: NextRequest) => {
+  const referrer = req.headers.get('referer')
+  const allowedDomains = [
+    'yourbandsite.com',
+    'localhost:3000'
+  ]
+  return allowedDomains.some(domain => 
+    referrer?.includes(domain)
+  )
+}
+```
+
+#### Premium Content Protection
+- Implement signed URLs with expiration
+- Use short-lived tokens (max 1 hour)
+- Implement bandwidth tracking
+- Restrict concurrent streams
+- Track user session data
+
+#### Rate Limiting
+```typescript
+// Rate limit configuration
+{
+  window: '15m',
+  max: 100, // requests per window
+  headers: true,
+  skipFailedRequests: true,
+  keyGenerator: (req) => {
+    return req.ip || req.headers['x-forwarded-for']
+  }
+}
+```
+
+#### Bandwidth Monitoring
+- Track daily/monthly usage
+- Implement alerts for unusual patterns
+- Log geographic distribution
+- Monitor peak usage times
+- Set up automatic scaling
+
+#### Bot Detection
+- Check user agent patterns
+- Monitor request patterns
+- Implement CAPTCHA for suspicious activity
+- Block known bot IPs
+- Rate limit by session
+
+#### Security Logging
+- Log all streaming attempts
+- Track failed access attempts
+- Monitor geographic anomalies
+- Log bandwidth spikes
+- Implement audit trail
+
+```typescript
+interface SecurityLog {
+  timestamp: Date
+  ip: string
+  userAgent: string
+  resource: string
+  bandwidth: number
+  status: 'success' | 'failed' | 'blocked'
+  reason?: string
+}
+```
+
+## Testing & Quality Assurance
+
+### Component Testing
+- Jest + React Testing Library
+- Test user interactions
+- Test error states
+- Test loading states
+- Test responsive behavior
+
+### API Testing
+- Test happy path
+- Test error cases
+- Test edge cases
+- Mock external services
+- Use proper test data
+
+### Performance Testing
+- Lighthouse scores >= 90
+- Core Web Vitals pass
+- Bundle size limits
+- API response times
+- Load testing requirements
+
+## Documentation & Comments
+
+### Communication & Code Style Standards
+
+#### LLM Assistant Guidelines
+- Never use emojis in code, comments, or documentation
+- Maintain professional, technical tone in all communications
+- Keep explanations concise and focused on functionality
+- Avoid casual expressions, exclamations, or overly friendly language
+- Use direct, clear technical language without unnecessary enthusiasm
+- Focus on implementation details rather than motivational commentary
+- Code comments should be factual and implementation-focused
+- Error messages should be informative, not apologetic or casual
+
+#### Documentation Tone
+- Use imperative mood for instructions: "Configure the API" not "Let's configure the API!"
+- State facts directly without hedging or casual qualifiers
+- Keep technical explanations brief and to the point
+- Avoid phrases like "awesome", "cool", "amazing", "let's", "we'll"
+- Use standard technical documentation patterns
+- Focus on what, how, and why - skip emotional language
+
+#### Code Comments Standards
+```typescript
+// Calculate audio duration from metadata
+const duration = parseAudioDuration(metadata);
+
+// NOT: Let's calculate the awesome audio duration! 🎵
+```
+
+#### Commit Message Format
+- Use conventional commit format
+- Keep messages factual and specific
+- No emojis or casual language in commit messages
+- Example: "feat: add music player controls" not "feat: 🎵 add cool music player!"
+
+#### Code Comments
+- Use JSDoc for public functions
+- Document complex logic
+- Explain business rules
+- Note technical debt
+- Document workarounds
+
+#### Component Documentation
+```typescript
+/**
+ * @component MusicPlayer
+ * @description A custom audio player for streaming music tracks
+ * 
+ * @prop {Track[]} playlist - Array of tracks to play
+ * @prop {boolean} autoPlay - Whether to start playing automatically
+ * @prop {(track: Track) => void} onTrackChange - Called when track changes
+ */
+```
+
+#### README Requirements
+- Project overview
+- Setup instructions
+- Environment variables
+- Commands and scripts
+- Deployment process
+- Troubleshooting guide
+
+#### API Documentation
+- Document all endpoints
+- Include request/response examples
+- Note rate limits
+- Document error codes
+- Include authentication requirements
