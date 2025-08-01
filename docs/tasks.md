@@ -28,12 +28,6 @@
 - [x] Create app/contact/page.tsx
 - [x] Test all routes load correctly
 
-### Task 1.4: Deployment Setup
-- [ ] Connect GitHub repository to Vercel
-- [ ] Configure environment variables in Vercel dashboard
-- [ ] Set up automatic deployments on push to main
-- [ ] Test initial deployment
-- [ ] Verify all environment variables work in production
 
 ## Module 2: Content Management System
 ### Task 2.1: Sanity Schemas
@@ -174,7 +168,14 @@
 - [ ] Fix any browser-specific issues
 - [ ] Test with JavaScript disabled (graceful degradation)
 
-### Task 7.3: Final Launch
+### Task 7.3: Deployment Setup
+- [ ] Connect GitHub repository to Vercel
+- [ ] Configure environment variables in Vercel dashboard
+- [ ] Set up automatic deployments on push to main
+- [ ] Test initial deployment
+- [ ] Verify all environment variables work in production
+
+### Task 7.4: Final Launch
 - [ ] Set up custom domain
 - [ ] Configure SSL certificate
 - [ ] Set up analytics (Google Analytics/Plausible)

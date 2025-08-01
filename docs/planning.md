@@ -405,18 +405,17 @@ This project is a comprehensive band website featuring a mid-2000s Flash-inspire
 - Basic schema structure
 - Admin access for band members
 
-#### Day 5-7: Routing and Deployment
+#### Day 5-7: Routing Setup
 **Tasks**:
 - Implement Next.js App Router structure
 - Create placeholder pages for all sections
-- Set up Vercel deployment pipeline
-- Configure environment variables in production
-- Test deployment and domain connectivity
+- Test routing functionality
+- Verify page structure
 
 **Deliverables**:
 - Complete routing structure
-- Deployed development environment
-- Automated deployment pipeline
+- Verified page navigation
+- Basic site structure
 
 ### Phase 2: Core Content Management (Week 2)
 **Objective**: Complete CMS implementation and content workflow
@@ -615,7 +614,20 @@ This project is a comprehensive band website featuring a mid-2000s Flash-inspire
 - Mobile device optimization
 - Issue resolution
 
-#### Day 40-42: Final Launch Preparation
+#### Day 40-41: Deployment Setup
+**Tasks**:
+- Set up GitHub repository and connect to Vercel
+- Configure Vercel deployment pipeline
+- Set up environment variables in production
+- Configure automatic deployments
+- Test deployment and verify functionality
+
+**Deliverables**:
+- Production environment setup
+- Automated deployment pipeline
+- Verified environment configuration
+
+#### Day 41-42: Final Launch Preparation
 **Tasks**:
 - Set up custom domain and SSL configuration
 - Implement analytics and monitoring
