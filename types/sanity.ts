@@ -11,12 +11,14 @@ interface SanityDocument {
 
 // Tour Date
 export interface TourDate extends SanityDocument {
-  _type: 'tour-date'
+  _type: 'tourDate'
+  title: string
   venue: string
   date: string
   city: string
-  ticket_link: string
-  status: 'upcoming' | 'past' | 'cancelled'
+  country: string
+  ticketUrl?: string
+  status: 'upcoming' | 'sold-out' | 'cancelled' | 'completed'
 }
 
 // News Post

@@ -1,42 +1,85 @@
-export default function Home() {
+import { fetchSanityDocuments, fetchSanityDocument } from '../../lib/sanity-server'
+import { newsPostsQuery, tourDatesQuery, siteSettingsQuery } from '../../lib/sanity-queries'
+import type { NewsPost, TourDate, SiteSettings } from '../../types/sanity'
+
+export default async function Home() {
+  // Fetch data in parallel
+  const [siteSettings, news, tourDates] = await Promise.all([
+    fetchSanityDocument<SiteSettings>(siteSettingsQuery),
+    fetchSanityDocuments<NewsPost>(newsPostsQuery),
+    fetchSanityDocuments<TourDate>(tourDatesQuery)
+  ])
+
+  // Filter upcoming tour dates
+  const upcomingShows = tourDates.data?.filter(date => date.status === 'upcoming') || []
+
   return (
     <div className="min-h-screen">
-      <section className="relative h-screen flex items-center justify-center bg-gradient-to-br from-purple-900 via-black to-indigo-900">
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-6xl md:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-6">
-            AFTER
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-8">
-            Experience the sound of tomorrow
+          <h1 className="text-6xl md:text-8xl font-bold">AFTER</h1>
+          <p className="text-xl md:text-2xl">
+            {siteSettings.data?.about_text || 'Experience the sound of tomorrow'}
           </p>
-        </div>
-      </section>
-
-      <section className="max-w-7xl mx-auto px-4 py-20">
-        <h2 className="text-3xl font-bold mb-8 text-center">Latest News</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* News items will be populated from Sanity */}
-          <div className="bg-gray-900 p-6 rounded-lg">
-            <p className="text-gray-400 mb-2">Coming Soon</p>
-            <h3 className="text-xl font-semibold mb-4">News and Updates</h3>
-            <p className="text-gray-300">Stay tuned for the latest updates from After.</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-gradient-to-t from-purple-900 via-black to-black py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8 text-center">Upcoming Shows</h2>
-          <div className="space-y-4">
-            {/* Tour dates will be populated from Sanity */}
-            <div className="bg-black/50 backdrop-blur-sm p-6 rounded-lg">
-              <p className="text-gray-400 mb-2">Coming Soon</p>
-              <h3 className="text-xl font-semibold mb-4">Tour Dates</h3>
-              <p className="text-gray-300">Check back soon for upcoming shows.</p>
+          {siteSettings.data?.social_links && (
+            <div className="mt-8 space-x-4">
+              {siteSettings.data.social_links.map(link => (
+                <a
+                  key={link.platform}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block"
+                >
+                  {link.platform}
+                </a>
+              ))}
             </div>
-          </div>
+          )}
+        </div>
+      </section>
+
+      {/* News Section */}
+      <section>
+        <h2 className="text-3xl font-bold">Latest News</h2>
+        <div>
+          {news.data ? (
+            news.data.map(post => (
+              <article key={post._id}>
+                <time dateTime={post.date}>{new Date(post.date).toLocaleDateString()}</time>
+                <h3>{post.title}</h3>
+                {/* We'll implement the image component later */}
+              </article>
+            ))
+          ) : (
+            <p>Stay tuned for the latest updates from After.</p>
+          )}
+        </div>
+      </section>
+
+      {/* Tour Dates Section */}
+      <section>
+        <h2 className="text-3xl font-bold">Upcoming Shows</h2>
+        <div>
+          {upcomingShows.length > 0 ? (
+            upcomingShows.map(show => (
+              <article key={show._id}>
+                <time dateTime={show.date}>{new Date(show.date).toLocaleDateString()}</time>
+                <h3>{show.venue}</h3>
+                <p>{show.city}</p>
+                {show.ticket_link && (
+                  <a href={show.ticket_link} target="_blank" rel="noopener noreferrer">
+                    Get Tickets
+                  </a>
+                )}
+              </article>
+            ))
+          ) : (
+            <p>Check back soon for upcoming shows.</p>
+          )}
         </div>
       </section>
     </div>
-  );
+  )
 }

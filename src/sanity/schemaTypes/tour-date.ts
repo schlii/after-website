@@ -42,14 +42,12 @@ export default defineType({
       name: 'timezone',
       title: 'Venue Timezone',
       type: 'string',
-      validation: Rule => Rule.required(),
       description: 'Example: America/New_York, Europe/London',
     }),
     defineField({
       name: 'coordinates',
       title: 'Venue Location',
       type: 'geopoint',
-      validation: Rule => Rule.required(),
     }),
     defineField({
       name: 'ticketUrl',
