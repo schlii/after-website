@@ -521,6 +521,11 @@ Requirements:
 - Use proper naming convention:
   - NEXT_PUBLIC_* // Client-side
   - PRIVATE_* // Server-side
+- Environment files (.env.local) are protected by Cursor:
+  - Blocked from AI tool access via .cursorignore
+  - Must be edited directly or via terminal commands
+  - Still fully functional for application use
+  - Prevents accidental exposure of sensitive data
 
 ### Security Headers
 - Implement CSP headers

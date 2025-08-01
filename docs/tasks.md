@@ -2,12 +2,12 @@
 
 ## Module 1: Project Foundation
 ### Task 1.1: Next.js Setup
-- [ ] Create new Next.js project with TypeScript: `npx create-next-app@latest band-website --typescript --tailwind --eslint --app`
-- [ ] Set up folder structure: `/app`, `/components`, `/lib`, `/types`, `/styles`
-- [ ] Configure environment variables file (.env.local)
-- [ ] Set up package.json with all required dependencies
-- [ ] Initialize Git repository and create initial commit
-- [ ] Test development server runs successfully
+- [x] Create new Next.js project with TypeScript: `npx create-next-app@latest band-website --typescript --tailwind --eslint --app`
+- [x] Set up folder structure: `/app`, `/components`, `/lib`, `/types`, `/styles`
+- [x] Configure environment variables file (.env.local)
+- [x] Set up package.json with all required dependencies (included in create-next-app)
+- [x] Initialize Git repository and create initial commit
+- [x] Test development server runs successfully
 
 ### Task 1.2: Sanity Integration
 - [ ] Create new Sanity project: `npm create sanity@latest`
