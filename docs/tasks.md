@@ -31,21 +31,21 @@
 
 ## Module 2: Content Management System
 ### Task 2.1: Sanity Schemas
-- [ ] Create schemas/tour-date.js (venue, date, city, ticket_link, status)
-- [ ] Create schemas/news-post.js (title, content, date, featured_image, slug)
-- [ ] Create schemas/song.js (title, artist, duration, audio_url, album_art)
-- [ ] Create schemas/band-member.js (name, role, bio, image)
-- [ ] Create schemas/contact-submission.js (name, email, message, date, status)
-- [ ] Create schemas/site-settings.js (hero_image, about_text, social_links)
-- [ ] Deploy schema changes to Sanity Studio
+- [x] Create schemas/tour-date.js (venue, date, city, ticket_link, status)
+- [x] Create schemas/news-post.js (title, content, date, featured_image, slug)
+- [x] Create schemas/song.js (title, artist, duration, audio_url, album_art)
+- [x] Create schemas/band-member.js (name, role, bio, image)
+- [x] Create schemas/contact-submission.js (name, email, message, date, status)
+- [x] Create schemas/site-settings.js (hero_image, about_text, social_links)
+- [x] Deploy schema changes to Sanity Studio
 
 ### Task 2.2: Data Fetching Setup
-- [ ] Create lib/sanity-queries.js with all GROQ queries
-- [ ] Create types/sanity.ts with TypeScript interfaces
-- [ ] Test queries in Sanity Vision tool
-- [ ] Create reusable data fetching functions
-- [ ] Implement error handling for failed requests
-- [ ] Add loading states for all data fetching
+- [x] Create lib/sanity-queries.js with all GROQ queries
+- [x] Create types/sanity.ts with TypeScript interfaces
+- [x] Test queries in Sanity Vision tool
+- [x] Create reusable data fetching functions
+- [x] Implement error handling for failed requests
+- [x] Add loading states for all data fetching
 
 ### Task 2.3: Basic Page Implementation
 - [ ] Build homepage with data from Sanity
