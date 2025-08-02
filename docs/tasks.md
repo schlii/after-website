@@ -57,13 +57,13 @@
 
 ## Module 3: E-commerce Integration
 ### Task 3.1: Shopify Setup
-- [ ] Create Shopify store account
-- [ ] Enable Storefront API access
-- [ ] Generate Storefront access token
-- [ ] Install Shopify SDK: `npm install shopify-buy`
-- [ ] Configure Shopify client in lib/shopify.js
-- [ ] Create test products in Shopify admin
-- [ ] Test API connection and product fetching
+- [x] Create Shopify store account
+- [x] Enable Storefront API access
+- [x] Generate Storefront access token
+- [x] Install Shopify SDK: `npm install shopify-buy`
+- [x] Configure Shopify client in lib/shopify.ts
+- [x] Create test products in Shopify admin
+- [x] Test API connection and product fetching
 
 ### Task 3.2: Product Display
 - [ ] Create components/ProductCard.tsx
