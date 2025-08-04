@@ -69,18 +69,18 @@
 - [x] Create components/ProductCard.tsx
 - [x] Create components/ProductGrid.tsx
 - [x] Build app/merch/page.tsx with product listing
-- [ ] Add lib/serialiseShopify.ts for plain product DTOs
-- [ ] Create app/merch/[handle]/page.tsx for individual products
-- [ ] Implement product image galleries
-- [ ] Add product variant selection (size, color, etc.)
+- [x] Add lib/serialiseShopify.ts for plain product DTOs
+- [x] Create app/merch/[handle]/page.tsx for individual products
+- [x] Implement product image galleries
+- [x] Add product variant selection (size, color, etc.)
 
 ### Task 3.3: Shopping Cart
-- [ ] Create shopping cart context/state management
-- [ ] Build components/Cart.tsx sidebar
-- [ ] Add "Add to Cart" functionality
-- [ ] Implement cart item quantity updates
-- [ ] Create cart persistence (localStorage)
-- [ ] Build checkout redirect to Shopify
+- [x] Create shopping cart context/state management
+- [x] Build components/Cart.tsx sidebar
+- [x] Add "Add to Cart" functionality
+- [x] Implement cart item quantity updates
+- [x] Create cart persistence (localStorage)
+- [x] Build checkout redirect to Shopify
 
 ## Module 4: Music & Media
 ### Task 4.1: BunnyCDN Setup
