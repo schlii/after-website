@@ -1,6 +1,6 @@
 'use client'
 
-import { type FC } from 'react'
+import { type FC, useState } from 'react'
 import { AddToCartButton } from './AddToCartButton'
 import { VariantSelector } from './VariantSelector'
 import { type PlainProduct } from '../../types/PlainProduct'
@@ -12,7 +12,7 @@ interface ProductCardProps {
 
 export const ProductCard: FC<ProductCardProps> = ({ product, className }) => {
   const { image: primaryImage, variants } = product
-  const [selectedVariantId, setSelectedVariantId] = React.useState<string>(variants[0]?.id ?? '')
+  const [selectedVariantId, setSelectedVariantId] = useState<string>(variants[0]?.id ?? '')
   const selectedVariant = variants.find(v => v.id === selectedVariantId) ?? variants[0]
   const price = selectedVariant?.price ?? 'N/A'
 

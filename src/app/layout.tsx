@@ -53,8 +53,7 @@ export default function RootLayout({
                   Contact
                 </Link>
               </li>
-            </ul>
-                      <li>
+                          <li>
                 <CartToggleButton />
               </li>
             </ul>
