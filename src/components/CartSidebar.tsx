@@ -27,8 +27,8 @@ export default function CartSidebar() {
         <p>Your cart is empty.</p>
       ) : (
         <ul>
-          {items.map((item) => (
-            <li key={item.id} style={{ marginBottom: '0.5rem' }}>
+          {items.map((item, idx) => (
+            <li key={`${item.id}-${idx}`} style={{ marginBottom: '0.5rem' }}>
               {item.title} x {item.quantity} – ${item.price}
             </li>
           ))}
