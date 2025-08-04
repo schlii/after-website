@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Providers from "../components/Providers";
+import CartToggleButton from "../components/CartToggleButton";
+import CartSidebar from "../components/CartSidebar";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,6 +18,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-black text-white">
+        {/* Global providers */}
+        <Providers>
         <header className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-sm">
           <nav className="max-w-7xl mx-auto px-4 py-4">
             <ul className="flex items-center justify-center space-x-8">
@@ -49,8 +54,13 @@ export default function RootLayout({
                 </Link>
               </li>
             </ul>
+                      <li>
+                <CartToggleButton />
+              </li>
+            </ul>
           </nav>
         </header>
+        <CartSidebar />
         <main className="pt-20">
           {children}
         </main>
@@ -59,6 +69,7 @@ export default function RootLayout({
             <p className="text-gray-400">© {new Date().getFullYear()} After. All rights reserved.</p>
           </div>
         </footer>
+        </Providers>
       </body>
     </html>
   );
