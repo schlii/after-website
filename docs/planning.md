@@ -444,6 +444,7 @@ This project is a comprehensive band website with modern responsive design capab
 - Create test products and collections
 - Implement Shopify client in Next.js application
 - Build product fetching and display functionality
+- Implement plain product DTO serialiser (lib/serialiseShopify.ts)
 - Test API connectivity and data flow
 
 **Deliverables**:
@@ -456,6 +457,7 @@ This project is a comprehensive band website with modern responsive design capab
 - Create shopping cart state management
 - Implement add/remove/update functionality
 - Build cart UI components and interactions
+- Add product variant selection UI
 - Set up local storage persistence
 - Handle cart state across page navigation
 

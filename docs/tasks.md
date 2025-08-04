@@ -65,10 +65,11 @@
 - [x] Create test products in Shopify admin
 - [x] Test API connection and product fetching
 
-### Task 3.2: Product Display
-- [ ] Create components/ProductCard.tsx
-- [ ] Create components/ProductGrid.tsx
-- [ ] Build app/merch/page.tsx with product listing
+### Task 3.2: Product Display & Product Detail
+- [x] Create components/ProductCard.tsx
+- [x] Create components/ProductGrid.tsx
+- [x] Build app/merch/page.tsx with product listing
+- [ ] Add lib/serialiseShopify.ts for plain product DTOs
 - [ ] Create app/merch/[handle]/page.tsx for individual products
 - [ ] Implement product image galleries
 - [ ] Add product variant selection (size, color, etc.)
