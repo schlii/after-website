@@ -5,6 +5,7 @@ import { shopifyHelpers } from '../../lib/shopify'
 
 interface CartItem {
   id: string // variant id
+  lineItemId?: string
   productId: string
   title: string
   quantity: number
@@ -20,8 +21,8 @@ interface CartState {
 
 interface CartContextValue extends CartState {
   addItem: (item: CartItem) => Promise<void>
-  updateQuantity: (variantId: string, delta: number) => Promise<void>
-  removeItem: (variantId: string) => Promise<void>
+  updateQuantity: (lineId: string, delta: number) => Promise<void>
+  removeItem: (lineId: string) => Promise<void>
   toggle: () => void
   isOpen: boolean
 }
@@ -69,7 +70,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     if (!state.checkoutId) return
     await shopifyHelpers.updateCheckout(
       state.checkoutId,
-      items.map((it) => ({ variantId: it.id, quantity: it.quantity }))
+      items.filter((it) => it.lineItemId).map((it) => ({ id: it.lineItemId, quantity: it.quantity }))
     )
   }
 
@@ -88,34 +89,48 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     })
 
     if (state.checkoutId) {
-      await syncCheckout(
-        state.items.map((i) =>
-          i.id === item.id ? { ...i, quantity: i.quantity + item.quantity } : i
-        )
-      )
+      const checkout = await shopifyHelpers.addToCheckout(state.checkoutId, [
+        { variantId: item.id, quantity: item.quantity }
+      ])
+      const added = checkout.lineItems.find((li: any) => li.variant.id === item.id)
+      setState((prev) => ({
+        ...prev,
+        items: prev.items.map((i) =>
+          i.id === item.id ? { ...i, lineItemId: i.lineItemId ?? added?.id } : i
+        ),
+        checkoutId: checkout.id,
+        checkoutUrl: checkout.webUrl,
+      }))
     } else {
       const checkout = await shopifyHelpers.createCheckout()
-      await shopifyHelpers.addToCheckout(checkout.id, [
+      const checkoutAfterAdd = await shopifyHelpers.addToCheckout(checkout.id, [
         { variantId: item.id, quantity: item.quantity },
       ])
-      setState((p) => ({ ...p, checkoutId: checkout.id, checkoutUrl: checkout.webUrl }))
+      const addedLine = checkoutAfterAdd.lineItems.find((li: any) => li.variant.id === item.id)
+      setState((p) => ({
+        ...p,
+        items: p.items.map((it) => it.id === item.id ? { ...it, lineItemId: addedLine?.id } : it),
+        checkoutId: checkout.id,
+        checkoutUrl: checkout.webUrl,
+      }))
     }
   }
 
-  const updateQuantity = async (variantId: string, delta: number) => {
+  const updateQuantity = async (lineId: string, delta: number) => {
+    let updated: CartItem[] = []
     setState((prev) => {
-      const newItems = prev.items
-        .map((i) => (i.id === variantId ? { ...i, quantity: i.quantity + delta } : i))
+      updated = prev.items
+        .map((i) => ((i.lineItemId ?? i.id) === lineId ? { ...i, quantity: i.quantity + delta } : i))
         .filter((i) => i.quantity > 0)
-      return { ...prev, items: newItems }
+      return { ...prev, items: updated }
     })
-    await syncCheckout(state.items.map((i) => (i.id === variantId ? { ...i, quantity: i.quantity + delta } : i)).filter(i=>i.quantity>0))
+    await syncCheckout(updated)
   }
 
-  const removeItem = async (variantId: string) => {
-    setState((prev) => ({ ...prev, items: prev.items.filter((i) => i.id !== variantId) }))
+  const removeItem = async (lineId: string) => {
+    setState((prev) => ({ ...prev, items: prev.items.filter((i) => (i.lineItemId ?? i.id) !== lineId) }))
     if (state.checkoutId) {
-      await shopifyHelpers.removeFromCheckout(state.checkoutId, [variantId])
+      await shopifyHelpers.removeFromCheckout(state.checkoutId, [lineId])
     }
   }
 
