@@ -5,7 +5,7 @@ import { shopifyHelpers } from '../../lib/shopify'
 
 interface CartItem {
   id: string // variant id
-  lineItemId?: string
+  lineItemId: string
   productId: string
   title: string
   quantity: number
@@ -17,18 +17,17 @@ interface CartState {
   items: CartItem[]
   checkoutId: string | null
   checkoutUrl: string | null
-}
-
-interface CartContextValue extends CartState {
-  addItem: (item: CartItem) => Promise<void>
-  updateQuantity: (lineId: string, delta: number) => Promise<void>
-  removeItem: (lineId: string) => Promise<void>
-  toggle: () => void
   isOpen: boolean
 }
 
-const CartContext = createContext<CartContextValue | undefined>(undefined)
+interface CartContextValue extends CartState {
+  addItem: (base: Omit<CartItem, 'lineItemId' | 'quantity'>) => Promise<void>
+  updateQuantity: (lineItemId: string, delta: number) => Promise<void>
+  removeItem: (lineItemId: string) => Promise<void>
+  toggle: () => void
+}
 
+const CartContext = createContext<CartContextValue | undefined>(undefined)
 export const useCart = () => {
   const ctx = useContext(CartContext)
   if (!ctx) throw new Error('CartContext not found')
@@ -38,104 +37,103 @@ export const useCart = () => {
 const LOCAL_KEY = 'after_cart'
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [state, setState] = useState<CartState & { isOpen: boolean }>({
+  const [state, setState] = useState<CartState>({
     items: [],
     checkoutId: null,
     checkoutUrl: null,
+    isOpen: false,
   })
 
-  // Load from localStorage
+  // hydrate from storage
   useEffect(() => {
-    const stored = typeof window !== 'undefined' ? localStorage.getItem(LOCAL_KEY) : null
-    if (stored) {
+    if (typeof window === 'undefined') return
+    const raw = localStorage.getItem(LOCAL_KEY)
+    if (raw) {
       try {
-        setState({ ...JSON.parse(stored), isOpen: false })
-      } catch (_) {
-        /* ignore */
-      }
+        setState((p) => ({ ...p, ...JSON.parse(raw), isOpen: false }))
+      } catch {}
     }
   }, [])
 
-  // Persist to localStorage
+  // persist
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const { isOpen, ...persist } = state
-      localStorage.setItem(LOCAL_KEY, JSON.stringify(persist))
-    }
+    if (typeof window === 'undefined') return
+    const { isOpen, ...persist } = state
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(persist))
   }, [state])
 
   const toggle = () => setState((p) => ({ ...p, isOpen: !p.isOpen }))
 
-  const syncCheckout = async (items: CartItem[]) => {
-    if (!state.checkoutId) return
-    await shopifyHelpers.updateCheckout(
-      state.checkoutId,
-      items.filter((it) => it.lineItemId).map((it) => ({ id: it.lineItemId, quantity: it.quantity }))
-    )
+  // ---------- helpers ----------
+  const refreshFromCheckout = (checkout: any) => {
+    const items: CartItem[] = checkout.lineItems.map((li: any) => ({
+      lineItemId: li.id,
+      id: li.variant.id,
+      productId: li.product.id,
+      title: li.title,
+      quantity: li.quantity,
+      price: li.variant.price,
+      image: li.variant.image?.src ?? null,
+    }))
+    setState((p) => ({
+      ...p,
+      items,
+      checkoutId: checkout.id,
+      checkoutUrl: checkout.webUrl,
+    }))
   }
 
-  const addItem = async (item: CartItem) => {
-    setState((prev) => {
-      const existing = prev.items.find((i) => i.id === item.id)
-      let newItems: CartItem[]
+  // ---------- actions ----------
+  const addItem = async (base: Omit<CartItem, 'lineItemId' | 'quantity'>) => {
+    // if checkout already exists, check if variant present
+    if (state.checkoutId) {
+      const existing = state.items.find((i) => i.id === base.id)
       if (existing) {
-        newItems = prev.items.map((i) =>
-          i.id === item.id ? { ...i, quantity: i.quantity + item.quantity } : i
-        )
+        // update quantity +1
+        const updated = await shopifyHelpers.updateCheckout(state.checkoutId, [
+          { id: existing.lineItemId, quantity: existing.quantity + 1 },
+        ])
+        refreshFromCheckout(updated)
       } else {
-        newItems = [...prev.items, item]
+        // add new variant
+        const updated = await shopifyHelpers.addToCheckout(state.checkoutId, [
+          { variantId: base.id, quantity: 1 },
+        ])
+        refreshFromCheckout(updated)
       }
-      return { ...prev, items: newItems }
-    })
-
-    if (state.checkoutId) {
-      const checkout = await shopifyHelpers.addToCheckout(state.checkoutId, [
-        { variantId: item.id, quantity: item.quantity }
-      ])
-      const added = checkout.lineItems.find((li: any) => li.variant.id === item.id)
-      setState((prev) => ({
-        ...prev,
-        items: prev.items.map((i) =>
-          i.id === item.id ? { ...i, lineItemId: i.lineItemId ?? added?.id } : i
-        ),
-        checkoutId: checkout.id,
-        checkoutUrl: checkout.webUrl,
-      }))
     } else {
+      // create new checkout
       const checkout = await shopifyHelpers.createCheckout()
-      const checkoutAfterAdd = await shopifyHelpers.addToCheckout(checkout.id, [
-        { variantId: item.id, quantity: item.quantity },
+      const updated = await shopifyHelpers.addToCheckout(checkout.id, [
+        { variantId: base.id, quantity: 1 },
       ])
-      const addedLine = checkoutAfterAdd.lineItems.find((li: any) => li.variant.id === item.id)
-      setState((p) => ({
-        ...p,
-        items: p.items.map((it) => it.id === item.id ? { ...it, lineItemId: addedLine?.id } : it),
-        checkoutId: checkout.id,
-        checkoutUrl: checkout.webUrl,
-      }))
+      refreshFromCheckout(updated)
     }
   }
 
-  const updateQuantity = async (lineId: string, delta: number) => {
-    let updated: CartItem[] = []
-    setState((prev) => {
-      updated = prev.items
-        .map((i) => ((i.lineItemId ?? i.id) === lineId ? { ...i, quantity: i.quantity + delta } : i))
-        .filter((i) => i.quantity > 0)
-      return { ...prev, items: updated }
-    })
-    await syncCheckout(updated)
+  const updateQuantity = async (lineItemId: string, delta: number) => {
+    if (!state.checkoutId) return
+    const item = state.items.find((i) => i.lineItemId === lineItemId)
+    if (!item) return
+    const newQty = item.quantity + delta
+    if (newQty <= 0) {
+      await removeItem(lineItemId)
+      return
+    }
+    const updated = await shopifyHelpers.updateCheckout(state.checkoutId, [
+      { id: lineItemId, quantity: newQty },
+    ])
+    refreshFromCheckout(updated)
   }
 
-  const removeItem = async (lineId: string) => {
-    setState((prev) => ({ ...prev, items: prev.items.filter((i) => (i.lineItemId ?? i.id) !== lineId) }))
-    if (state.checkoutId) {
-      await shopifyHelpers.removeFromCheckout(state.checkoutId, [lineId])
-    }
+  const removeItem = async (lineItemId: string) => {
+    if (!state.checkoutId) return
+    const updated = await shopifyHelpers.removeFromCheckout(state.checkoutId, [lineItemId])
+    refreshFromCheckout(updated)
   }
 
   return (
-    <CartContext.Provider value={{ ...state, addItem, updateQuantity, removeItem, toggle, isOpen: state.isOpen ?? false }}>
+    <CartContext.Provider value={{ ...state, addItem, updateQuantity, removeItem, toggle }}>
       {children}
     </CartContext.Provider>
   )

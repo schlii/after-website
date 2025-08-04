@@ -20,7 +20,6 @@ export const AddToCartButton: FC<Props> = ({ product, variantId }) => {
       productId: product.id,
       title: product.title,
       price: variant.price,
-      quantity: 1,
       image: product.image?.src ?? null,
     })
   }
