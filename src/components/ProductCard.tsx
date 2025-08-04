@@ -1,6 +1,8 @@
 'use client'
 
 import { type FC } from 'react'
+import { AddToCartButton } from './AddToCartButton'
+import { VariantSelector } from './VariantSelector'
 import { type PlainProduct } from '../../types/PlainProduct'
 
 interface ProductCardProps {
@@ -10,7 +12,9 @@ interface ProductCardProps {
 
 export const ProductCard: FC<ProductCardProps> = ({ product, className }) => {
   const { image: primaryImage, variants } = product
-  const price = variants[0]?.price ?? 'N/A'
+  const [selectedVariantId, setSelectedVariantId] = React.useState<string>(variants[0]?.id ?? '')
+  const selectedVariant = variants.find(v => v.id === selectedVariantId) ?? variants[0]
+  const price = selectedVariant?.price ?? 'N/A'
 
   return (
     <div 
@@ -34,6 +38,9 @@ export const ProductCard: FC<ProductCardProps> = ({ product, className }) => {
       {/* Product Title */}
       <h3>{product.title}</h3>
       
+      {/* Variant Selector */}
+      <VariantSelector variants={variants} onSelect={setSelectedVariantId} />
+
       {/* Product Price */}
       <p>Price: ${price}</p>
       
@@ -51,6 +58,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, className }) => {
       {product.vendor && (
         <p>Vendor: {product.vendor}</p>
       )}
+          <AddToCartButton product={product} variantId={selectedVariantId} />
     </div>
   )
 }
