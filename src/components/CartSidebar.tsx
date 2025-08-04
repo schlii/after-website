@@ -4,7 +4,7 @@ import { useCart } from '../contexts/CartContext'
 import Link from 'next/link'
 
 export default function CartSidebar() {
-  const { items, checkoutUrl, isOpen, toggle } = useCart()
+  const { items, checkoutUrl, isOpen, toggle, updateQuantity, removeItem } = useCart()
 
   return (
     <div
@@ -29,10 +29,20 @@ export default function CartSidebar() {
         <ul>
           {items.map((item, idx) => (
             <li key={`${item.id}-${idx}`} style={{ marginBottom: '0.5rem' }}>
-              {item.title} x {item.quantity} – ${item.price}
+              {item.title} – ${item.price}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <button onClick={() => updateQuantity(item.id, -1)}>-</button>
+                <span>{item.quantity}</span>
+                <button onClick={() => updateQuantity(item.id, 1)}>+</button>
+                <button onClick={() => removeItem(item.id)}>🗑️</button>
+              </div>
             </li>
           ))}
         </ul>
+        <p style={{ marginTop: '1rem' }}>
+          Subtotal: $
+          {items.reduce((sum, i) => sum + parseFloat(i.price) * i.quantity, 0).toFixed(2)}
+        </p>
       )}
       {checkoutUrl && (
         <Link href={checkoutUrl} target="_blank" style={{

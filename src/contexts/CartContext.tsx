@@ -20,6 +20,8 @@ interface CartState {
 
 interface CartContextValue extends CartState {
   addItem: (item: CartItem) => Promise<void>
+  updateQuantity: (variantId: string, delta: number) => Promise<void>
+  removeItem: (variantId: string) => Promise<void>
   toggle: () => void
   isOpen: boolean
 }
@@ -63,32 +65,62 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const toggle = () => setState((p) => ({ ...p, isOpen: !p.isOpen }))
 
+  const syncCheckout = async (items: CartItem[]) => {
+    if (!state.checkoutId) return
+    await shopifyHelpers.updateCheckout(
+      state.checkoutId,
+      items.map((it) => ({ variantId: it.id, quantity: it.quantity }))
+    )
+  }
+
   const addItem = async (item: CartItem) => {
+    setState((prev) => {
+      const existing = prev.items.find((i) => i.id === item.id)
+      let newItems: CartItem[]
+      if (existing) {
+        newItems = prev.items.map((i) =>
+          i.id === item.id ? { ...i, quantity: i.quantity + item.quantity } : i
+        )
+      } else {
+        newItems = [...prev.items, item]
+      }
+      return { ...prev, items: newItems }
+    })
+
     if (state.checkoutId) {
-      // existing checkout
-      await shopifyHelpers.addToCheckout(state.checkoutId, [
-        { variantId: item.id, quantity: item.quantity },
-      ])
-      setState((prev) => ({
-        ...prev,
-        items: [...prev.items, item],
-      }))
+      await syncCheckout(
+        state.items.map((i) =>
+          i.id === item.id ? { ...i, quantity: i.quantity + item.quantity } : i
+        )
+      )
     } else {
-      // new checkout
       const checkout = await shopifyHelpers.createCheckout()
       await shopifyHelpers.addToCheckout(checkout.id, [
         { variantId: item.id, quantity: item.quantity },
       ])
-      setState({
-        items: [item],
-        checkoutId: checkout.id,
-        checkoutUrl: checkout.webUrl ?? checkout.webUrl ?? '',
-      })
+      setState((p) => ({ ...p, checkoutId: checkout.id, checkoutUrl: checkout.webUrl }))
+    }
+  }
+
+  const updateQuantity = async (variantId: string, delta: number) => {
+    setState((prev) => {
+      const newItems = prev.items
+        .map((i) => (i.id === variantId ? { ...i, quantity: i.quantity + delta } : i))
+        .filter((i) => i.quantity > 0)
+      return { ...prev, items: newItems }
+    })
+    await syncCheckout(state.items.map((i) => (i.id === variantId ? { ...i, quantity: i.quantity + delta } : i)).filter(i=>i.quantity>0))
+  }
+
+  const removeItem = async (variantId: string) => {
+    setState((prev) => ({ ...prev, items: prev.items.filter((i) => i.id !== variantId) }))
+    if (state.checkoutId) {
+      await shopifyHelpers.removeFromCheckout(state.checkoutId, [variantId])
     }
   }
 
   return (
-    <CartContext.Provider value={{ ...state, addItem, toggle, isOpen: state.isOpen ?? false }}>
+    <CartContext.Provider value={{ ...state, addItem, updateQuantity, removeItem, toggle, isOpen: state.isOpen ?? false }}>
       {children}
     </CartContext.Provider>
   )
