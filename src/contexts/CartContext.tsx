@@ -69,10 +69,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     const items: CartItem[] = checkout.lineItems.map((li: any) => ({
       lineItemId: li.id,
       id: li.variant.id,
-      productId: li.product.id,
+      productId: li.variant.product?.id ?? '',
       title: li.title,
       quantity: li.quantity,
-      price: li.variant.price,
+      price:
+        typeof li.variant.price === 'string'
+          ? li.variant.price
+          : li.variant.price.amount,
       image: li.variant.image?.src ?? null,
     }))
     setState((p) => ({
