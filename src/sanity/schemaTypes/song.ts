@@ -29,11 +29,18 @@ export default defineType({
       validation: Rule => Rule.required().min(0),
     }),
     defineField({
-      name: 'audioUrl',
-      title: 'Audio URL',
+      name: 'itunesPreviewUrl',
+      title: 'iTunes Preview URL',
       type: 'url',
-      description: 'BunnyCDN URL for the audio file',
-      validation: Rule => Rule.required(),
+      description: 'Apple iTunes 30-second preview clip URL (m4a)',
+      validation: Rule => Rule.required().uri({ allowRelative: false, scheme: ['http','https'] }),
+    }),
+    defineField({
+      name: 'spotifyUrl',
+      title: 'Spotify Track URL',
+      type: 'url',
+      description: 'Optional. Used for "Listen on Spotify" button',
+      validation: Rule => Rule.uri({ allowRelative: false, scheme: ['http','https'] }),
     }),
     defineField({
       name: 'albumArt',
@@ -58,32 +65,7 @@ export default defineType({
       type: 'date',
       validation: Rule => Rule.required(),
     }),
-    defineField({
-      name: 'fileSize',
-      title: 'File Size (bytes)',
-      type: 'number',
-      validation: Rule => Rule.required().min(0),
-    }),
-    defineField({
-      name: 'bitRate',
-      title: 'Bit Rate (kbps)',
-      type: 'number',
-      validation: Rule => Rule.required().min(0),
-    }),
-    defineField({
-      name: 'format',
-      title: 'Audio Format',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'MP3', value: 'mp3' },
-          { title: 'AAC', value: 'aac' },
-          { title: 'WAV', value: 'wav' },
-          { title: 'OGG', value: 'ogg' },
-        ],
-      },
-      validation: Rule => Rule.required(),
-    }),
+    // Removed fileSize/bitRate/format as audio hosting is not used
     defineField({
       name: 'copyright',
       title: 'Copyright Information',

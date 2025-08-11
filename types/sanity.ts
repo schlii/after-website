@@ -37,7 +37,8 @@ export interface Song extends SanityDocument {
   title: string
   artist: string
   duration: number
-  audio_url: string
+  itunesPreviewUrl: string
+  spotifyUrl?: string
   album_art: SanityImageSource
 }
 
