@@ -66,7 +66,9 @@ export const siteSettingsQuery = groq`
   *[_type == "siteSettings"][0] {
     heroImage,
     aboutText,
-    socialLinks
+    socialLinks,
+    appleArtistId,
+    appleStorefront
   }
 `
 

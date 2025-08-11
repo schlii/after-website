@@ -76,6 +76,8 @@ export interface SiteSettings extends SanityDocument {
     bandcamp?: string
     soundcloud?: string
   }
+  appleArtistId: number
+  appleStorefront: string
 }
 
 // Response Types

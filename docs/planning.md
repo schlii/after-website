@@ -37,7 +37,7 @@ This project is a comprehensive band website with modern responsive design capab
 - Shopping cart with localStorage persistence
 
 ### Music Streaming
-- iTunes Search API integration for 30-second preview clips streamed from Apple CDN
+- iTunes Lookup API integration for 30-second preview clips streamed from Apple CDN
 - Custom HTML5 audio player implementation
 - Progressive loading and caching
 - Cross-browser compatibility
@@ -92,7 +92,7 @@ This project is a comprehensive band website with modern responsive design capab
 
 **Technical Implementation**:
 - Use iTunes Lookup API with Artist ID to retrieve track metadata and `previewUrl` for 30-second clips
-- Add server endpoint to normalize, filter, and cache tracks for playlist use
+- Add server endpoint `/api/itunes/artist-tracks` to normalize, filter, and cache tracks for playlist use
 - State management for player controls and single-page playlist
 - Keyboard shortcuts and accessibility features
 - Progressive loading for large audio files

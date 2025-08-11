@@ -84,9 +84,9 @@
 
 ## Module 4: Music & Media
 ### Task 4.1: iTunes Integration Setup (automatic playlist by Artist ID)
-- [ ] Add site settings fields: `appleArtistId` (number) and `appleStorefront` (default `US`)
-- [ ] Create API route `/api/itunes/artist-tracks` that fetches Lookup `entity=song&limit=200`, normalizes, filters `previewUrl`, and caches results
-- [ ] Document iTunes usage and remove dependency on Spotify `preview_url`
+- [x] Add site settings fields: `appleArtistId` (number) and `appleStorefront` (default `US`)
+- [x] Create API route `/api/itunes/artist-tracks` that fetches Lookup `entity=song&limit=200`, normalizes, filters `previewUrl`, and caches results
+- [x] Document iTunes usage and remove dependency on Spotify `preview_url`
 
 ### Task 4.2: Music Player
 - [ ] Create components/MusicPlayer.tsx (single player with playlist from `/api/itunes/artist-tracks`)

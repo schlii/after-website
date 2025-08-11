@@ -90,7 +90,9 @@ This document provides comprehensive guidance on data fetching patterns, GROQ qu
 *[_type == "siteSettings"][0] {
   heroImage,
   aboutText,
-  socialLinks
+  socialLinks,
+  appleArtistId,
+  appleStorefront
 }
 ```
 **Current Data**: No documents (needs initial setup)  
@@ -393,12 +395,48 @@ const newQueryTests = [
 - Data freshness (cache invalidation)
 - API usage (stay within Sanity limits)
 
+## iTunes Lookup Integration
+
+### Overview
+Playlist data is sourced from Apple iTunes Lookup API using the configured `appleArtistId` and `appleStorefront` in Sanity `siteSettings`.
+
+### API Route
+- Endpoint: `/api/itunes/artist-tracks`
+- Query params (optional): `artistId`, `storefront` (defaults to settings)
+- Caching: 1 hour revalidation, CDN cache headers applied
+
+### Response Format
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "123456789",
+      "title": "Track Title",
+      "artist": "Artist Name",
+      "album": "Collection Name",
+      "duration": 187,
+      "previewUrl": "https://audio-ssl.itunes.apple.com/...m4a",
+      "artworkUrl": "https://is5-ssl.mzstatic.com/.../600x600bb.jpg",
+      "releaseDate": "2021-01-01T00:00:00Z",
+      "trackViewUrl": "https://music.apple.com/...",
+      "genre": "Rock"
+    }
+  ]
+}
+```
+
+### Notes
+- Only tracks with `previewUrl` are returned
+- Artwork is auto-upgraded to 600x600 where possible
+- Use this endpoint to build the playlist for the music player
+
+---
 ## Next Steps
 
-### Immediate (Task 3.1)
-- Set up Shopify integration
-- Test e-commerce data flow
-- Validate product queries
+### Immediate (Task 4.2)
+- Build music player using `/api/itunes/artist-tracks`
+- Implement keyboard shortcuts and accessibility
 
 ### Future Enhancements
 - Implement real-time data updates
