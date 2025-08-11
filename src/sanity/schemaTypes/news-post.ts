@@ -91,10 +91,6 @@ export default defineType({
           type: 'youtube',
           title: 'YouTube Embed',
         },
-        {
-          type: 'spotify',
-          title: 'Spotify Embed',
-        },
       ],
       validation: Rule => Rule.required(),
     }),
