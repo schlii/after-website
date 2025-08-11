@@ -91,16 +91,16 @@ This project is a comprehensive band website with modern responsive design capab
 - Download/purchase links
 
 **Technical Implementation**:
-- iTunes Search API integration to retrieve track metadata and `previewUrl` for 30-second clips
-- State management for player controls
+- Use iTunes Lookup API with Artist ID to retrieve track metadata and `previewUrl` for 30-second clips
+- Add server endpoint to normalize, filter, and cache tracks for playlist use
+- State management for player controls and single-page playlist
 - Keyboard shortcuts and accessibility features
 - Progressive loading for large audio files
 - Format fallbacks for browser compatibility
 
 **Content Management**:
-- Track metadata managed through Sanity
-- iTunes preview URL stored in Sanity (`itunesPreviewUrl`)
-- Optional Spotify track URL stored in Sanity for "Listen on Spotify" button (`spotifyUrl`)
+- Store site-level Apple Music artist ID and storefront in Settings
+- Optional per-song fields remain for overrides (`itunesPreviewUrl`, `spotifyUrl`)
 - Album artwork and descriptions
 - Release dates and categorization
 
@@ -283,6 +283,8 @@ This project is a comprehensive band website with modern responsive design capab
   newsletter_description: text
   seo_description: text
   og_image: image
+  apple_artist_id: number // Apple Music Artist ID used for playlist auto-loading
+  apple_storefront: string // e.g., 'US'
 }
 ```
 
