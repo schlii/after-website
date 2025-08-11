@@ -33,7 +33,7 @@
 ### Task 2.1: Sanity Schemas
 - [x] Create schemas/tour-date.js (venue, date, city, ticket_link, status)
 - [x] Create schemas/news-post.js (title, content, date, featured_image, slug)
-- [x] Create schemas/song.js (title, artist, duration, audio_url, album_art)
+- [x] Create schemas/song.js (title, artist, duration, itunes_preview_url, spotify_url, album_art)
 - [x] Create schemas/band-member.js (name, role, bio, image)
 - [x] Create schemas/contact-submission.js (name, email, message, date, status)
 - [x] Create schemas/site-settings.js (hero_image, about_text, social_links)
@@ -83,22 +83,20 @@
 - [x] Build checkout redirect to Shopify
 
 ## Module 4: Music & Media
-### Task 4.1: Spotify Integration Setup
-- [x] Create Spotify Developer application and retrieve `client_id` and `client_secret`
-- [x] Implement server-side Client Credentials flow to obtain an access token (`lib/spotify.ts`)
-- [x] Build `/api/spotify/preview` route to fetch track metadata and `preview_url` (`src/app/api/spotify/preview/route.ts`)
-- [x] Cache access token and handle automatic refresh (in-memory, early refresh buffer)
-- [x] Document required environment variables (`PRIVATE_SPOTIFY_CLIENT_ID`, `PRIVATE_SPOTIFY_CLIENT_SECRET`)
-- [ ] Verify successful retrieval of preview URLs in development
+### Task 4.1: iTunes Integration Setup (replaces Spotify preview playback)
+- [ ] Integrate iTunes Search API for track metadata and 30s `previewUrl`
+- [ ] Define Sanity fields: `itunesPreviewUrl` (required), `spotifyUrl` (optional)
+- [ ] Document iTunes usage and remove dependency on Spotify `preview_url`
 
 ### Task 4.2: Music Player
-- [ ] Create components/MusicPlayer.tsx
+- [ ] Create components/MusicPlayer.tsx (HTML5 audio using `itunesPreviewUrl`)
 - [ ] Implement play/pause/skip controls
 - [ ] Add progress bar and time display
 - [ ] Create playlist functionality
 - [ ] Add volume controls
 - [ ] Implement keyboard shortcuts
 - [ ] Test across all browsers
+- [ ] Show "Listen on Spotify" button when `spotifyUrl` exists
 
 ### Task 4.3: Music Page
 - [ ] Build app/music/page.tsx layout

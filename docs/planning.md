@@ -37,7 +37,7 @@ This project is a comprehensive band website with modern responsive design capab
 - Shopping cart with localStorage persistence
 
 ### Music Streaming
-- Spotify integration for 30-second audio previews streamed directly from Spotify CDN
+- iTunes Search API integration for 30-second preview clips streamed from Apple CDN
 - Custom HTML5 audio player implementation
 - Progressive loading and caching
 - Cross-browser compatibility
@@ -91,7 +91,7 @@ This project is a comprehensive band website with modern responsive design capab
 - Download/purchase links
 
 **Technical Implementation**:
-- Spotify Web API integration to retrieve track metadata and 30-second `preview_url`
+- iTunes Search API integration to retrieve track metadata and `previewUrl` for 30-second clips
 - State management for player controls
 - Keyboard shortcuts and accessibility features
 - Progressive loading for large audio files
@@ -99,7 +99,8 @@ This project is a comprehensive band website with modern responsive design capab
 
 **Content Management**:
 - Track metadata managed through Sanity
-- Audio files hosted on BunnyCDN
+- iTunes preview URL stored in Sanity (`itunesPreviewUrl`)
+- Optional Spotify track URL stored in Sanity for "Listen on Spotify" button (`spotifyUrl`)
 - Album artwork and descriptions
 - Release dates and categorization
 
@@ -226,7 +227,8 @@ This project is a comprehensive band website with modern responsive design capab
   artist: string
   album?: string
   duration: number (seconds)
-  audio_url: string (BunnyCDN path)
+  itunes_preview_url: string // iTunes 30s preview clip
+  spotify_url?: string // Optional: link target for "Listen on Spotify"
   album_art: image
   release_date: date
   genre: string
@@ -234,9 +236,6 @@ This project is a comprehensive band website with modern responsive design capab
   key?: string
   lyrics?: text
   credits: array of strings
-  file_size: number (bytes)
-  bit_rate: number
-  format: 'mp3' | 'aac' | 'wav' | 'ogg'
 }
 ```
 
@@ -289,7 +288,7 @@ This project is a comprehensive band website with modern responsive design capab
 
 ### Asset Management Strategy
 - Images: Sanity DAM with automatic optimization
-- Audio: Streamed from Spotify preview URLs (no self-hosting required)
+- Audio: Streamed from iTunes preview URLs (no self-hosting required)
 - Documents: Sanity for press kits and downloadable content
 - Video: Embed codes stored in Sanity, hosted externally
 
