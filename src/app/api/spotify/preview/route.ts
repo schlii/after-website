@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { fetchSpotifyTrack } from '@/lib/spotify'
+import { fetchSpotifyTrack } from 'lib/spotify'
 
 export const dynamic = 'force-dynamic'
 
