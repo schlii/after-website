@@ -84,11 +84,11 @@
 
 ## Module 4: Music & Media
 ### Task 4.1: Spotify Integration Setup
-- [ ] Create Spotify Developer application and retrieve `client_id` and `client_secret`
-- [ ] Implement server-side Client Credentials flow to obtain an access token
-- [ ] Build `/api/spotify/preview` route to fetch track metadata and `preview_url`
-- [ ] Cache access token and handle automatic refresh
-- [ ] Document required environment variables (`SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`)
+- [x] Create Spotify Developer application and retrieve `client_id` and `client_secret`
+- [x] Implement server-side Client Credentials flow to obtain an access token (`lib/spotify.ts`)
+- [x] Build `/api/spotify/preview` route to fetch track metadata and `preview_url` (`src/app/api/spotify/preview/route.ts`)
+- [x] Cache access token and handle automatic refresh (in-memory, early refresh buffer)
+- [x] Document required environment variables (`PRIVATE_SPOTIFY_CLIENT_ID`, `PRIVATE_SPOTIFY_CLIENT_SECRET`)
 - [ ] Verify successful retrieval of preview URLs in development
 
 ### Task 4.2: Music Player
