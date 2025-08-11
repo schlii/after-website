@@ -83,13 +83,13 @@
 - [x] Build checkout redirect to Shopify
 
 ## Module 4: Music & Media
-### Task 4.1: BunnyCDN Setup
-- [ ] Create BunnyCDN account and storage zone
-- [ ] Configure CORS settings for audio streaming
-- [ ] Upload test audio files
-- [ ] Test direct file access and streaming
-- [ ] Create audio URL generation utility
-- [ ] Implement basic security/hotlink protection
+### Task 4.1: Spotify Integration Setup
+- [ ] Create Spotify Developer application and retrieve `client_id` and `client_secret`
+- [ ] Implement server-side Client Credentials flow to obtain an access token
+- [ ] Build `/api/spotify/preview` route to fetch track metadata and `preview_url`
+- [ ] Cache access token and handle automatic refresh
+- [ ] Document required environment variables (`SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`)
+- [ ] Verify successful retrieval of preview URLs in development
 
 ### Task 4.2: Music Player
 - [ ] Create components/MusicPlayer.tsx

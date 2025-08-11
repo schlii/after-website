@@ -37,7 +37,7 @@ This project is a comprehensive band website with modern responsive design capab
 - Shopping cart with localStorage persistence
 
 ### Music Streaming
-- BunnyCDN for audio file hosting and delivery
+- Spotify integration for 30-second audio previews streamed directly from Spotify CDN
 - Custom HTML5 audio player implementation
 - Progressive loading and caching
 - Cross-browser compatibility
@@ -91,7 +91,7 @@ This project is a comprehensive band website with modern responsive design capab
 - Download/purchase links
 
 **Technical Implementation**:
-- BunnyCDN integration for audio streaming
+- Spotify Web API integration to retrieve track metadata and 30-second `preview_url`
 - State management for player controls
 - Keyboard shortcuts and accessibility features
 - Progressive loading for large audio files
@@ -289,7 +289,7 @@ This project is a comprehensive band website with modern responsive design capab
 
 ### Asset Management Strategy
 - Images: Sanity DAM with automatic optimization
-- Audio Files: BunnyCDN with organized folder structure
+- Audio: Streamed from Spotify preview URLs (no self-hosting required)
 - Documents: Sanity for press kits and downloadable content
 - Video: Embed codes stored in Sanity, hosted externally
 
@@ -482,10 +482,10 @@ This project is a comprehensive band website with modern responsive design capab
 ### Phase 4: Music & Interactive Features (Week 4)
 **Objective**: Implement music streaming and communication features
 
-#### Day 22-24: BunnyCDN and Music Player
+#### Day 22-24: Spotify Integration and Music Player
 **Tasks**:
-- Set up BunnyCDN account and configure storage
-- Upload test audio files and configure delivery
+- Create Spotify Developer application and obtain credentials
+- Implement server-side Client Credentials flow for access token retrieval
 - Build custom HTML5 audio player component
 - Implement playlist functionality and controls
 - Add keyboard shortcuts and accessibility features
