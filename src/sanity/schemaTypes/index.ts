@@ -8,7 +8,6 @@ import contactSubmission from './contact-submission'
 import siteSettings from './site-settings'
 import user from './user'
 import youtube from './youtube'
-import spotify from './spotify'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -20,6 +19,5 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     siteSettings,
     user,
     youtube,
-    spotify,
   ],
 }
