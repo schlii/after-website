@@ -24,7 +24,7 @@ const newsPostsQuery = `*[_type == "news-post"] | order(date desc) {
 }`
 
 const songsQuery = `*[_type == "song"] | order(title asc) {
-  _id, title, artist, duration, audio_url, album_art
+  _id, title, artist, duration, itunesPreviewUrl, spotifyUrl, album_art
 }`
 
 const bandMembersQuery = `*[_type == "band-member"] {
@@ -90,7 +90,8 @@ interface Song {
   title: string
   artist: string
   duration: number
-  audio_url: string
+  itunesPreviewUrl?: string
+  spotifyUrl?: string
   album_art: any
 }
 
@@ -309,7 +310,7 @@ class DataIntegrationTester {
       const checks = [
         { name: 'TourDate Interface', data: tourDates?.[0], required: ['_id', 'title', 'venue', 'date', 'city', 'country', 'status'] },
         { name: 'NewsPost Interface', data: newsPosts?.[0], required: ['_id', 'title', 'content', 'date', 'featured_image'] },
-        { name: 'Song Interface', data: songs?.[0], required: ['_id', 'title', 'artist', 'duration', 'audio_url', 'album_art'] },
+        { name: 'Song Interface', data: songs?.[0], required: ['_id', 'title', 'artist', 'duration', 'album_art'] },
         { name: 'BandMember Interface', data: bandMembers?.[0], required: ['_id', 'name', 'role', 'bio', 'image'] },
         { name: 'SiteSettings Interface', data: siteSettings, required: ['_id', 'heroImage', 'aboutText', 'socialLinks'] }
       ]

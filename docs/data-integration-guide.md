@@ -63,13 +63,14 @@ This document provides comprehensive guidance on data fetching patterns, GROQ qu
   title,
   artist,
   duration,
-  audio_url,
+  itunesPreviewUrl,
+  spotifyUrl,
   album_art
 }
 ```
 **Performance**: ~370ms  
-**Current Data**: No documents (ready for music content)  
-**Usage**: Music page, homepage music player
+**Current Data**: No documents (optional overrides; primary source is iTunes Lookup by Artist ID)  
+**Usage**: Music page playlist overrides, metadata
 
 ### Band Members Query
 ```groq
@@ -230,7 +231,8 @@ interface Song extends SanityDocument {
   title: string
   artist: string
   duration: number
-  audio_url: string
+  itunesPreviewUrl?: string
+  spotifyUrl?: string
   album_art: SanityImageSource
 }
 

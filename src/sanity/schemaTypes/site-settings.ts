@@ -125,6 +125,21 @@ export default defineType({
       title: 'Google Analytics ID',
       type: 'string',
     }),
+    defineField({
+      name: 'appleArtistId',
+      title: 'Apple Music Artist ID',
+      type: 'number',
+      description: 'Used to auto-load tracks via iTunes Lookup API',
+      validation: Rule => Rule.required(),
+    }),
+    defineField({
+      name: 'appleStorefront',
+      title: 'Apple Storefront',
+      type: 'string',
+      description: "Country storefront, e.g., 'US'",
+      initialValue: 'US',
+      validation: Rule => Rule.required().regex(/^[A-Z]{2}$/),
+    }),
   ],
   preview: {
     select: {

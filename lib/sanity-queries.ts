@@ -44,7 +44,8 @@ export const songsQuery = groq`
     title,
     artist,
     duration,
-    audio_url,
+    itunesPreviewUrl,
+    spotifyUrl,
     album_art
   }
 `
