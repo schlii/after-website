@@ -1,3 +1,5 @@
+import { ContactForm } from '@/components/ContactForm'
+
 export default function ContactPage() {
   return (
     <div className="min-h-screen">
@@ -10,10 +12,7 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div className="bg-black/50 backdrop-blur-sm p-6 rounded-lg">
               <h2 className="text-2xl font-semibold mb-4">Get in Touch</h2>
-              {/* Contact form will be added later */}
-              <p className="text-gray-300 mb-4">
-                Contact form coming soon. Stay tuned for updates.
-              </p>
+              <ContactForm />
             </div>
             
             <div className="bg-black/50 backdrop-blur-sm p-6 rounded-lg">

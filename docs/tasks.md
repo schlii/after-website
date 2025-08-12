@@ -105,27 +105,8 @@
 - [x] Create track listing component
 - [x] Implement shuffle mode
 
-## Module 5: Contact & Newsletter
-### Task 5.1: Contact Form
-- [ ] Create components/ContactForm.tsx
-- [ ] Implement form validation
-- [ ] Create API route app/api/contact/route.ts
-- [ ] Connect form submission to Sanity
-- [ ] Set up email notifications to band
-- [ ] Add success/error messaging
-- [ ] Test form submission end-to-end
-
-### Task 5.2: Newsletter Integration
-- [ ] Choose newsletter service (Mailchimp/ConvertKit)
-- [ ] Create API account and get credentials
-- [ ] Build newsletter signup component
-- [ ] Create API route for newsletter subscription
-- [ ] Implement double opt-in flow
-- [ ] Add newsletter signup to multiple pages
-- [ ] Test subscription process
-
-## Module 6: Design & Aesthetics
-### Task 6.1: 2000s Design System
+## Module 5: Design & Aesthetics
+### Task 5.1: 2000s Design System
 - [ ] Create CSS custom properties for color scheme
 - [ ] Implement retro typography (fonts, sizes, effects)
 - [ ] Build reusable button components with 2000s styling
@@ -133,7 +114,7 @@
 - [ ] Add CSS animations for hover effects
 - [ ] Implement loading animations
 
-### Task 6.2: Layout Implementation
+### Task 5.2: Layout Implementation
 - [ ] Create desktop layouts with absolute positioning
 - [ ] Build modular homepage components
 - [ ] Implement overlapping elements and z-index management
@@ -141,7 +122,7 @@
 - [ ] Create animated transitions between pages
 - [ ] Test layout across different screen resolutions
 
-### Task 6.3: Responsive Design
+### Task 5.3: Responsive Design
 - [ ] Define breakpoints for mobile/tablet/desktop
 - [ ] Create mobile-first CSS approach
 - [ ] Implement mobile navigation menu
@@ -149,8 +130,8 @@
 - [ ] Test on real devices and browser dev tools
 - [ ] Optimize touch interactions for mobile
 
-## Module 7: Testing & Optimization
-### Task 7.1: Performance
+## Module 6: Testing & Optimization
+### Task 6.1: Performance
 - [ ] Implement Next.js Image optimization
 - [ ] Add lazy loading for images and components
 - [ ] Optimize bundle size with webpack-bundle-analyzer
@@ -158,7 +139,7 @@
 - [ ] Test Core Web Vitals scores
 - [ ] Optimize for mobile performance
 
-### Task 7.2: Cross-browser Testing
+### Task 6.2: Cross-browser Testing
 - [ ] Test in Chrome, Firefox, Safari, Edge
 - [ ] Verify mobile browser compatibility
 - [ ] Test music player across browsers
@@ -166,14 +147,14 @@
 - [ ] Fix any browser-specific issues
 - [ ] Test with JavaScript disabled (graceful degradation)
 
-### Task 7.3: Deployment Setup
+### Task 6.3: Deployment Setup
 - [ ] Connect GitHub repository to Vercel
 - [ ] Configure environment variables in Vercel dashboard
 - [ ] Set up automatic deployments on push to main
 - [ ] Test initial deployment
 - [ ] Verify all environment variables work in production
 
-### Task 7.4: Final Launch
+### Task 6.4: Final Launch
 - [ ] Set up custom domain
 - [ ] Configure SSL certificate
 - [ ] Set up analytics (Google Analytics/Plausible)
@@ -182,5 +163,24 @@
 - [ ] Train band members on Sanity admin
 - [ ] Create documentation for content updates
 - [ ] Go live and monitor for issues
+
+## Module 7: Contact & Newsletter
+### Task 7.1: Contact Form
+- [ ] Create components/ContactForm.tsx
+- [ ] Implement form validation
+- [ ] Create API route app/api/contact/route.ts
+- [ ] Set up email service integration (Nodemailer/Resend)
+- [ ] Send contact form submissions directly via email
+- [ ] Add success/error messaging
+- [ ] Test form submission end-to-end
+
+### Task 7.2: Newsletter Integration
+- [ ] Choose newsletter service (Mailchimp/ConvertKit)
+- [ ] Create API account and get credentials
+- [ ] Build newsletter signup component
+- [ ] Create API route for newsletter subscription
+- [ ] Implement double opt-in flow
+- [ ] Add newsletter signup to multiple pages
+- [ ] Test subscription process
 
 Each task should be completed in order within each module, and modules should be completed sequentially for best results. 

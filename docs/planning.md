@@ -355,7 +355,7 @@ This project is a comprehensive band website with modern responsive design capab
 ### Phase 1: Foundation Setup (Week 1)
 **Objective**: Establish core development environment and basic connectivity
 
-#### Day 1-2: Project Initialization
+#### Project Initialization
 **Tasks**:
 - Create Next.js project with TypeScript configuration
 - Set up folder structure according to architectural standards
@@ -368,7 +368,7 @@ This project is a comprehensive band website with modern responsive design capab
 - Basic project structure
 - Development workflow documentation
 
-#### Day 3-4: Sanity Integration
+#### Sanity Integration
 **Tasks**:
 - Create Sanity project and configure studio
 - Install and configure Sanity client in Next.js
@@ -381,7 +381,7 @@ This project is a comprehensive band website with modern responsive design capab
 - Basic schema structure
 - Admin access for band members
 
-#### Day 5-7: Routing Setup
+#### Routing Setup
 **Tasks**:
 - Implement Next.js App Router structure
 - Create placeholder pages for all sections
@@ -396,7 +396,7 @@ This project is a comprehensive band website with modern responsive design capab
 ### Phase 2: Core Content Management (Week 2)
 **Objective**: Complete CMS data layer implementation and validation
 
-#### Day 8-10: Schema Development
+#### Schema Development
 **Tasks**:
 - Create comprehensive Sanity schemas for all content types
 - Implement validation rules and field requirements
@@ -409,7 +409,7 @@ This project is a comprehensive band website with modern responsive design capab
 - Validated content models
 - Sample content for testing
 
-#### Day 11-12: Data Layer Implementation
+#### Data Layer Implementation
 **Tasks**:
 - Create GROQ queries for all content types
 - Implement TypeScript interfaces for data structures
@@ -422,7 +422,7 @@ This project is a comprehensive band website with modern responsive design capab
 - Type-safe data handling
 - Error handling mechanisms
 
-#### Day 13-14: Data Integration and Testing
+#### Data Integration and Testing
 **Tasks**:
 - Test all GROQ queries with real Sanity data
 - Validate data fetching functions work correctly
@@ -439,7 +439,7 @@ This project is a comprehensive band website with modern responsive design capab
 ### Phase 3: E-commerce Integration (Week 3)
 **Objective**: Complete Shopify integration and shopping functionality
 
-#### Day 15-17: Shopify Setup and Integration
+#### Shopify Setup and Integration
 **Tasks**:
 - Configure Shopify store and Storefront API
 - Create test products and collections
@@ -453,7 +453,7 @@ This project is a comprehensive band website with modern responsive design capab
 - Product display capabilities
 - Test product catalog
 
-#### Day 18-19: Shopping Cart Implementation
+#### Shopping Cart Implementation
 **Tasks**:
 - Create shopping cart state management
 - Implement add/remove/update functionality
@@ -467,7 +467,7 @@ This project is a comprehensive band website with modern responsive design capab
 - Persistent cart state
 - Cart management interface
 
-#### Day 20-21: Checkout Integration
+#### Checkout Integration
 **Tasks**:
 - Implement Shopify checkout redirect
 - Set up guest checkout workflow
@@ -483,10 +483,9 @@ This project is a comprehensive band website with modern responsive design capab
 ### Phase 4: Music & Interactive Features (Week 4)
 **Objective**: Implement music streaming and communication features
 
-#### Day 22-24: Spotify Integration and Music Player
+#### iTunes Integration and Music Player
 **Tasks**:
-- Create Spotify Developer application and obtain credentials
-- Implement server-side Client Credentials flow for access token retrieval
+- Use iTunes Lookup API with Artist ID to retrieve track metadata and `previewUrl`
 - Build custom HTML5 audio player component
 - Implement playlist functionality and controls
 - Add keyboard shortcuts and accessibility features
@@ -496,7 +495,7 @@ This project is a comprehensive band website with modern responsive design capab
 - Custom audio player
 - Playlist management
 
-#### Day 25-26: Music Page Development
+#### Music Page Development
 **Tasks**:
 - Create comprehensive music page layout
 - Integrate player with Sanity music data
@@ -509,7 +508,7 @@ This project is a comprehensive band website with modern responsive design capab
 - Social integration
 - Cross-browser compatibility
 
-#### Day 27-28: Contact and Newsletter Integration
+#### Contact and Newsletter Integration
 **Tasks**:
 - Build contact form with validation
 - Implement form submission to Sanity
@@ -525,7 +524,7 @@ This project is a comprehensive band website with modern responsive design capab
 ### Phase 5: Design Implementation (Week 5)
 **Objective**: Complete responsive design implementation
 
-#### Day 29-31: Design System
+#### Design System
 **Tasks**:
 - Implement CSS custom properties for color schemes
 - Set up typography system
@@ -538,7 +537,7 @@ This project is a comprehensive band website with modern responsive design capab
 - Component library
 - Animation framework
 
-#### Day 32-33: Desktop Layout Implementation
+#### Desktop Layout Implementation
 **Tasks**:
 - Create responsive desktop layouts
 - Implement proper spacing and alignment
@@ -551,7 +550,7 @@ This project is a comprehensive band website with modern responsive design capab
 - Animation system
 - Performance optimization
 
-#### Day 34-35: Responsive Implementation
+#### Responsive Implementation
 **Tasks**:
 - Implement mobile-first responsive breakpoints
 - Create mobile navigation and interaction patterns
@@ -567,7 +566,7 @@ This project is a comprehensive band website with modern responsive design capab
 ### Phase 6: Testing & Launch (Week 6)
 **Objective**: Comprehensive testing, optimization, and production launch
 
-#### Day 36-37: Performance Optimization
+#### Performance Optimization
 **Tasks**:
 - Implement Next.js Image optimization
 - Add lazy loading for images and components
@@ -580,7 +579,7 @@ This project is a comprehensive band website with modern responsive design capab
 - Bundle size optimization
 - Core Web Vitals compliance
 
-#### Day 38-39: Cross-browser and Device Testing
+#### Cross-browser and Device Testing
 **Tasks**:
 - Test functionality across all major browsers
 - Verify mobile browser compatibility
@@ -593,7 +592,7 @@ This project is a comprehensive band website with modern responsive design capab
 - Mobile device optimization
 - Issue resolution
 
-#### Day 40-41: Deployment Setup
+#### Deployment Setup
 **Tasks**:
 - Set up GitHub repository and connect to Vercel
 - Configure Vercel deployment pipeline
@@ -606,7 +605,7 @@ This project is a comprehensive band website with modern responsive design capab
 - Automated deployment pipeline
 - Verified environment configuration
 
-#### Day 41-42: Final Launch Preparation
+#### Final Launch Preparation
 **Tasks**:
 - Set up custom domain and SSL configuration
 - Implement analytics and monitoring
