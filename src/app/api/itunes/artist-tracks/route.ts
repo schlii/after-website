@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { fetchSanityDocument } from '@/lib/sanity-fetch'
-import { siteSettingsQuery } from '@/lib/sanity-queries'
-import type { SiteSettings } from '@/types/sanity'
+import { fetchSanityDocument } from 'lib/sanity-fetch'
+import { siteSettingsQuery } from 'lib/sanity-queries'
+import type { SiteSettings } from '../../../../../types/sanity'
 
 interface ItunesLookupResponse {
   resultCount: number
