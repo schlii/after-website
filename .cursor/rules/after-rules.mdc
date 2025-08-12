@@ -29,8 +29,6 @@ alwaysApply: true
 - Update planning documents when requirements change
 - Cross-reference current work against project architecture in `planning.md`
 - if a message contains "/no", do not code anything or try to run any commands until the user confirms or if a message contains "/go"
-- commit a new version when starting a new task number (ex, task 1.2, task 2.5). when the user says "lets get started on task x.x", commit a new version
-- commit a new version when user says "mark task x.x as complete" after updating tasks.md
 
 #### Decision Making Process
 - Consult `planning.md` for architectural decisions

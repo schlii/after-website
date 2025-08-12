@@ -66,9 +66,16 @@ export const siteSettingsQuery = groq`
   *[_type == "siteSettings"][0] {
     heroImage,
     aboutText,
-    socialLinks,
+    socialLinks
+  }
+`
+
+// Apple Music Settings
+export const appleMusicSettingsQuery = groq`
+  *[_type == "appleMusicSettings"][0] {
     appleArtistId,
-    appleStorefront
+    appleStorefront,
+    enabled
   }
 `
 

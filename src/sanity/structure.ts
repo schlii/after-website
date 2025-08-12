@@ -4,4 +4,38 @@ import type {StructureResolver} from 'sanity/structure'
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Content')
-    .items(S.documentTypeListItems())
+    .items([
+      // Settings Section
+      S.listItem()
+        .title('Settings')
+        .child(
+          S.list()
+            .title('Settings')
+            .items([
+              S.listItem()
+                .title('Apple Music Settings')
+                .id('appleMusicSettings')
+                .child(
+                  S.document()
+                    .schemaType('appleMusicSettings')
+                    .documentId('appleMusicSettings')
+                ),
+              S.listItem()
+                .title('Site Settings')
+                .id('siteSettings')
+                .child(
+                  S.document()
+                    .schemaType('siteSettings')
+                    .documentId('siteSettings')
+                ),
+            ])
+        ),
+      
+      // Divider
+      S.divider(),
+      
+      // All other document types
+      ...S.documentTypeListItems().filter(
+        (listItem) => !['siteSettings', 'appleMusicSettings'].includes(listItem.getId() ?? '')
+      ),
+    ])

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { fetchSanityDocument } from 'lib/sanity-fetch'
-import { siteSettingsQuery } from 'lib/sanity-queries'
-import type { SiteSettings } from '../../../../../types/sanity'
+import { appleMusicSettingsQuery } from 'lib/sanity-queries'
+import type { AppleMusicSettings } from '../../../../../types/sanity'
 
 interface ItunesLookupResponse {
   resultCount: number
@@ -68,7 +68,7 @@ export async function GET(req: NextRequest) {
     const artistIdParam = searchParams.get('artistId')
     const storefrontParam = searchParams.get('storefront')
 
-    const settingsResult = await fetchSanityDocument<SiteSettings>(siteSettingsQuery)
+    const settingsResult = await fetchSanityDocument<AppleMusicSettings>(appleMusicSettingsQuery)
     const settings = settingsResult.data || null
 
     const artistId = artistIdParam || (settings ? String(settings.appleArtistId) : null)

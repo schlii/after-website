@@ -89,22 +89,21 @@
 - [x] Document iTunes usage and remove dependency on Spotify `preview_url`
 
 ### Task 4.2: Music Player
-- [ ] Create components/MusicPlayer.tsx (single player with playlist from `/api/itunes/artist-tracks`)
-- [ ] Implement play/pause/skip controls
-- [ ] Add progress bar and time display
-- [ ] Create playlist functionality
-- [ ] Add volume controls
-- [ ] Implement keyboard shortcuts
-- [ ] Test across all browsers
-- [ ] Show "Listen on Spotify" button when `spotifyUrl` exists
+- [x] Create components/MusicPlayer.tsx (single player with playlist from `/api/itunes/artist-tracks`)
+- [x] Implement play/pause/skip controls
+- [x] Add progress bar and time display
+- [x] Create playlist functionality
+- [x] Add volume controls
+- [x] Implement keyboard shortcuts
+- [x] Test across all browsers
+- [x] Show "Listen on Spotify" button when `spotifyUrl` exists
 
 ### Task 4.3: Music Page
-- [ ] Build app/music/page.tsx layout
-- [ ] Integrate music player with Sanity song data
-- [ ] Add album artwork display
-- [ ] Create track listing component
-- [ ] Implement shuffle and repeat modes
-- [ ] Add social sharing for tracks
+- [x] Build app/music/page.tsx layout
+- [x] Integrate music player with iTunes API data
+- [x] Add album artwork display
+- [x] Create track listing component
+- [x] Implement shuffle mode
 
 ## Module 5: Contact & Newsletter
 ### Task 5.1: Contact Form

@@ -76,8 +76,14 @@ export interface SiteSettings extends SanityDocument {
     bandcamp?: string
     soundcloud?: string
   }
+}
+
+// Apple Music Settings
+export interface AppleMusicSettings extends SanityDocument {
+  _type: 'appleMusicSettings'
   appleArtistId: number
   appleStorefront: string
+  enabled: boolean
 }
 
 // Response Types

@@ -1,0 +1,10 @@
+[33m0e4692e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeat/task-4.1-spotify-setup[m[33m)[m initiating task 4.2 - music player
+[33m26ee766[m starting on new approach to step 4.1 - apple music preview integration
+[33md547236[m chore(sanity): remove Song document type from schema and registration
+[33mf342aaa[m fix(sanity): remove spotify embed type references from news-post schema
+[33mbba9ee7[m chore: remove Spotify preview code and schema
+[33ma9911fe[m refactor: migrate queries/docs to iTunes fields; add Apple Music settings
+[33mf3ed0df[m docs: plan automatic playlist via Apple Music Artist ID and API endpoint
+[33m4a970af[m feat(sanity): add iTunes and Spotify URL fields to song schema and remove deprecated audio fields
+[33m71215ed[m docs: switch music playback plan to iTunes previews and add Spotify link field
+[33mfac4ed0[m fix(spotify): use lib/* path alias for server import to avoid @/* restriction
