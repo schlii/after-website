@@ -1,0 +1,213 @@
+.pageWrapper {
+  /* Centers the site container and ensures full-height background visibility */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Scalable site container adhering to 1024 × 800 mock-up */
+.siteContainer {
+  width: clamp(320px, 80vmin, 1024px);
+  aspect-ratio: 1024 / 800;
+
+  /* Enable container query units so internal gaps scale with width */
+  container-type: inline-size;
+  container-name: site;
+
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(36, 1fr);
+  column-gap: 2.34375cqw; /* 24 px at full width (24 / 1024 * 100) */
+  row-gap: 0.390625cqw;  /* 4 px at full width */
+
+  background: rgba(255, 255, 255, 0.05); /* subtle visual aid */
+  outline: 1px dashed rgba(255, 255, 255, 0.15);
+  position: relative;
+}
+
+/* Hero wrapper spans the grid area and hosts background image + panel */
+.heroWrapper {
+  grid-column: 1 / 8;
+  grid-row: 1 / 26;
+  position: relative;
+  border-radius: var(--panel-radius, 6px);
+  overflow: hidden; /* clip the background image to panel corners */
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.panel {
+  grid-column: 8 / 13;
+  grid-row: 1 / 26;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.nav {
+  grid-column: 1 / 13;
+  grid-row: 27 / 37;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Base surface style shared by every panel */
+.panelCommon {
+  /* Gradient overlay on top of the base colour */
+  background:
+    linear-gradient(
+      var(--panel-gradient-angle, 195deg),
+      var(--panel-gradient-start, hsla(0, 0%, 100%, 0.507)) 0%,  /* transparent white at top */
+      var(--panel-gradient-end, hsla(0, 0%, 0%, 0.13)) 100%
+    ),
+    var(--panel-bg);
+
+  /* Responsive border widths */
+  --border-w: clamp(1px, 0.10cqw, 2px);
+  --inner-w: clamp(4px, 0.45cqw, 8px); /* thicker inner stroke */
+  --panel-glow-blur: 8cqw;
+
+  border: var(--border-w) solid var(--panel-border);
+
+  /* Multiple shadows: inner stroke, inner glow, drop shadow */
+  box-shadow:
+    inset 0 0 0 var(--inner-w) var(--panel-inner),
+    inset 0 0 var(--panel-glow-blur) 0 var(--panel-glow, hsla(0, 100%, 99%, 0.9)),
+    0 .1cqh .5cqw var(--panel-drop, hsla(210, 51%, 20%, 0.363));
+
+  --panel-radius: 6px;
+  border-radius: var(--panel-radius);
+  padding: 2cqw;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Optional framed box inside a panel */
+.panelBox {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--panel-border, rgba(255, 255, 255, 0.15));
+  border-radius: 4px;
+  --panel-box-margin: clamp(4px, 0.78cqw, 8px); /* ~8px at full width */
+  margin: var(--panel-box-margin);
+  /* Fill remaining space inside parent while respecting margins */
+  width: calc(100% - (2 * var(--panel-box-margin)));
+  height: calc(100% - (2 * var(--panel-box-margin)));
+  box-sizing: border-box;
+
+  padding: 4pt;
+}
+
+/* Modifier: extra top padding */
+.panelBox--tallerTop {
+  padding-top: 8pt;
+}
+
+/* Utility: fills the panel with an image */
+.panelImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0; /* behind content but inside strokes */
+}
+
+/* Modifier: tune glow for image-background panels */
+.panelImageVariant {
+  --panel-glow-blur: 2cqw;
+  --panel-glow: hsla(0, 0%, 100%, 0.8);
+
+  /* Ensure photo remains visible */
+  --panel-bg: transparent;
+
+  /* Optional gradient and stroke tweaks for image panels */
+  --panel-gradient-start: hsla(0, 0%, 100%, 0.0);
+  --panel-gradient-end: hsla(0, 0%, 0%, 0.25);
+
+  /* Slightly lighter strokes over busy images */
+  --border-w: clamp(1px, 0.07cqw, 1.5px);
+  --inner-w: clamp(3px, 0.35cqw, 6px);
+}
+
+/* Mobile fallback: collapse grid into a stacked flow */
+@container site (max-width: 600px) {
+  .siteContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .hero,
+  .panel,
+  .nav {
+    grid: unset;
+    flex: 1 0 auto;
+  }
+}
+
+/* Tour placeholder styles */
+.tourHeader {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.tourLine1 {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  opacity: 0.8;
+}
+
+.tourLine2 {
+  margin: 0;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 600;
+}
+
+.tourList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.4rem;
+  font-size: clamp(0.7rem, 1.4vw, 0.9rem);
+}
+
+.tourList li {
+  display: grid;
+  grid-template-columns: max-content auto 1fr auto; /* auto-sizing date */
+  column-gap: 0.1rem;
+  align-items: baseline;
+  text-align: left;
+}
+
+.tourList .city {
+  white-space: nowrap;
+}
+
+.tourList .date {
+  min-width: 5.5rem;
+  font-weight: 500;
+}
+
+.tourList .venue {
+  flex: 1 1 auto;
+}
+
+.tix {
+  color: hsl(210 60% 45%);
+  text-decoration: underline;
+}

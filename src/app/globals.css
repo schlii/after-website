@@ -3,6 +3,11 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* Panel theme */
+  --panel-bg: hsl(212, 100%, 97%);
+  --panel-border: hsla(210, 78%, 18%, 0.6);
+  --panel-inner: hsl(210 10% 85% / 0.9);
+  --panel-glow: hsla(0 0% 100% / 0.9);
 }
 
 @theme inline {
@@ -19,8 +24,14 @@
   }
 }
 
+html, body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
 body {
-  background: var(--background);
+  background: var(--background) url('/SE003.jpg') center / cover fixed no-repeat;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
