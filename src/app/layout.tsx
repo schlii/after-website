@@ -4,11 +4,46 @@ import Providers from "../components/Providers";
 import CartToggleButton from "../components/CartToggleButton";
 import CartSidebar from "../components/CartSidebar";
 import "./globals.css";
+import localFont from 'next/font/local';
 
 export const metadata: Metadata = {
   title: "After - Official Band Website",
   description: "The official website of After - Music, Tour Dates, Merch, and More",
 };
+
+const aeonikPro = localFont({
+  src: [
+    {
+      path: '../../public/Aeonik Pro/AeonikPro-Regular.otf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/Aeonik Pro/AeonikPro-Bold.otf',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-aeonik-pro',
+  display: 'swap',
+});
+
+const aeonikMono = localFont({
+  src: [
+    {
+      path: '../../public/Aeonik Mono/AeonikMono-Regular.otf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/Aeonik Mono/AeonikMono-Medium.otf',
+      weight: '500',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-aeonik-mono',
+  display: 'swap',
+});
 
 export default function RootLayout({
   children,
@@ -16,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${aeonikPro.variable} ${aeonikMono.variable}`}>
       <body className="min-h-screen bg-black text-white">
         {/* Global providers */}
         <Providers>

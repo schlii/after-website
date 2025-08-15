@@ -1,6 +1,7 @@
 .pageWrapper {
   /* Centers the site container and ensures full-height background visibility */
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -183,15 +184,22 @@
   display: flex;
   flex-direction: column;
   row-gap: 0.4rem;
-  font-size: clamp(0.7rem, 1.4vw, 0.9rem);
+  /* auto scales with box width; never below 0.65rem nor above 0.85rem */
+  font-size: clamp(0.65rem, 0.95cqw, 0.85rem);
 }
 
 .tourList li {
   display: grid;
-  grid-template-columns: max-content auto 1fr auto; /* auto-sizing date */
-  column-gap: 0.1rem;
+  grid-template-columns: max-content 1fr auto; /* date | info | tickets */
+  column-gap: 0.5rem;
   align-items: baseline;
-  text-align: left;
+}
+
+.info {
+  flex: 1 1 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tourList .city {
@@ -199,7 +207,6 @@
 }
 
 .tourList .date {
-  min-width: 5.5rem;
   font-weight: 500;
 }
 
@@ -210,4 +217,67 @@
 .tix {
   color: hsl(210 60% 45%);
   text-decoration: underline;
+}
+
+/* ──────────  Site navigation (outside grid) ────────── */
+.siteNav {
+  width: clamp(320px, 80vmin, 1024px);
+  margin: 1.5cqh auto 0;
+  display: flex;
+  justify-content: center; /* center links */
+  align-items: center;
+  font-size: clamp(1.85rem, 1.5vw, 1.1rem);
+}
+
+.navLinks {
+  display: flex;
+  gap: 1.2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navLink {
+  color: #ffffff;
+  text-decoration: none;
+  text-shadow: 0 0 4px rgba(80, 120, 255, 0.6);
+  transition: color 0.2s ease;
+}
+
+.navLink:hover {
+  color: #c9d6ff;
+}
+
+/* Cart icon overlay inside site container */
+.cartWrapper {
+  position: absolute;
+  top: 1cqh;
+  right: 1cqw;
+  text-shadow: 0 0 4px rgba(80, 120, 255, 0.6);
+}
+
+.tourBox {
+  /* Ensure photo remains visible */
+  --panel-bg: transparent;
+
+  font-family: var(--font-mono);
+  font-weight: 500; /* medium */
+
+  /* Enable container query for dynamic font sizing */
+  container-type: inline-size;
+}
+
+/* Base font size for list */
+.tourList {
+  font-size: 0.7rem;
+}
+
+/* Shrink font when box narrows below 260px */
+@container (max-width: 260px) {
+  .tourList { font-size: 0.4rem; }
+}
+
+/* Extra shrink for very narrow */
+@container (max-width: 220px) {
+  .tourList { font-size: 0.1rem; }
 }
