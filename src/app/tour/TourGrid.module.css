@@ -4,7 +4,7 @@
 
 /* Photo panels positioning */
 .panelA { grid-column: 1 / 3; grid-row: 1 / 5; }
-.panelB { grid-column: 3 / 4; grid-row: 1 / 5; }
+.panelB { grid-column: 0 / 0; grid-row: 1 / 5; }
 .panelC { grid-column: 1 / 4; grid-row: 6 / 10; }
 .panelD { grid-column: 1 / 2; grid-row: 11 / 24; }
 .panelE { grid-column: 2 / 4; grid-row: 11 / 24; }

@@ -1,6 +1,6 @@
 import { SiteGridLayout } from '@/components/SiteGridLayout'
 import AppleMusicPlayerClient from '@/components/AppleMusicPlayerClient'
-import styles from '../playground/Playground.module.css'
+import styles from '@/styles/SiteGrid.module.css'
 
 export default function MusicPage() {
   return (

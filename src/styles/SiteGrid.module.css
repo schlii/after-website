@@ -1,0 +1,2 @@
+/* Production grid styles proxying the playground module */
+@import '../app/playground/Playground.module.css';

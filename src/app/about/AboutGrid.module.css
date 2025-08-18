@@ -1,0 +1,26 @@
+.panel {}
+
+/* Panel positioning placeholders */
+.panelA {
+  /* TODO: set real coordinates */
+  grid-column: 1 / 7; /* columns ?–? */
+  grid-row: 1 /19;    /* rows ?–? */
+}
+
+.panelB {
+  /* TODO: set real coordinates */
+  grid-column: 7 / 13; /* columns ?–? */
+  grid-row: 19 / 37;    /* rows ?–? */
+}
+
+.panelC {
+  /* TODO: set real coordinates */
+  grid-column: 7 / 13; /* columns ?–? */
+  grid-row: 6 / 14;    /* rows ?–? */
+}
+
+.panelD {
+  /* TODO: set real coordinates */
+  grid-column: 1 / 7; /* columns ?–? */
+  grid-row: 24 / 32;    /* rows ?–? */
+}

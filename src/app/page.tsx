@@ -1,6 +1,6 @@
 import React from 'react'
 import { SiteGridLayout } from '@/components/SiteGridLayout'
-import styles from './playground/Playground.module.css'
+import styles from '@/styles/SiteGrid.module.css'
 import CartToggleButton from '@/components/CartToggleButton'
 import AppleMusicPlayerClient from '@/components/AppleMusicPlayerClient'
 

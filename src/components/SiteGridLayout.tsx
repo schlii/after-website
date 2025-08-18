@@ -1,6 +1,6 @@
 import { type FC, type ReactNode } from 'react'
 import Link from 'next/link'
-import styles from '@/app/playground/Playground.module.css'
+import styles from '@/styles/SiteGrid.module.css'
 
 interface SiteGridLayoutProps {
   /**

@@ -1,0 +1,59 @@
+.panel {}
+
+/* Panel positioning */
+.panelA {
+  grid-column: 1 / 13; /* columns 1–6 */
+  grid-row: 1 / 11;   /* rows 1–18 */
+}
+
+.panelB {
+  grid-column: 1 / 4; /* columns 7–12 */
+  grid-row: 12 / 22;  /* rows 1–18 */
+}
+
+.panelC {
+  grid-column: 4 / 7; /* columns 7–12 */
+  grid-row: 12 / 22;  /* rows 1–18 */
+}
+
+.panelD {
+  /* TODO: set real coordinates */
+  grid-column: 7 / 10; /* columns ?–? */
+  grid-row: 12 / 22;    /* rows ?–? */
+}
+
+.panelE {
+  /* TODO: set real coordinates */
+  grid-column: 10 / 13; /* columns ?–? */
+  grid-row: 12 / 22;    /* rows ?–? */
+}
+
+.panelF {
+  /* TODO: set real coordinates */
+  grid-column: 1 / 4; /* columns ?–? */
+  grid-row: 23 / 33;    /* rows ?–? */
+}
+
+.panelG {
+  /* TODO: set real coordinates */
+  grid-column: 4 / 7; /* columns ?–? */
+  grid-row: 23 / 33;    /* rows ?–? */
+}
+
+.panelH {
+  /* TODO: set real coordinates */
+  grid-column: 7 / 10; /* columns ?–? */
+  grid-row: 23 / 33;    /* rows ?–? */
+}
+
+.panelI {
+  /* TODO: set real coordinates */
+  grid-column: 10 / 13; /* columns ?–? */
+  grid-row: 23 / 33;    /* rows ?–? */
+}
+
+.panelJ {
+  /* TODO: set real coordinates */
+  grid-column: 1 / 13; /* columns ?–? */
+  grid-row: 34 / 37;    /* rows ?–? */
+}

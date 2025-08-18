@@ -1,0 +1,7 @@
+.panel {}
+
+/* Single full-grid panel */
+.panelMain {
+  grid-column: 1 / 13; /* columns 1-12 inclusive */
+  grid-row: 1 / 37;    /* rows 1-36 inclusive */
+}

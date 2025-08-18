@@ -96,7 +96,11 @@
 - [x] Add volume controls
 - [x] Implement keyboard shortcuts
 - [x] Test across all browsers
-- [x] Show "Listen on Spotify" button when `spotifyUrl` exists
+- [x] Create GlobalAudioPlayerContext for persistent playback
+- [x] Refactor AppleMusicPlayer to consume global context
+- [x] Enable auto-play on track change
+- [x] Add optional playlist panel inside player
+- [ ] Conduct accessibility & keyboard-shortcut audit
 
 ### Task 4.3: Music Page
 - [x] Build app/music/page.tsx layout
@@ -105,30 +109,46 @@
 - [x] Create track listing component
 - [x] Implement shuffle mode
 
-## Module 5: Design & Aesthetics
-### Task 5.1: 2000s Design System
-- [ ] Create CSS custom properties for color scheme
-- [ ] Implement retro typography (fonts, sizes, effects)
-- [ ] Build reusable button components with 2000s styling
-- [ ] Create background patterns and textures
-- [ ] Add CSS animations for hover effects
-- [ ] Implement loading animations
+## Module 5A: Global Layout & Navigation (completed)
 
-### Task 5.2: Layout Implementation
-- [ ] Create desktop layouts with absolute positioning
-- [ ] Build modular homepage components
-- [ ] Implement overlapping elements and z-index management
-- [ ] Add decorative elements and borders
-- [ ] Create animated transitions between pages
-- [ ] Test layout across different screen resolutions
+### Task 5A.1: Grid & Panel System
+- [x] Implement 12 × 36 CSS grid (`SiteGridLayout`) applied site-wide
+- [x] Establish panel chrome (outer border, inner stroke, glow) with modifier classes
 
-### Task 5.3: Responsive Design
-- [ ] Define breakpoints for mobile/tablet/desktop
-- [ ] Create mobile-first CSS approach
-- [ ] Implement mobile navigation menu
-- [ ] Adapt complex layouts for smaller screens
+### Task 5A.2: Navigation & Fonts
+- [x] Add bottom navigation bar (Home, Tour, Merch, Music, Contact, About)
+- [x] Integrate Aeonik Pro / Aeonik Mono fonts via `next/font/local` and map to CSS variables
+
+### Task 5A.3: Page Migration
+- [x] Migrate Home, Music, Tour, Merch, About, Contact pages to grid layout
+- [x] Remove legacy fixed header and adjust content padding
+
+## Module 5B: Design & Aesthetics
+### Task 5.1: Layout & Content Integration (desktop)
+- [x] Grid panel spacing and desktop-responsive behavior finalised
+- [ ] Implement panel layouts for merch, contact, and about
+- [ ] Integrate real Sanity content into Tour, Merch, About, and Contact panels
+- [ ] Perform cross-resolution layout testing (desktop)
+
+### Task 5.2: Music Player Interface
+- [ ] Design Winamp-inspired skin mock-up (Figma/SVG reference)
+- [ ] Export scalable vector assets (buttons, sliders, frame) 
+- [ ] Implement new skin in `AppleMusicPlayer.tsx` without altering logic
+- [ ] Ensure layout scales between 1024 px and 1440 px widths
+- [ ] Add keyboard-focus styles matching skin
+- [ ] Verify contrast and readability against WCAG AA
+
+### Task 5.3: Desktop filter effects
+- [ ] Implement CSS/canvas dithering overlay applied after all desktop content
+- [ ] Provide global toggle (dev only) to disable filter for debugging
+- [ ] Measure FPS and memory impact in Chrome DevTools
+- [ ] Test overlay on WebKit and Firefox to confirm consistency
+- [ ] Document technique and cleanup hooks
+
+### Task 5.4: Mobile Site (separate build, pending)
+- [ ] Create dedicated mobile layout and navigation
+- [ ] Implement mobile-specific interactions and touch targets
 - [ ] Test on real devices and browser dev tools
-- [ ] Optimize touch interactions for mobile
 
 ## Module 6: Testing & Optimization
 ### Task 6.1: Performance
@@ -163,6 +183,11 @@
 - [ ] Train band members on Sanity admin
 - [ ] Create documentation for content updates
 - [ ] Go live and monitor for issues
+
+### Task 6.5: GUI Quality Assurance
+- [ ] Conduct full accessibility audit (ARIA roles, contrast, focus order)
+- [ ] Profile grid resizing performance and bundle size
+- [ ] Implement visual regression tests for grid and panel chrome
 
 ## Module 7: Contact & Newsletter
 ### Task 7.1: Contact Form

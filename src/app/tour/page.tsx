@@ -1,5 +1,5 @@
 import { SiteGridLayout } from '@/components/SiteGridLayout'
-import pgStyles from '../playground/Playground.module.css'
+import pgStyles from '@/styles/SiteGrid.module.css'
 import grid from './TourGrid.module.css'
 
 export default function TourPage() {
