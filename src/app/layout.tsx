@@ -55,50 +55,11 @@ export default function RootLayout({
       <body className="min-h-screen bg-black text-white">
         {/* Global providers */}
         <Providers>
-        <header className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-sm">
-          <nav className="max-w-7xl mx-auto px-4 py-4">
-            <ul className="flex items-center justify-center space-x-8">
-              <li>
-                <Link href="/" className="text-xl hover:text-purple-400 transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/music" className="text-xl hover:text-purple-400 transition-colors">
-                  Music
-                </Link>
-              </li>
-              <li>
-                <Link href="/tour" className="text-xl hover:text-purple-400 transition-colors">
-                  Tour
-                </Link>
-              </li>
-              <li>
-                <Link href="/merch" className="text-xl hover:text-purple-400 transition-colors">
-                  Merch
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-xl hover:text-purple-400 transition-colors">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-xl hover:text-purple-400 transition-colors">
-                  Contact
-                </Link>
-              </li>
-                          <li>
-                <CartToggleButton />
-              </li>
-            </ul>
-          </nav>
-        </header>
         <CartSidebar />
-        <main className="pt-20">
+        <main>
           {children}
         </main>
-        <footer className="bg-black/80 backdrop-blur-sm py-8 mt-20">
+        <footer className="bg-black/80 backdrop-blur-sm py-8 mt-10">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <p className="text-gray-400">© {new Date().getFullYear()} After. All rights reserved.</p>
           </div>

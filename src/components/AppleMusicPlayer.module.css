@@ -107,3 +107,45 @@
   flex: 1 1 auto;
   accent-color: #ffffff;
 }
+
+/* Playlist */
+.playlistContainer {
+  margin-top: 1cqh;
+  width: 100%;
+  max-height: 35cqh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6cqh;
+}
+
+.playlistItem {
+  padding: 3cqh 1cqw;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 0.8cqw;
+  cursor: pointer;
+  font-size: clamp(0.55rem, 1.5cqw, 1.5rem);
+  color: #000000;
+  transition: background 0.2s ease;
+}
+
+.playlistItem:hover {
+  background: rgba(80, 120, 255, 0.25);
+}
+
+.playlistItemActive {
+  background: rgba(80, 120, 255, 0.25);
+}
+
+.trackIndex {
+  opacity: 0.8;
+}
+
+.trackDuration {
+  margin-left: auto;
+  opacity: 0.7;
+  font-size: 0.75em;
+}

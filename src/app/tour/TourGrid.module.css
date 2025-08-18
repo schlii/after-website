@@ -1,0 +1,23 @@
+.panel {
+  /* base panel style can be extended later */
+}
+
+/* Photo panels positioning */
+.panelA { grid-column: 1 / 3; grid-row: 1 / 5; }
+.panelB { grid-column: 3 / 4; grid-row: 1 / 5; }
+.panelC { grid-column: 1 / 4; grid-row: 6 / 10; }
+.panelD { grid-column: 1 / 2; grid-row: 11 / 24; }
+.panelE { grid-column: 2 / 4; grid-row: 11 / 24; }
+.panelF { grid-column: 1 / 4; grid-row: 25 / 37; }
+.panelG { grid-column: 10 / 11; grid-row: 1 / 5; }
+.panelH { grid-column: 11 / 13; grid-row: 1 / 13; }
+.panelI { grid-column: 10 / 11; grid-row: 6 / 16; }
+.panelJ { grid-column: 11 / 13; grid-row: 14 / 16; }
+.panelK { grid-column: 10 / 12; grid-row: 17 / 26; }
+.panelL { grid-column: 12 / 13; grid-row: 17 / 26; }
+.panelM { grid-column: 10 / 13; grid-row: 27 / 32; }
+.panelN { grid-column: 10 / 11; grid-row: 33 / 37; }
+.panelO { grid-column: 11 / 13; grid-row: 33 / 37; }
+
+/* Main content panel */
+.mainContent { grid-column: 4 / 10; grid-row: 1 / 37; }

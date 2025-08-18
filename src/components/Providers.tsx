@@ -1,8 +1,13 @@
 'use client'
 
-import { type ReactNode } from 'react'
-import { CartProvider } from '../contexts/CartContext'
+import React from 'react'
+import { AudioPlayerProvider } from '@/contexts/GlobalAudioPlayerContext'
+import { CartProvider } from '@/contexts/CartContext'
 
-export default function Providers({ children }: { children: ReactNode }) {
-  return <CartProvider>{children}</CartProvider>
+export default function Providers({ children }: { children: React.ReactNode }) {
+  return (
+    <CartProvider>
+      <AudioPlayerProvider>{children}</AudioPlayerProvider>
+    </CartProvider>
+  )
 }

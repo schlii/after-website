@@ -74,7 +74,7 @@
 
   /* Responsive border widths */
   --border-w: clamp(1px, 0.10cqw, 2px);
-  --inner-w: clamp(4px, 0.45cqw, 8px); /* thicker inner stroke */
+  --inner-w: clamp(4px, 0.45cqw, 8px); /* inner stroke width */
   --panel-glow-blur: 8cqw;
 
   border: var(--border-w) solid var(--panel-border);
@@ -87,7 +87,7 @@
 
   --panel-radius: 6px;
   border-radius: var(--panel-radius);
-  padding: 2cqw;
+  padding: 0;
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
@@ -280,4 +280,10 @@
 /* Extra shrink for very narrow */
 @container (max-width: 220px) {
   .tourList { font-size: 0.1rem; }
+}
+
+/* -------------- Full-grid panel -------------- */
+.fullPanel {
+  grid-column: 1 / 13;
+  grid-row: 1 / 37;
 }

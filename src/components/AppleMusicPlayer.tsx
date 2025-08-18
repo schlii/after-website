@@ -1,9 +1,8 @@
 'use client'
 
-import { FC, useState, useEffect, useCallback } from 'react'
+import { FC, useCallback } from 'react'
 import styles from './AppleMusicPlayer.module.css'
-import { useAudioPlayer, type Track } from '@/hooks/useAudioPlayer'
-import type { NormalizedItunesTrack } from '@/app/api/itunes/artist-tracks/route'
+import { useGlobalAudioPlayer } from '@/contexts/GlobalAudioPlayerContext'
 
 const PlayIcon: FC = () => (
   <svg
@@ -61,11 +60,9 @@ const NextIcon: FC = () => (
  * Renders a lightweight Apple-Music-styled player panel that fits the
  * surrounding panelCommon constraints. No playback logic at this stage.
  */
-const AppleMusicPlayer: FC = () => {
-  const [tracks, setTracks] = useState<Track[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+interface AppleMusicPlayerProps { showPlaylist?: boolean }
 
+const AppleMusicPlayer: FC<AppleMusicPlayerProps> = ({ showPlaylist = false }) => {
   const {
     isPlaying,
     currentTime,
@@ -74,51 +71,17 @@ const AppleMusicPlayer: FC = () => {
     muted,
     loading: audioLoading,
     currentTrack,
+    currentTrackIndex,
+    playlist: tracks,
     togglePlay,
     skipToNext,
     skipToPrevious,
     seekTo,
     setVolume,
     toggleMute,
-  } = useAudioPlayer({
-    playlist: tracks,
-    autoPlay: true,
-  })
-
-  // Fetch Apple Music tracks on mount
-  useEffect(() => {
-    const fetchTracks = async () => {
-      try {
-        setLoading(true)
-        const response = await fetch('/api/itunes/artist-tracks')
-        const result = await response.json()
-
-        if (!result.success) {
-          throw new Error(result.error?.message || 'Failed to load tracks')
-        }
-
-        const playerTracks: Track[] = (result.data as NormalizedItunesTrack[]).map((t) => ({
-          id: t.id,
-          title: t.title,
-          artist: t.artist,
-          album: t.album,
-          duration: t.duration,
-          previewUrl: t.previewUrl,
-          artworkUrl: t.artworkUrl,
-        }))
-
-        setTracks(playerTracks)
-      } catch (err) {
-        const message = err instanceof Error ? err.message : 'Failed to load tracks'
-        setError(message)
-        console.error('AppleMusicPlayer fetchTracks error:', err)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchTracks()
-  }, [])
+    selectTrack,
+    play,
+  } = useGlobalAudioPlayer()
 
   const formatTime = useCallback((seconds: number): string => {
     if (!Number.isFinite(seconds)) return '0:00'
@@ -137,16 +100,8 @@ const AppleMusicPlayer: FC = () => {
     setVolume(v)
   }
 
-  if (loading) {
-    return <div className={styles.player}>Loading...</div>
-  }
-
-  if (error) {
-    return <div className={styles.player}>{error}</div>
-  }
-
   if (!tracks.length) {
-    return <div className={styles.player}>No tracks found</div>
+    return <div className={styles.player}>Loading...</div>
   }
 
   return (
@@ -225,7 +180,24 @@ const AppleMusicPlayer: FC = () => {
           aria-label="Volume"
         />
       </div>
-    </div>
+
+      {/* Playlist */}
+      {showPlaylist && (
+        <div className={styles.playlistContainer}>
+          {tracks.map((track, index) => (
+            <button
+              key={track.id}
+              className={`${styles.playlistItem} ${index === currentTrackIndex ? styles.playlistItemActive : ''}`}
+              onClick={() => selectTrack(index)}
+            >
+              <span className={styles.trackIndex}>{index + 1}.</span>
+              <span className={styles.trackTitle}>{track.title}</span>
+              <span className={styles.trackDuration}>{formatTime(track.duration)}</span>
+            </button>
+          ))}
+        </div>
+      )}
+      </div>
   )
 }
 
