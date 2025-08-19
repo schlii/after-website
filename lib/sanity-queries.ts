@@ -61,12 +61,33 @@ export const bandMembersQuery = groq`
   }
 `
 
-// Site Settings
-export const siteSettingsQuery = groq`
-  *[_type == "siteSettings"][0] {
+// Global
+export const globalQuery = groq`
+  *[_type == "global"][0] {
+    siteTitle,
+    tagline,
+    socialLinks,
+    seoDescription,
+    ogImage
+  }
+`
+
+// Home Page
+export const homeQuery = groq`
+  *[_type == "home"][0] {
     heroImage,
-    aboutText,
-    socialLinks
+    heroHeading,
+    heroSubheading
+  }
+`
+
+// About Page
+export const aboutQuery = groq`
+  *[_type == "about"][0] {
+    image1,
+    text1,
+    image2,
+    text2
   }
 `
 
@@ -88,5 +109,40 @@ export const contactSubmissionsQuery = groq`
     message,
     date,
     status
+  }
+`
+
+export const merchQuery = groq`
+  *[_type == "merch"][0] {
+    bannerImage,
+    policyLinksText
+  }
+`
+
+export const tourQuery = groq`
+  *[_type == "tour"][0] {
+    introHeading,
+    photoImages
+  }
+`
+
+export const contactQuery = groq`
+  *[_type == "contact"][0] {
+    formIntro
+  }
+`
+
+export const musicQuery = groq`
+  *[_type == "music"][0] {
+    playlistHeading
+  }
+`
+
+export const bandInfoQuery = groq`
+  *[_type == "bandInfo"][0] {
+    bandImage1,
+    bandImage2,
+    bio1,
+    bio2
   }
 `

@@ -85,7 +85,7 @@
     inset 0 0 var(--panel-glow-blur) 0 var(--panel-glow, hsla(0, 100%, 99%, 0.9)),
     0 .1cqh .5cqw var(--panel-drop, hsla(210, 51%, 20%, 0.363));
 
-  --panel-radius: 6px;
+  --panel-radius: 3px;
   border-radius: var(--panel-radius);
   padding: 0;
   position: relative;
@@ -99,7 +99,7 @@
 .panelBox {
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid var(--panel-border, rgba(255, 255, 255, 0.15));
-  border-radius: 4px;
+  border-radius: 2px;
   --panel-box-margin: clamp(4px, 0.78cqw, 8px); /* ~8px at full width */
   margin: var(--panel-box-margin);
   /* Fill remaining space inside parent while respecting margins */
@@ -122,7 +122,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 0; /* behind content but inside strokes */
+  /* Place the image beneath panel chrome (inner stroke/glow). */
+  z-index: -1;
 }
 
 /* Modifier: tune glow for image-background panels */

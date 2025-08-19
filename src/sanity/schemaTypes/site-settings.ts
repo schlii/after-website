@@ -1,8 +1,8 @@
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
-  name: 'siteSettings',
-  title: 'Site Settings',
+  name: 'global',
+  title: 'Global Settings',
   type: 'document',
   __experimental_actions: [
     // Disable delete and duplicate for singleton
@@ -21,12 +21,6 @@ export default defineType({
       title: 'Social Media Links',
       options: { collapsible: true, collapsed: true }
     },
-    {
-      name: 'contact',
-      title: 'Contact Information',
-      options: { collapsible: true, collapsed: true }
-    },
-
     {
       name: 'seo',
       title: 'SEO & Analytics',
@@ -49,42 +43,6 @@ export default defineType({
       validation: Rule => Rule.required(),
     }),
     defineField({
-      name: 'heroImage',
-      title: 'Hero Image',
-      type: 'image',
-      fieldset: 'general',
-      options: {
-        hotspot: true,
-      },
-      fields: [
-        {
-          name: 'alt',
-          title: 'Alt Text',
-          type: 'string',
-          validation: Rule => Rule.required(),
-        },
-      ],
-      validation: Rule => Rule.required(),
-    }),
-    defineField({
-      name: 'aboutText',
-      title: 'About Text',
-      type: 'array',
-      fieldset: 'general',
-      of: [
-        {
-          type: 'block',
-          styles: [
-            { title: 'Normal', value: 'normal' },
-            { title: 'H2', value: 'h2' },
-            { title: 'H3', value: 'h3' },
-            { title: 'Quote', value: 'blockquote' },
-          ],
-        },
-      ],
-      validation: Rule => Rule.required(),
-    }),
-    defineField({
       name: 'socialLinks',
       title: 'Social Links',
       type: 'object',
@@ -99,34 +57,6 @@ export default defineType({
         { name: 'bandcamp', title: 'Bandcamp', type: 'url' },
         { name: 'soundcloud', title: 'SoundCloud', type: 'url' },
       ],
-    }),
-    defineField({
-      name: 'contactEmail',
-      title: 'Contact Email',
-      type: 'string',
-      fieldset: 'contact',
-      validation: Rule => Rule.required().email(),
-    }),
-    defineField({
-      name: 'pressEmail',
-      title: 'Press Email',
-      type: 'string',
-      fieldset: 'contact',
-      validation: Rule => Rule.email(),
-    }),
-    defineField({
-      name: 'bookingEmail',
-      title: 'Booking Email',
-      type: 'string',
-      fieldset: 'contact',
-      validation: Rule => Rule.email(),
-    }),
-    defineField({
-      name: 'newsletterDescription',
-      title: 'Newsletter Description',
-      type: 'text',
-      fieldset: 'contact',
-      rows: 3,
     }),
     defineField({
       name: 'seoDescription',

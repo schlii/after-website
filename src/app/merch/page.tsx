@@ -5,35 +5,21 @@ import grid from './MerchGrid.module.css'
 export default function MerchPage() {
   return (
     <SiteGridLayout>
-      {/* Panel A */}
-      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.panelA}`}></section>
+      {/* Banner */}
+      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.bannerPanel}`}></section>
 
-      {/* Panel B */}
-      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.panelB}`}></section>
+      {/* Product panels */}
+      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.productPanel1}`}></section>
+      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.productPanel2}`}></section>
+      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.productPanel3}`}></section>
+      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.productPanel4}`}></section>
+      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.productPanel5}`}></section>
+      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.productPanel6}`}></section>
+      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.productPanel7}`}></section>
+      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.productPanel8}`}></section>
 
-      {/* Panel C */}
-      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.panelC}`}></section>
-
-      {/* Panel D */}
-      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.panelD}`}></section>
-
-      {/* Panel E */}
-      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.panelE}`}></section>
-
-      {/* Panel F */}
-      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.panelF}`}></section>
-
-      {/* Panel G */}
-      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.panelG}`}></section>
-
-      {/* Panel H */}
-      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.panelH}`}></section>
-
-      {/* Panel I */}
-      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.panelI}`}></section>
-
-      {/* Panel J */}
-      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.panelJ}`}></section>
+      {/* Policy links */}
+      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.policyLinksPanel}`}></section>
     </SiteGridLayout>
     
   )

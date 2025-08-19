@@ -1,121 +1,44 @@
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
-  name: 'bandMember',
-  title: 'Band Member',
+  name: 'bandInfo',
+  title: 'Band Info',
   type: 'document',
+  // Include 'delete' so the user can permanently remove the deleted stub and recreate as needed.
+  __experimental_actions: ['create', 'update', 'delete', 'publish'],
   fields: [
     defineField({
-      name: 'name',
-      title: 'Name',
-      type: 'string',
-      validation: Rule => Rule.required(),
-    }),
-    defineField({
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: {
-        source: 'name',
-        maxLength: 96,
-      },
-      validation: Rule => Rule.required(),
-    }),
-    defineField({
-      name: 'role',
-      title: 'Role',
-      type: 'string',
-      validation: Rule => Rule.required(),
-    }),
-    defineField({
-      name: 'bio',
-      title: 'Biography',
-      type: 'array',
-      of: [
-        {
-          type: 'block',
-          styles: [
-            { title: 'Normal', value: 'normal' },
-            { title: 'H3', value: 'h3' },
-            { title: 'Quote', value: 'blockquote' },
-          ],
-        },
-      ],
-      validation: Rule => Rule.required(),
-    }),
-    defineField({
-      name: 'profileImage',
-      title: 'Profile Image',
+      name: 'bandImage1',
+      title: 'Band Image 1',
       type: 'image',
-      options: {
-        hotspot: true,
-      },
-      fields: [
-        {
-          name: 'alt',
-          title: 'Alt Text',
-          type: 'string',
-          validation: Rule => Rule.required(),
-        },
-      ],
+      options: { hotspot: true },
+      fields: [{ name: 'alt', title: 'Alt Text', type: 'string', validation: Rule => Rule.required() }],
       validation: Rule => Rule.required(),
     }),
     defineField({
-      name: 'instruments',
-      title: 'Instruments',
-      type: 'array',
-      of: [{ type: 'string' }],
-      options: {
-        layout: 'tags',
-      },
-      validation: Rule => Rule.required().min(1),
-    }),
-    defineField({
-      name: 'joinDate',
-      title: 'Join Date',
-      type: 'date',
+      name: 'bandImage2',
+      title: 'Band Image 2',
+      type: 'image',
+      options: { hotspot: true },
+      fields: [{ name: 'alt', title: 'Alt Text', type: 'string', validation: Rule => Rule.required() }],
       validation: Rule => Rule.required(),
     }),
     defineField({
-      name: 'socialLinks',
-      title: 'Social Media Links',
-      type: 'object',
-      fields: [
-        { name: 'twitter', title: 'Twitter', type: 'url' },
-        { name: 'instagram', title: 'Instagram', type: 'url' },
-        { name: 'facebook', title: 'Facebook', type: 'url' },
-        { name: 'youtube', title: 'YouTube', type: 'url' },
-        { name: 'website', title: 'Personal Website', type: 'url' },
-      ],
-    }),
-    defineField({
-      name: 'featured',
-      title: 'Featured Member',
-      type: 'boolean',
-      initialValue: false,
-      description: 'Feature this member on the homepage or in prominent sections',
-    }),
-    defineField({
-      name: 'pastBands',
-      title: 'Past Bands/Projects',
+      name: 'bio1',
+      title: 'Bio 1',
       type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            { name: 'bandName', title: 'Band Name', type: 'string' },
-            { name: 'role', title: 'Role', type: 'string' },
-            { name: 'years', title: 'Years Active', type: 'string' },
-          ],
-        },
-      ],
+      of: [{ type: 'block' }],
+    }),
+    defineField({
+      name: 'bio2',
+      title: 'Bio 2',
+      type: 'array',
+      of: [{ type: 'block' }],
     }),
   ],
   preview: {
-    select: {
-      title: 'name',
-      subtitle: 'role',
-      media: 'profileImage',
+    prepare() {
+      return { title: 'Band Info' }
     },
   },
 })

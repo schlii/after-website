@@ -1,58 +1,58 @@
 .panel {}
 
 /* Panel positioning */
-.panelA {
+.bannerPanel {
   grid-column: 1 / 13; /* columns 1–6 */
   grid-row: 1 / 11;   /* rows 1–18 */
 }
 
-.panelB {
+.productPanel1 {
   grid-column: 1 / 4; /* columns 7–12 */
   grid-row: 12 / 22;  /* rows 1–18 */
 }
 
-.panelC {
+.productPanel2 {
   grid-column: 4 / 7; /* columns 7–12 */
   grid-row: 12 / 22;  /* rows 1–18 */
 }
 
-.panelD {
+.productPanel3 {
   /* TODO: set real coordinates */
   grid-column: 7 / 10; /* columns ?–? */
   grid-row: 12 / 22;    /* rows ?–? */
 }
 
-.panelE {
+.productPanel4 {
   /* TODO: set real coordinates */
   grid-column: 10 / 13; /* columns ?–? */
   grid-row: 12 / 22;    /* rows ?–? */
 }
 
-.panelF {
+.productPanel5 {
   /* TODO: set real coordinates */
   grid-column: 1 / 4; /* columns ?–? */
   grid-row: 23 / 33;    /* rows ?–? */
 }
 
-.panelG {
+.productPanel6 {
   /* TODO: set real coordinates */
   grid-column: 4 / 7; /* columns ?–? */
   grid-row: 23 / 33;    /* rows ?–? */
 }
 
-.panelH {
+.productPanel7 {
   /* TODO: set real coordinates */
   grid-column: 7 / 10; /* columns ?–? */
   grid-row: 23 / 33;    /* rows ?–? */
 }
 
-.panelI {
+.productPanel8 {
   /* TODO: set real coordinates */
   grid-column: 10 / 13; /* columns ?–? */
   grid-row: 23 / 33;    /* rows ?–? */
 }
 
-.panelJ {
+.policyLinksPanel {
   /* TODO: set real coordinates */
   grid-column: 1 / 13; /* columns ?–? */
   grid-row: 34 / 37;    /* rows ?–? */
