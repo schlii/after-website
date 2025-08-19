@@ -19,8 +19,8 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(36, 1fr);
-  column-gap: 2.34375cqw; /* 24 px at full width (24 / 1024 * 100) */
-  row-gap: 0.390625cqw;  /* 4 px at full width */
+  column-gap: min(24px, 2.34375cqw); /* cap at 24 px so gutters stop widening on ultrawide */
+  row-gap:    min(4px, 0.390625cqw);  /* cap at 4 px so horizontal rhythm stays intact */
 
   background: rgba(255, 255, 255, 0.05); /* subtle visual aid */
   outline: 1px dashed rgba(255, 255, 255, 0.15);
