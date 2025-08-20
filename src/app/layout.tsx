@@ -3,6 +3,8 @@ import Link from "next/link";
 import Providers from "../components/Providers";
 import CartToggleButton from "../components/CartToggleButton";
 import CartSidebar from "../components/CartSidebar";
+import { draftMode } from 'next/headers';
+import { VisualEditing } from 'next-sanity';
 import "./globals.css";
 import localFont from 'next/font/local';
 
@@ -65,6 +67,7 @@ export default function RootLayout({
           </div>
         </footer>
         </Providers>
+        {(draftMode() as any).isEnabled && <VisualEditing />}
       </body>
     </html>
   );
