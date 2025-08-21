@@ -127,16 +127,16 @@
 ### Task 5.1: Layout & Content Integration (desktop)
 - [x] Grid panel spacing and desktop-responsive behavior finalised
 - [x] Implement panel layouts for merch, contact, and about
-- [ ] Integrate real Sanity content into Tour, Merch, About, and Contact panels
-- [ ] Perform cross-resolution layout testing (desktop)
+- [x] Integrate real Sanity content into Tour, Merch, About, and Contact panels
+- [x] Perform cross-resolution layout testing (desktop)
 
 ### Task 5.2: Music Player Interface
-- [ ] Design Winamp-inspired skin mock-up (Figma/SVG reference)
-- [ ] Export scalable vector assets (buttons, sliders, frame) 
-- [ ] Implement new skin in `AppleMusicPlayer.tsx` without altering logic
-- [ ] Ensure layout scales between 1024 px and 1440 px widths
-- [ ] Add keyboard-focus styles matching skin
-- [ ] Verify contrast and readability against WCAG AA
+- [x] Design Winamp-inspired skin mock-up (Figma/SVG reference)
+- [x] Export scalable vector assets (buttons, sliders, frame) 
+- [x] Implement new skin in `AppleMusicPlayer.tsx` without altering logic
+- [x] Ensure layout scales between 1024 px and 1440 px widths
+- [x] Add keyboard-focus styles matching skin
+- [x] Verify contrast and readability against WCAG AA
 
 ### Task 5.3: Desktop filter effects
 - [ ] Implement CSS/canvas dithering overlay applied after all desktop content

@@ -7,9 +7,11 @@ import { type PlainProduct } from '../../types/PlainProduct'
 interface Props {
   product: PlainProduct
   variantId?: string // defaults to first variant
+  className?: string
+  style?: React.CSSProperties
 }
 
-export const AddToCartButton: FC<Props> = ({ product, variantId }) => {
+export const AddToCartButton: FC<Props> = ({ product, variantId, className, style }) => {
   const { addItem } = useCart()
 
   const handleAdd = async () => {
@@ -25,18 +27,6 @@ export const AddToCartButton: FC<Props> = ({ product, variantId }) => {
   }
 
   return (
-    <button
-      onClick={handleAdd}
-      style={{
-        marginTop: '0.5rem',
-        padding: '0.5rem 1rem',
-        border: '1px solid #ccc',
-        borderRadius: '4px',
-        background: '#333',
-        color: '#fff',
-      }}
-    >
-      Add to Cart
-    </button>
+    <button onClick={handleAdd} className={className} style={style}>add to cart</button>
   )
 }

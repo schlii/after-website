@@ -1,0 +1,135 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1.5rem 1rem 4rem;
+  max-width: 640px;
+  margin: 0 auto;
+  font-family: var(--font-sans);
+  height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,0.4) transparent;
+}
+
+.container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.4);
+  border-radius: 2px;
+}
+
+.heading {
+  font-family: PixdorTwo, var(--font-mono);
+  font-size: 2.25rem;
+  text-align: center;
+  margin: 0;
+}
+
+.playerSection {
+  display: flex;
+  justify-content: center;
+}
+
+.heroImage {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.tourSection {
+  /* spacing handled via panel wrapper */
+}
+
+.merchSection {}
+
+.merchGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.aboutSection {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.contactSection {
+  margin-top: 2rem;
+}
+
+/* Unified panel chrome for mobile */
+.mobilePanel {
+  --panel-bg: #dfe4ea;
+  background:
+    linear-gradient(195deg, hsla(0,0%,100%,0.5) 0%, hsla(0,0%,0%,0.15) 100%),
+    var(--panel-bg);
+
+  border: 1px solid rgba(0,0,0,0.25);
+  box-shadow:
+    inset 0 0 0 4px rgba(255,255,255,0.2),
+    inset 0 0 6px rgba(255,255,255,0.6),
+    0 2px 6px rgba(0,0,0,0.2);
+
+  border-radius: 8px;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Modifier: blue background (matches desktop music player) */
+.mobilePanelBlue {
+  --panel-bg: #226bc9;
+  --panel-gradient-start: hsla(0,0%,100%,0.2);
+  --panel-gradient-end: hsla(0,0%,0%,0.15);
+}
+
+/* Modifier: gray background with grain */
+.mobilePanelGray {
+  --panel-bg: #dfe4ea;
+}
+
+/* Inner framed box with grain texture */
+.grainBox {
+  position: relative;
+  --panel-box-margin: 1px;
+  background: rgba(255,255,255,0.25);
+  height: auto !important; /* allow content to define height */
+  overflow: hidden; /* clip sliding merch */
+  padding-bottom: 1.5rem;
+}
+
+/* Trim excess spacing for button wrapper */
+.grainBox form > div:last-child {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+}
+
+.grainBox::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/grain.png');
+  background-size: 200px 200px;
+  background-repeat: repeat;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.grainBox > * {
+  position: relative;
+  z-index: 1;
+}
+
+.sectionHeading {
+  font-family: PixdorTwo, var(--font-mono);
+  font-size: 1.25rem;
+  text-align: center;
+  margin: 0.25rem 0 0.75rem;
+  text-transform: lowercase;
+  color: #000000;
+}
