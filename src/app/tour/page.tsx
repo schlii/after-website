@@ -4,7 +4,10 @@ import grid from './TourGrid.module.css'
 
 import { fetchSanityDocument, fetchSanityDocuments } from 'lib/sanity-fetch'
 import { tourQuery, tourDatesQuery } from 'lib/sanity-queries'
+import TourDatesPanel from '@/components/TourDatesPanel'
 import { urlFor } from '@/sanity/lib/image'
+
+export const revalidate = 0
 
 interface TourPageData {
   introHeading?: string
@@ -56,24 +59,7 @@ export default async function TourPage() {
           <header className={pgStyles.tourHeader}>
             <p className={pgStyles.tourLine1}>{tourData?.introHeading || 'upcoming tour'}</p>
           </header>
-          <ul className={pgStyles.tourList}>
-            {tourDates?.map(td => (
-              <li key={td._id}>
-                <span className={pgStyles.date}>{new Date(td.date).toLocaleDateString()}</span>
-                <span className={pgStyles.info}>{`${td.city}, ${td.country} – ${td.venue}`}</span>
-                {td.ticketUrl && (
-                  <a
-                    href={td.ticketUrl}
-                    className={pgStyles.tix}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    tickets
-                  </a>
-                )}
-              </li>
-            ))}
-          </ul>
+          <TourDatesPanel dates={tourDates} />
         </div>
       </section>
 

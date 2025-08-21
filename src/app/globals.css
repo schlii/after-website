@@ -35,3 +35,19 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans, Arial, Helvetica, sans-serif);
 }
+
+/* Sanity Studio overrides --------------------------------------------------*/
+html:has(#sanity),
+body:has(#sanity) {
+  /* Reset the global full-viewport rules so the Studio header remains visible */
+  height: auto !important;
+  overflow: auto !important;
+}
+
+@font-face {
+  font-family: 'PixdorTwo';
+  src: url('/PixdorTwo.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

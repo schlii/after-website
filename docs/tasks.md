@@ -126,7 +126,7 @@
 ## Module 5B: Design & Aesthetics
 ### Task 5.1: Layout & Content Integration (desktop)
 - [x] Grid panel spacing and desktop-responsive behavior finalised
-- [ ] Implement panel layouts for merch, contact, and about
+- [x] Implement panel layouts for merch, contact, and about
 - [ ] Integrate real Sanity content into Tour, Merch, About, and Contact panels
 - [ ] Perform cross-resolution layout testing (desktop)
 

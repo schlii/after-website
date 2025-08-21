@@ -1,10 +1,13 @@
 import React from 'react'
+// Disable ISR on this page so that Sanity Presentation overlays work correctly
+export const revalidate = 0
 import { SiteGridLayout } from '@/components/SiteGridLayout'
 import styles from '@/styles/SiteGrid.module.css'
 import CartToggleButton from '@/components/CartToggleButton'
 import AppleMusicPlayerClient from '@/components/AppleMusicPlayerClient'
-import { homeQuery, tourDatesQuery } from 'lib/sanity-queries'
-import { fetchSanityDocument, fetchSanityDocuments } from 'lib/sanity-fetch'
+import { homeQuery, tourQuery, tourDatesQuery } from 'lib/sanity-queries'
+import TourDatesPanel from '@/components/TourDatesPanel'
+import { fetchSanityDocuments, fetchSanityDocument } from 'lib/sanity-fetch'
 import { urlFor } from '@/sanity/lib/image'
 
 interface TourDate {
@@ -23,14 +26,11 @@ interface HomePageData {
 }
 
 export default async function HomePage() {
-  const [{ data: homeData }] = await Promise.all([
+  const [ { data: homeData }, { data: tourData }, { data: tourDates } ] = await Promise.all([
     fetchSanityDocument<HomePageData>(homeQuery),
+    fetchSanityDocument<{ introHeading?: string }>(tourQuery),
+    fetchSanityDocuments<TourDate>(`${tourDatesQuery} | order(date asc)`),
   ])
-
-  // Fetch next five upcoming tour dates
-  const { data: tourDates } = await fetchSanityDocuments<TourDate>(`
-    ${tourDatesQuery} [status == "upcoming" && date >= now()] | order(date asc)[0...5]
-  `)
 
   return (
     <SiteGridLayout>
@@ -57,19 +57,9 @@ export default async function HomePage() {
       <section className={`${styles.panelCommon} ${styles.panel}`}>
         <div className={`${styles.panelBox} ${styles.tourBox}`}>
           <header className={styles.tourHeader}>
-            <p className={styles.tourLine1}>upcoming tour</p>
+            <p className={styles.tourLine1}>{tourData?.introHeading || 'upcoming tour'}</p>
           </header>
-          <ul className={styles.tourList}>
-            {tourDates?.map((td: TourDate) => (
-              <li key={td._id}>
-                <span className={styles.date}>{new Date(td.date).toLocaleDateString()}</span>
-                <span className={styles.info}>{`${td.city}, ${td.country} – ${td.venue}`}</span>
-                {td.ticketUrl && (
-                  <a href={td.ticketUrl} className={styles.tix} target="_blank" rel="noreferrer">tickets</a>
-                )}
-              </li>
-            ))}
-          </ul>
+          <TourDatesPanel dates={tourDates} compact />
         </div>
       </section>
 

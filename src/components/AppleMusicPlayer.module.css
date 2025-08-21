@@ -7,6 +7,7 @@
   height: 100%;
   gap: 1cqh;
   box-sizing: border-box;
+  padding: clamp(8px, 2cqh, 16px) clamp(12px, 2cqw, 24px);
 }
 
 .nowPlaying {

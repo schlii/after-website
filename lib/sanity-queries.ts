@@ -4,13 +4,9 @@ import { groq } from 'next-sanity'
 export const tourDatesQuery = groq`
   *[_type == "tourDate"] | order(date asc) {
     _id,
-    title,
-    venue,
     date,
-    city,
-    country,
-    ticketUrl,
-    status
+    location,
+    ticketUrl
   }
 `
 

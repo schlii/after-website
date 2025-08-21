@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { fetchSanityDocument } from 'lib/sanity-fetch'
 import { appleMusicSettingsQuery } from 'lib/sanity-queries'
+import { stegaClean } from '@sanity/client/stega'
 import type { AppleMusicSettings } from '../../../../../types/sanity'
 
 interface ItunesLookupResponse {
@@ -71,8 +72,12 @@ export async function GET(req: NextRequest) {
     const settingsResult = await fetchSanityDocument<AppleMusicSettings>(appleMusicSettingsQuery)
     const settings = settingsResult.data || null
 
-    const artistId = artistIdParam || (settings ? String(settings.appleArtistId) : null)
-    const storefront = (storefrontParam || (settings?.appleStorefront ?? 'US')).toUpperCase()
+    const artistIdRaw = artistIdParam || (settings ? String(settings.appleArtistId) : null)
+    const storefrontRaw = storefrontParam || settings?.appleStorefront || 'US'
+
+    // Remove possible zero-width stega characters introduced by Visual Editing
+    const artistId = artistIdRaw ? stegaClean(artistIdRaw) : null
+    const storefront = stegaClean(storefrontRaw).toUpperCase()
 
     if (!artistId) {
       return NextResponse.json(

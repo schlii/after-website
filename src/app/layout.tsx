@@ -47,11 +47,13 @@ const aeonikMono = localFont({
   display: 'swap',
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { isEnabled: draftEnabled } = await draftMode();
+
   return (
     <html lang="en" className={`${aeonikPro.variable} ${aeonikMono.variable}`}>
       <body className="min-h-screen bg-black text-white">
@@ -61,13 +63,8 @@ export default function RootLayout({
         <main>
           {children}
         </main>
-        <footer className="bg-black/80 backdrop-blur-sm py-8 mt-10">
-          <div className="max-w-7xl mx-auto px-4 text-center">
-            <p className="text-gray-400">© {new Date().getFullYear()} After. All rights reserved.</p>
-          </div>
-        </footer>
         </Providers>
-        {(draftMode() as any).isEnabled && <VisualEditing />}
+        {draftEnabled && <VisualEditing />}
       </body>
     </html>
   );

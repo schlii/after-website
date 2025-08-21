@@ -12,7 +12,6 @@ const initialValues: ContactFormData = {
   email: '',
   subject: '',
   message: '',
-  inquiryType: 'general',
 }
 
 export const ContactForm: FC<ContactFormProps> = ({ className }) => {
@@ -22,7 +21,6 @@ export const ContactForm: FC<ContactFormProps> = ({ className }) => {
     email: null,
     subject: null,
     message: null,
-    inquiryType: null,
   })
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [serverError, setServerError] = useState<string>('')
@@ -34,7 +32,7 @@ export const ContactForm: FC<ContactFormProps> = ({ className }) => {
   const validate = () => {
     const parseResult = contactFormSchema.safeParse(values)
     if (parseResult.success) {
-      setErrors({ name: null, email: null, subject: null, message: null, inquiryType: null })
+      setErrors({ name: null, email: null, subject: null, message: null })
       return true
     }
     const fieldErrors: Record<keyof ContactFormData, string | null> = {
@@ -42,7 +40,6 @@ export const ContactForm: FC<ContactFormProps> = ({ className }) => {
       email: null,
       subject: null,
       message: null,
-      inquiryType: null,
     }
     const zodErrors = parseResult.error.flatten().fieldErrors
     for (const key in fieldErrors) {
@@ -85,13 +82,13 @@ export const ContactForm: FC<ContactFormProps> = ({ className }) => {
       <div className="space-y-4">
         {/* Name */}
         <div>
-          <label htmlFor="name" className="block font-medium">Name *</label>
+          <label htmlFor="name" className="block font-medium text-black">name</label>
           <input
             id="name"
             type="text"
             value={values.name}
             onChange={handleChange('name')}
-            className="w-full px-3 py-2 rounded bg-gray-800 text-white focus:outline-none focus:ring focus:ring-purple-600"
+            className="w-full px-3 py-2 bg-white border border-black text-black focus:outline-none"
             required
           />
           {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
@@ -99,44 +96,27 @@ export const ContactForm: FC<ContactFormProps> = ({ className }) => {
 
         {/* Email */}
         <div>
-          <label htmlFor="email" className="block font-medium">Email *</label>
+          <label htmlFor="email" className="block font-medium text-black">email</label>
           <input
             id="email"
             type="email"
             value={values.email}
             onChange={handleChange('email')}
-            className="w-full px-3 py-2 rounded bg-gray-800 text-white focus:outline-none focus:ring focus:ring-purple-600"
+            className="w-full px-3 py-2 bg-white border border-black text-black focus:outline-none"
             required
           />
           {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
         </div>
 
-        {/* Inquiry Type */}
-        <div>
-          <label htmlFor="inquiryType" className="block font-medium">Inquiry Type *</label>
-          <select
-            id="inquiryType"
-            value={values.inquiryType}
-            onChange={handleChange('inquiryType')}
-            className="w-full px-3 py-2 rounded bg-gray-800 text-white focus:outline-none focus:ring focus:ring-purple-600"
-          >
-            <option value="general">General</option>
-            <option value="booking">Booking</option>
-            <option value="press">Press</option>
-            <option value="technical">Technical</option>
-          </select>
-          {errors.inquiryType && <p className="text-red-500 text-sm mt-1">{errors.inquiryType}</p>}
-        </div>
-
         {/* Subject */}
         <div>
-          <label htmlFor="subject" className="block font-medium">Subject *</label>
+          <label htmlFor="subject" className="block font-medium text-black">subject</label>
           <input
             id="subject"
             type="text"
             value={values.subject}
             onChange={handleChange('subject')}
-            className="w-full px-3 py-2 rounded bg-gray-800 text-white focus:outline-none focus:ring focus:ring-purple-600"
+            className="w-full px-3 py-2 bg-white border border-black text-black focus:outline-none"
             required
           />
           {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>}
@@ -144,26 +124,26 @@ export const ContactForm: FC<ContactFormProps> = ({ className }) => {
 
         {/* Message */}
         <div>
-          <label htmlFor="message" className="block font-medium">Message *</label>
+          <label htmlFor="message" className="block font-medium text-black">message</label>
           <textarea
             id="message"
             rows={6}
             value={values.message}
             onChange={handleChange('message')}
-            className="w-full px-3 py-2 rounded bg-gray-800 text-white focus:outline-none focus:ring focus:ring-purple-600"
+            className="w-full px-3 py-2 bg-white border border-black text-black focus:outline-none"
             required
           />
           {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
         </div>
 
         {/* Submit */}
-        <div>
+        <div className="text-center">
           <button
             type="submit"
             disabled={status === 'submitting'}
-            className="px-6 py-3 rounded bg-purple-600 hover:bg-purple-700 disabled:opacity-50"
+            className="px-6 py-2 bg-gray-300 text-black border border-black hover:bg-gray-400 disabled:opacity-50"
           >
-            {status === 'submitting' ? 'Sending...' : 'Send Message'}
+            {status === 'submitting' ? 'sending...' : 'send'}
           </button>
         </div>
 

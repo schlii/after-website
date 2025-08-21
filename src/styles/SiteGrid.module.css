@@ -1,2 +1,10 @@
 /* Production grid styles proxying the playground module */
 @import '../app/playground/Playground.module.css';
+
+.tourLine1 {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #000000;
+  font-family: 'PixdorTwo', var(--font-mono);
+}

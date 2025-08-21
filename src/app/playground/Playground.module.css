@@ -108,6 +108,7 @@
   box-sizing: border-box;
 
   padding: 4pt;
+  position: relative;
 }
 
 /* Modifier: extra top padding */
@@ -162,7 +163,8 @@
 /* Tour placeholder styles */
 .tourHeader {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: .25rem;
+  margin-top: 0.75rem;
 }
 
 .tourLine1 {
@@ -266,6 +268,11 @@
 
   /* Enable container query for dynamic font sizing */
   container-type: inline-size;
+
+  /* Constrain inner content */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 /* Base font size for list */
@@ -287,4 +294,18 @@
 .fullPanel {
   grid-column: 1 / 13;
   grid-row: 1 / 37;
+}
+
+/* Noise overlay for tour panel */
+.tourBox::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.25;
+  background-image:
+    radial-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px),
+    radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 3px 3px;
+  background-position: 0 0, 1.5px 1.5px;
 }
