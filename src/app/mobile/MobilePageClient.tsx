@@ -9,7 +9,7 @@ import { ProductGrid } from '@/components/ProductGrid'
 import { ContactForm } from '@/components/ContactForm'
 import React from 'react'
 
-import type { PlainProduct } from '@/types/PlainProduct'
+import type { PlainProduct } from '../../../types/PlainProduct'
 import type { TourDateEntry } from '@/components/TourDatesPanel'
 import MobileMerchCarousel from '@/components/MobileMerchCarousel'
 import MobileCartBar from '@/components/MobileCartBar'
@@ -54,24 +54,23 @@ const MobilePageClient: React.FC<Props> = ({ heroImageUrl, heroImageAlt, tourDat
         </div>
       </div>
 
-      {/* About */}
-      {aboutText.length > 0 && (
-        <div className={styles.mobilePanel}>
-          {aboutText.map((p, idx) => (
-            <p key={idx}>{p}</p>
-          ))}
-        </div>
-      )}
-
       {/* Contact */}
       <div className={`${styles.mobilePanel} ${styles.mobilePanelGray}`}>
         <div className={`${site.panelBox} ${styles.grainBox}`}>
-          <h2 className={styles.sectionHeading}>contact us</h2>
           <ContactForm />
         </div>
       </div>
+
+      {/* Footer */}
+      <footer style={{textAlign:'center', fontFamily:'PixdorTwo, var(--font-mono)', color:'#000', fontSize:'1rem', marginTop:'-1.2rem'}}>
+        <p style={{margin:'0'}}>© After 2025</p>
+        <p style={{margin:0}}>
+          Website by <a href="https://instagram.com/bicflame" target="_blank" rel="noreferrer" style={{textDecoration:'underline', color:'#000'}}>bicflame</a>
+        </p>
+      </footer>
+
+      <MobileCartBar />
     </main>
-    <MobileCartBar />
     </>
   )
 }

@@ -70,7 +70,7 @@ const MobileMerchCarousel: FC<Props> = ({ products }) => {
 
       {/* swipe hints can be optional, no arrow buttons */}
       {/* add to cart */}
-      <AddToCartButton product={product} variantId={variantId ?? product.variants[0]?.id} className={css.sendBtn} style={{minWidth:'125px', padding:'0.5rem 1rem', marginTop:'1rem', marginBottom:'1rem', whiteSpace:'nowrap', textAlign:'center', display:'block'}} />
+      <AddToCartButton product={product} variantId={variantId ?? product.variants[0]?.id} className={css.sendBtn} style={{minWidth:'125px', padding:'0.5rem 0.75rem', marginTop:'1rem', marginBottom:'1rem', whiteSpace:'nowrap', textAlign:'center', display:'block'}} />
     </div>
   )
 }
