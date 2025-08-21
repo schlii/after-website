@@ -8,3 +8,14 @@
   color: #000000;
   font-family: 'PixdorTwo', var(--font-mono);
 }
+
+/* Persistent heading above site container */
+.siteHeading {
+  width: clamp(320px, 80vmin, 1024px);
+  margin: 1rem auto 1rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 6rem;
+  line-height: 1;
+  text-align: center;
+}

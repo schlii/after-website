@@ -20,6 +20,7 @@ interface SiteGridLayoutProps {
 export const SiteGridLayout: FC<SiteGridLayoutProps> = ({ children }) => {
   return (
     <main className={styles.pageWrapper}>
+      <header className={styles.siteHeading}>After</header>
       <div className={styles.siteContainer}>{children}</div>
       <nav className={styles.siteNav}>
         <ul className={styles.navLinks}>
