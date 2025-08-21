@@ -2,6 +2,7 @@
 
 import { type FC, useState } from 'react'
 import { contactFormSchema, type ContactFormData } from 'lib/contactValidation'
+import css from './ContactForm.module.css'
 
 interface ContactFormProps {
   className?: string
@@ -78,17 +79,17 @@ export const ContactForm: FC<ContactFormProps> = ({ className }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className={className} noValidate>
-      <div className="space-y-4">
+    <form onSubmit={handleSubmit} className={`${className ?? ''} h-full flex flex-col`} noValidate>
+      <div className="space-y-4 flex-1 flex flex-col min-h-0 px-4">
         {/* Name */}
         <div>
-          <label htmlFor="name" className="block font-medium text-black">name</label>
+          <label htmlFor="name" className="block font-medium text-black" style={{fontFamily:'PixdorTwo, var(--font-mono)'}}>name</label>
           <input
             id="name"
             type="text"
             value={values.name}
             onChange={handleChange('name')}
-            className="w-full px-3 py-2 bg-white border border-black text-black focus:outline-none"
+            className={css.inputCapsule}
             required
           />
           {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
@@ -96,13 +97,13 @@ export const ContactForm: FC<ContactFormProps> = ({ className }) => {
 
         {/* Email */}
         <div>
-          <label htmlFor="email" className="block font-medium text-black">email</label>
+          <label htmlFor="email" className="block font-medium text-black" style={{fontFamily:'PixdorTwo, var(--font-mono)'}}>email</label>
           <input
             id="email"
             type="email"
             value={values.email}
             onChange={handleChange('email')}
-            className="w-full px-3 py-2 bg-white border border-black text-black focus:outline-none"
+            className={css.inputCapsule}
             required
           />
           {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
@@ -110,38 +111,38 @@ export const ContactForm: FC<ContactFormProps> = ({ className }) => {
 
         {/* Subject */}
         <div>
-          <label htmlFor="subject" className="block font-medium text-black">subject</label>
+          <label htmlFor="subject" className="block font-medium text-black" style={{fontFamily:'PixdorTwo, var(--font-mono)'}}>subject</label>
           <input
             id="subject"
             type="text"
             value={values.subject}
             onChange={handleChange('subject')}
-            className="w-full px-3 py-2 bg-white border border-black text-black focus:outline-none"
+            className={css.inputCapsule}
             required
           />
           {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject}</p>}
         </div>
 
         {/* Message */}
-        <div>
-          <label htmlFor="message" className="block font-medium text-black">message</label>
+        <div className="flex-1 flex flex-col min-h-0">
+          <label htmlFor="message" className="block font-medium text-black" style={{fontFamily:'PixdorTwo, var(--font-mono)'}}>message</label>
           <textarea
             id="message"
             rows={6}
             value={values.message}
             onChange={handleChange('message')}
-            className="w-full px-3 py-2 bg-white border border-black text-black focus:outline-none"
+            className={`${css.inputCapsule} ${css.textArea} h-full min-h-0`}
             required
           />
           {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
         </div>
 
         {/* Submit */}
-        <div className="text-center">
+        <div className="text-center mt-auto pt-4 mb-4">
           <button
             type="submit"
             disabled={status === 'submitting'}
-            className="px-6 py-2 bg-gray-300 text-black border border-black hover:bg-gray-400 disabled:opacity-50"
+            className={css.sendBtn}
           >
             {status === 'submitting' ? 'sending...' : 'send'}
           </button>

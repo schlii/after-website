@@ -8,8 +8,8 @@ export default function ContactPage() {
     <SiteGridLayout>
       {/* Full-page panel */}
       <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.panelMain} flex items-center justify-center p-8`}>
-        <div className="w-full max-w-md">
-          <h1 className="text-center text-black mb-6 text-3xl font-semibold lowercase">contact us</h1>
+        <div className={`${pgStyles.panelBox} ${pgStyles.tourBox} w-full`}>
+          <h1 className="text-center text-black mt-4 mb-6 text-3xl font-regular lowercase" style={{fontFamily:'PixdorTwo, var(--font-mono)'}}>contact us</h1>
           <ContactForm />
         </div>
       </section>

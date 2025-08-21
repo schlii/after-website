@@ -302,10 +302,17 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.25;
-  background-image:
-    radial-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px),
-    radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 3px 3px;
-  background-position: 0 0, 1.5px 1.5px;
+  z-index: 0; /* stay behind content */
+
+  /* gaussian noise texture */
+  opacity: 0.05;
+  background-image: url('/grain.png');
+  background-size: 200px 200px;
+  background-repeat: repeat;
+}
+
+/* raise direct children above noise */
+.tourBox > * {
+  position: relative;
+  z-index: 1;
 }

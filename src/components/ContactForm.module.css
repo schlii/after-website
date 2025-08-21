@@ -1,0 +1,54 @@
+.inputCapsule {
+  width: 100%;
+  background: #dfe4ea;
+  border: 1px solid #8d96a0;
+  border-radius: 8px;
+  box-shadow:
+    0 -2px 4px rgba(0, 0, 0, 0.25),
+    0  2px 4px rgba(255, 255, 255, 0.7);
+  padding: 0.5rem 0.75rem;
+  font-family: 'PixdorTwo', var(--font-mono);
+  color: #000000;
+  font-size: 0.9rem;
+}
+
+.textArea {
+  composes: inputCapsule;
+  resize: none;
+  min-height: 220px;
+}
+
+.sendBtn {
+  width: 130px;
+  text-align: center;
+  background: #8c949b;
+  border: 1px solid #a3abb2;
+  border-radius: 9999px;
+  padding: 0.5rem 0;
+  font-family: 'PixdorTwo', var(--font-mono);
+  text-transform: uppercase;
+  color: #ffffff;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  box-shadow:
+    0 -2px 3px rgba(0, 0, 0, 0.3),
+    0  2px 3px rgba(255, 255, 255, 0.6);
+  position: relative;
+}
+
+.sendBtn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.1) 40%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.4));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.sendBtn:hover {
+  opacity: 0.85;
+}
