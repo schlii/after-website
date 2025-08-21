@@ -54,7 +54,7 @@ const INITIAL_STATE: PlayerState = {
   isPlaying: false,
   currentTime: 0,
   duration: 0,
-  volume: 1,
+  volume: 0.3,
   muted: false,
   loading: false,
   error: null,
@@ -340,7 +340,8 @@ export function useAudioPlayer({
     const audio = audioRef.current
     if (!audio) return
     
-    const clampedVolume = Math.max(0, Math.min(1, volume))
+    const MAX_VOL = 0.7
+    const clampedVolume = Math.max(0, Math.min(MAX_VOL, volume))
     audio.volume = clampedVolume
     setState(prev => ({ ...prev, volume: clampedVolume }))
   }, [])

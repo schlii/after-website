@@ -3,6 +3,7 @@
 import { FC, useCallback } from 'react'
 import styles from './AppleMusicPlayer.module.css'
 import { useGlobalAudioPlayer } from '@/contexts/GlobalAudioPlayerContext'
+import AudioVisualizer from '@/components/AudioVisualizer'
 
 const PlayIcon: FC = () => (
   <svg
@@ -105,10 +106,24 @@ const AppleMusicPlayer: FC<AppleMusicPlayerProps> = ({ showPlaylist = false }) =
   }
 
   return (
-    <div className={styles.player}>
+    <div className={`${styles.player} flex flex-col min-h-0`}>
+      {/* Visualizer canvas background */}
+      <AudioVisualizer isActive={isPlaying} />
+      {/* Background track title */}
+      {currentTrack?.title && (
+        <span className={styles.backgroundTitle}>{currentTrack.title}</span>
+      )}
       <div className={styles.nowPlaying}>
         <span className={styles.trackTitle}>{currentTrack?.title || '—'}</span>
-        <span className={styles.artistName}>{currentTrack?.artist || ''}</span>
+        <a
+          href="https://open.spotify.com/artist/7KfMR05zRrWyhQimnYa8li?si=47d20decf6c74f09" /* band artist link */
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.spotifyBtn}
+          style={{ ['--label-offset' as any]: '1px' }}
+        >
+          <span className={styles.spotifyLabel}>listen on spotify</span>
+        </a>
       </div>
 
       <div className={styles.controls}>
@@ -173,7 +188,7 @@ const AppleMusicPlayer: FC<AppleMusicPlayerProps> = ({ showPlaylist = false }) =
         <input
           type="range"
           min="0"
-          max="1"
+          max="0.3"
           step="0.01"
           value={muted ? 0 : volume}
           onChange={handleVolume}

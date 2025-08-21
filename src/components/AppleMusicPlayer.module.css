@@ -8,6 +8,12 @@
   gap: 1cqh;
   box-sizing: border-box;
   padding: clamp(8px, 2cqh, 16px) clamp(12px, 2cqw, 24px);
+  position: relative; /* enable absolute positioning for background title */
+}
+
+.player > * {
+  position: relative;
+  z-index: 1;
 }
 
 .nowPlaying {
@@ -17,6 +23,7 @@
   line-height: 1.2;
   font-size: clamp(0.6rem, 2cqw, 0.95rem);
   text-align: center;
+  gap: 0.4rem;
 }
 
 .trackTitle {
@@ -25,12 +32,60 @@
   overflow: hidden;
   white-space: nowrap;
   max-width: 100%;
-  color: #000000;
+  color: #ffffff;
 }
 
 .artistName {
   opacity: 0.8;
   color: #000000;
+}
+
+/* Spotify button (thin capsule) */
+.spotifyBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 1.25rem;
+  background: #292a2b;
+  border: 1px solid #8d96a0;
+  border-radius: 9999px;
+  font-family: var(--font-sans, Arial, Helvetica, sans-serif);
+  font-weight: 700;
+  text-transform: lowercase;
+  font-size: 0.75rem;
+  color: #1db954;
+  box-shadow:
+    0 -2px 3px rgba(0, 0, 0, 0.3),
+    0 2px 3px rgba(255, 255, 255, 0.6);
+  position: relative;
+  transition: opacity 0.15s ease;
+
+  /* custom offset variable */
+  --label-offset: 0px;
+}
+
+.spotifyLabel {
+  display: block;
+  transform: translateY(var(--label-offset));
+}
+
+.spotifyBtn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.1) 40%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.4));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* keep existing highlight bevel via ::after only */
+
+.spotifyBtn:hover {
+  opacity: 0.85;
 }
 
 .controls {
@@ -40,21 +95,56 @@
 }
 
 .control {
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid var(--panel-border, rgba(255, 255, 255, 0.25));
-  width: clamp(28px, 4cqw, 40px);
-  height: clamp(28px, 4cqw, 40px);
+  width: clamp(32px, 4cqw, 40px);
+  height: clamp(32px, 4cqw, 40px);
   border-radius: 50%;
+  background: linear-gradient(#8fc3ff 0%, #4b7fe1 100%);
+  border: 1px solid #b4d0ff;
+  box-shadow:
+    inset 0 1px 2px rgba(255,255,255,0.5), /* inner top highlight */
+    inset 0 -2px 3px rgba(0,0,0,0.4),      /* inner bottom shade */
+    0 -2px 3px rgba(0,0,0,0.3),            /* outer top shade */
+    0 2px 3px rgba(255,255,255,0.6);      /* outer bottom highlight */
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #e6f0fd;
   cursor: pointer;
-  color: #ffffff;
-  transition: background 0.15s ease;
+  transition: opacity 0.15s ease;
+  position: relative;
+}
+
+/* glossy dome highlight */
+.control::before {
+  content: '';
+  position: absolute;
+  inset: 2px 2px auto 2px; /* top strip */
+  height: 45%;
+  border-radius: inherit;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.25) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* bevel edge similar to ticket buttons */
+.control::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.1) 40%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.4));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 .control:hover {
-  background: rgba(255, 255, 255, 0.15);
+  opacity: 0.85;
 }
 
 .progressWrapper {
@@ -68,7 +158,7 @@
   flex: 1 1 auto;
   appearance: none;
   height: 2px;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.445);
   position: relative;
 }
 
@@ -113,32 +203,80 @@
 .playlistContainer {
   margin-top: 1cqh;
   width: 100%;
-  max-height: 35cqh;
+  flex: 1 1 0;
+  min-height: 0;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 0.6cqh;
+
+  /* thin white scrollbar matching tour panel style */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.6) transparent;
+}
+
+.playlistContainer::-webkit-scrollbar {
+  width: 4px;
+}
+
+.playlistContainer::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 2px;
 }
 
 .playlistItem {
-  padding: 3cqh 1cqw;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
+  padding: 0.4rem 0.8rem;
+  background: linear-gradient(#3789d4 0%, #4b7fe1 100%);
+  border: 1px solid #b4d0ff;
+  border-radius: 12px;
+  box-shadow:
+    inset 0 1px 2px rgba(255,255,255,0.5),
+    inset 0 -2px 3px rgba(0,0,0,0.35);
   display: flex;
   align-items: center;
   gap: 0.8cqw;
   cursor: pointer;
   font-size: clamp(0.55rem, 1.5cqw, 1.5rem);
-  color: #000000;
-  transition: background 0.2s ease;
+  color: #ffffff;
+  transition: opacity 0.2s ease;
+  position: relative; /* enable pseudo-elements */
+}
+
+/* glossy reflections */
+.playlistItem::before {
+  content: '';
+  position: absolute;
+  inset: 2px 2px auto 2px; /* top strip */
+  height: 40%;
+  border-radius: inherit;
+  background: linear-gradient(
+    rgba(255,255,255,0.9) 0%,
+    rgba(255,255,255,0.5) 45%,
+    rgba(255,255,255,0.05) 100%
+  );
+  pointer-events: none;
+}
+
+.playlistItem::after {
+  content: '';
+  position: absolute;
+  inset: auto 2px 2px 2px; /* bottom strip */
+  height: 34%;
+  border-radius: inherit;
+  background: linear-gradient(
+    transparent 0%,
+    rgba(0,0,0,0.18) 50%,
+    rgba(0,0,0,0.35) 100%
+  );
+  pointer-events: none;
 }
 
 .playlistItem:hover {
-  background: rgba(80, 120, 255, 0.25);
+  opacity: 0.85;
 }
 
 .playlistItemActive {
-  background: rgba(80, 120, 255, 0.25);
+  background: linear-gradient(#2973db 0%, #274075 100%);
 }
 
 .trackIndex {
@@ -148,5 +286,40 @@
 .trackDuration {
   margin-left: auto;
   opacity: 0.7;
-  font-size: 0.75em;
+  font-size: 0.9em;
+}
+
+/* Large background track title */
+.backgroundTitle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(2rem, 12cqw, 8rem);
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0.05;
+  filter: blur(2px);
+  pointer-events: none;
+  color: #ffffff;
+  text-align: center;
+  text-transform: uppercase;
+  z-index: 0;
+}
+
+.player::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.25) 0px,
+    rgba(255, 255, 255, 0.25) 1px,
+    rgba(255, 255, 255, 0) 1px,
+    rgba(255, 255, 255, 0) 3px
+  );
+  mix-blend-mode: screen;
 }

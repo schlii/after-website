@@ -59,6 +59,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  /* Custom background colour for music player panel */
+  --panel-bg: #226bc9;
+  --panel-gradient-start: hsla(0,0%,100%,0.2);
+  --panel-gradient-end: hsla(0,0%,0%,0.15);
 }
 
 /* Base surface style shared by every panel */
@@ -294,6 +299,11 @@
 .fullPanel {
   grid-column: 1 / 13;
   grid-row: 1 / 37;
+
+  /* Blue background for music page */
+  --panel-bg: #226bc9;
+  --panel-gradient-start: hsla(0,0%,100%,0.2);
+  --panel-gradient-end: hsla(0,0%,0%,0.15);
 }
 
 /* Noise overlay for tour panel */
