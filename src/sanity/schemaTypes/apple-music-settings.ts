@@ -4,12 +4,6 @@ export default defineType({
   name: 'appleMusicSettings',
   title: 'Apple Music Settings',
   type: 'document',
-  __experimental_actions: [
-    // Disable delete and duplicate for singleton
-    'create',
-    'update',
-    'publish'
-  ],
   fields: [
     defineField({
       name: 'appleArtistId',

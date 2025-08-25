@@ -9,10 +9,12 @@ export default defineType({
       name: 'url',
       title: 'YouTube URL',
       type: 'url',
-      validation: Rule => Rule.required().regex(
-        /^https?:\/\/(www\.)?(youtube\.com|youtu\.be)\/.+$/,
-        'Must be a valid YouTube URL'
-      ),
+      validation: Rule =>
+        Rule.required().custom(url =>
+          /^https?:\/\/(www\.)?(youtube\.com|youtu\.be)\/.+$/.test(url || '')
+            ? true
+            : 'Must be a valid YouTube URL'
+        ),
     }),
     defineField({
       name: 'caption',

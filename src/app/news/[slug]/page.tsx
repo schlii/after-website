@@ -1,6 +1,6 @@
 import { fetchSanityDocument } from '../../../../lib/sanity-server'
 import { fetchSanityDocuments } from '../../../../lib/sanity-fetch'
-import { newsPostsQuery } from '../../../../lib/sanity-queries'
+import { newsPostsQuery, newsPostBySlugQuery } from '../../../../lib/sanity-queries'
 import type { NewsPost } from '../../../../types/sanity'
 
 interface NewsPostPageProps {
@@ -42,9 +42,9 @@ export default async function NewsPostPage({ params }: NewsPostPageProps) {
     <div className="min-h-screen">
       <article>
         <header>
-          <h1>{post.title}</h1>
-          <time dateTime={post.date}>
-            {new Date(post.date).toLocaleDateString('en-US', {
+          <h1>{post!.title}</h1>
+          <time dateTime={post!.date}>
+            {new Date(post!.date).toLocaleDateString('en-US', {
               weekday: 'long',
               year: 'numeric',
               month: 'long',
@@ -53,7 +53,7 @@ export default async function NewsPostPage({ params }: NewsPostPageProps) {
           </time>
         </header>
 
-        {post.featured_image && (
+        {post!.featured_image && (
           <div>
             {/* We'll implement the image component later in the styling phase */}
           </div>
@@ -62,9 +62,9 @@ export default async function NewsPostPage({ params }: NewsPostPageProps) {
         <div>
           {/* For now, we'll just show the content as plain text */}
           {/* Later we'll implement proper rendering of the portable text */}
-          {typeof post.content === 'string' 
-            ? post.content
-            : JSON.stringify(post.content)}
+          {typeof post!.content === 'string' 
+            ? post!.content
+            : JSON.stringify(post!.content)}
         </div>
 
         <footer>

@@ -4,7 +4,6 @@ export default defineType({
   name: 'music',
   title: 'Music',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({
       name: 'playlistHeading',

@@ -4,7 +4,6 @@ export default defineType({
   name: 'merch',
   title: 'Merch',
   type: 'document',
-  __experimental_actions: ['update', 'publish'], // singleton
   fields: [
     defineField({
       name: 'bannerImage',

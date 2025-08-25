@@ -1,7 +1,7 @@
 import { type FC } from 'react'
 import Image from 'next/image'
 import { type SiteSettings } from '../../../types/sanity'
-import { urlForImage } from '../../../lib/sanity-server'
+import { urlFor } from '@/sanity/lib/image'
 
 interface HeroSectionProps {
   siteSettings: SiteSettings | null
@@ -17,7 +17,7 @@ export const HeroSection: FC<HeroSectionProps> = ({ siteSettings }) => {
       {siteSettings?.heroImage && (
         <div className="absolute inset-0 z-0">
           <Image
-            src={urlForImage(siteSettings.heroImage).url()}
+            src={urlFor(siteSettings.heroImage).url()}
             alt="After Band Hero"
             fill
             className="object-cover"

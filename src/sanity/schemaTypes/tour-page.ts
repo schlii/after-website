@@ -4,7 +4,6 @@ export default defineType({
   name: 'tour',
   title: 'Tour',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({
       name: 'introHeading',

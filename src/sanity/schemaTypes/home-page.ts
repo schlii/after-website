@@ -4,7 +4,6 @@ export default defineType({
   name: 'home',
   title: 'Home',
   type: 'document',
-  __experimental_actions: ['update', 'publish'], // singleton
   fields: [
     defineField({
       name: 'heroImage',

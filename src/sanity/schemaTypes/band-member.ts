@@ -4,8 +4,6 @@ export default defineType({
   name: 'bandInfo',
   title: 'Band Info',
   type: 'document',
-  // Include 'delete' so the user can permanently remove the deleted stub and recreate as needed.
-  __experimental_actions: ['create', 'update', 'delete', 'publish'],
   fields: [
     defineField({
       name: 'bandImage1',

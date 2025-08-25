@@ -4,12 +4,6 @@ export default defineType({
   name: 'global',
   title: 'Global Settings',
   type: 'document',
-  __experimental_actions: [
-    // Disable delete and duplicate for singleton
-    'create',
-    'update',
-    'publish'
-  ],
   fieldsets: [
     {
       name: 'general',

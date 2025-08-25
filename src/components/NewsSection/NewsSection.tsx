@@ -2,7 +2,7 @@ import { type FC } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { type NewsPost } from '../../../types/sanity'
-import { urlForImage } from '../../../lib/sanity-server'
+import { urlFor } from '@/sanity/lib/image'
 
 interface NewsSectionProps {
   news: NewsPost[] | null
@@ -20,7 +20,7 @@ export const NewsSection: FC<NewsSectionProps> = ({ news }) => {
                 <Link href={`/news/${post.slug}`}>
                   <div className="relative aspect-video mb-4 overflow-hidden">
                     <Image
-                      src={urlForImage(post.featured_image).url()}
+                      src={urlFor(post.featured_image).url()}
                       alt={post.title}
                       fill
                       className="object-cover transition-transform group-hover:scale-105"

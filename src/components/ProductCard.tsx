@@ -32,7 +32,7 @@ export const ProductCard: FC<ProductCardProps> = ({ product, className }) => {
       {primaryImage && (
         <img
           src={primaryImage.src}
-          alt={primaryImage.altText || product.title}
+          alt={primaryImage.alt || product.title}
           style={{ width: '100%', maxWidth: 320, height: 'auto', border: '1px solid #000' }}
         />
       )}
