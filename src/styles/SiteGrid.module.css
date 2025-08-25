@@ -19,3 +19,16 @@
   line-height: 1;
   text-align: center;
 }
+
+.siteFooter {
+  width: clamp(320px, 80vmin, 1024px);
+  margin: 0.75rem auto 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.siteFooter a {
+  text-decoration: underline;
+  color: #ffffff;
+}

@@ -23,9 +23,10 @@ export const ProductGrid: FC<ProductGridProps> = ({ products, className }) => {
       className={className}
       style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+        gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
         gap: '1rem',
-        padding: '1rem'
+        padding: '0.5rem',
+        justifyItems: 'center'
       }}
     >
       {products.map((product) => (

@@ -23,6 +23,8 @@ export interface Track {
   previewUrl: string
   artworkUrl?: string
   spotifyUrl?: string
+  /** URL to the track on Apple Music */
+  appleMusicUrl?: string
 }
 
 export interface PlayerState {

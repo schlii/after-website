@@ -29,6 +29,7 @@ export const AudioPlayerProvider: FC<{ children: ReactNode }> = ({ children }) =
           duration: t.duration,
           previewUrl: t.previewUrl,
           artworkUrl: t.artworkUrl,
+          appleMusicUrl: t.trackViewUrl || `https://music.apple.com/us/song/${t.id}`,
         }))
         setPlaylist(newPlaylist)
       } catch (err) {

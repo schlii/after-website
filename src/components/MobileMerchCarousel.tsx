@@ -55,10 +55,15 @@ const MobileMerchCarousel: FC<Props> = ({ products }) => {
                   <Image src={p.image.src} alt={p.image.alt ?? p.title} width={320} height={320} style={{ objectFit:'contain', border:'1px solid #000' }} />
                 )}
                 <p style={{ margin:'0.5rem 0 0', fontFamily:'PixdorTwo, var(--font-mono)', fontSize:'1.15rem', color:'#000' }}>
-                  {p.title} <span style={{ opacity:0.6 }}>|</span> ${v?.price ?? '0.00'}
+                  {p.title} <span style={{ opacity:0.6 }}>|</span> ${Number.parseFloat(v?.price ?? '0').toFixed(0)}
                 </p>
                 {p.variants.length>1 && (
-                  <select value={index===idx? (variantId ?? p.variants[0].id):p.variants[0].id} onChange={(e)=>setVariantId(e.target.value)} style={{ marginTop:'0.4rem', padding:'0.25rem 0.5rem', borderRadius:4, fontFamily:'PixdorTwo, var(--font-mono)', color:'#000', fontSize:'1rem' }}>
+                  <select
+                    value={index===idx? (variantId ?? p.variants[0].id):p.variants[0].id}
+                    onChange={(e)=>setVariantId(e.target.value)}
+                    className={css.inputCapsule}
+                    style={{ marginTop:'0.4rem', fontFamily:'PixdorTwo, var(--font-mono)', color:'#000', fontSize:'1rem' }}
+                  >
                     {p.variants.map((vv)=>(<option key={vv.id} value={vv.id}>{vv.title}</option>))}
                   </select>
                 )}

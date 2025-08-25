@@ -14,51 +14,45 @@ export const ProductCard: FC<ProductCardProps> = ({ product, className }) => {
   const { image: primaryImage, variants } = product
   const [selectedVariantId, setSelectedVariantId] = useState<string>(variants[0]?.id ?? '')
   const selectedVariant = variants.find(v => v.id === selectedVariantId) ?? variants[0]
-  const price = selectedVariant?.price ?? 'N/A'
+  const rawPrice = selectedVariant?.price ?? '0'
+  const price = Number.parseFloat(rawPrice).toFixed(0)
 
   return (
-    <div 
+    <div
       className={className}
       style={{
-        border: '1px solid #ccc',
-        padding: '1rem',
-        borderRadius: '4px',
-        backgroundColor: '#fff'
+        padding: '0.75rem',
+        textAlign: 'center',
+        color: '#000',
+        fontFamily: 'PixdorTwo, var(--font-mono)',
+        backgroundColor: 'transparent'
       }}
     >
       {/* Product Image */}
       {primaryImage && (
-        <img 
+        <img
           src={primaryImage.src}
           alt={primaryImage.altText || product.title}
-          style={{ width: '100%', maxWidth: '300px', height: 'auto' }}
+          style={{ width: '100%', maxWidth: 320, height: 'auto', border: '1px solid #000' }}
         />
       )}
-      
-      {/* Product Title */}
-      <h3>{product.title}</h3>
-      
-      {/* Variant Selector */}
-      <VariantSelector variants={variants} onSelect={setSelectedVariantId} />
 
-      {/* Product Price */}
-      <p>Price: ${price}</p>
-      
-      {/* Availability */}
-      <p>
-        Status: {product.available ? 'Available' : 'Out of Stock'}
+      {/* Title + Price */}
+      <p style={{ margin: '0.5rem 0 0', fontSize: '1.15rem' }}>
+        {product.title} <span style={{ opacity: 0.6 }}>|</span> ${price}
       </p>
-      
-      {/* Product Type */}
-      {product.productType && (
-        <p>Type: {product.productType}</p>
+
+      {/* Variant Selector */}
+      {variants.length > 1 && (
+        <div style={{ marginTop: '0.4rem' }}>
+          <VariantSelector variants={variants} onSelect={setSelectedVariantId} />
+        </div>
       )}
-      
-      {/* Vendor */}
-      {product.vendor && (
-        <p>Vendor: {product.vendor}</p>
-      )}
-          <AddToCartButton product={product} variantId={selectedVariantId} />
+
+      {/* Add to cart */}
+      <div style={{ marginTop: '0.6rem' }}>
+        <AddToCartButton product={product} variantId={selectedVariantId} />
+      </div>
     </div>
   )
 }

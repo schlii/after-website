@@ -65,6 +65,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ className }) => {
           previewUrl: track.previewUrl,
           artworkUrl: track.artworkUrl,
           spotifyUrl: undefined, // TODO: Add Spotify URL mapping if available
+          appleMusicUrl: track.trackViewUrl,
         }))
         
         setTracks(playerTracks)
@@ -195,17 +196,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ className }) => {
                 <p className="text-gray-500 text-sm truncate">{currentTrack.album}</p>
               )}
             </div>
-            {/* Spotify Link */}
-            {currentTrack.spotifyUrl && (
-              <a
-                href={currentTrack.spotifyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-3 py-1 bg-green-600 text-white text-sm rounded-full hover:bg-green-700 transition-colors"
-              >
-                Listen on Spotify
-              </a>
-            )}
+            {/* Removed inline Spotify link; external buttons are in controls */}
           </div>
         </div>
       )}
@@ -244,6 +235,27 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ className }) => {
             <path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/>
           </svg>
         </button>
+
+        {/* Spotify button */}
+        {currentTrack?.spotifyUrl ? (
+          <a
+            href={currentTrack.spotifyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 text-gray-400 hover:text-white transition-colors"
+            aria-label="Open in Spotify"
+          >
+            <img src="/spotify%20button.png" alt="Spotify" className="w-full h-full object-contain" />
+          </a>
+        ) : (
+          <button
+            disabled
+            className={`${styles.serviceControl} opacity-50 cursor-not-allowed`}
+            aria-label="Open in Spotify"
+          >
+            <img src="/spotify%20button.png" alt="Spotify" className="w-full h-full object-contain" />
+          </button>
+        )}
 
         <button
           onClick={skipToPrevious}
@@ -285,13 +297,34 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ className }) => {
             <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
           </svg>
         </button>
+
+        {/* Apple Music button */}
+        {currentTrack?.appleMusicUrl ? (
+          <a
+            href={currentTrack.appleMusicUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 text-gray-400 hover:text-white transition-colors"
+            aria-label="Open in Apple Music"
+          >
+            <img src="/apple%20button.png" alt="Apple Music" className="w-full h-full object-contain" />
+          </a>
+        ) : (
+          <button
+            disabled
+            className={`${styles.serviceControl} opacity-50 cursor-not-allowed`}
+            aria-label="Open in Apple Music"
+          >
+            <img src="/apple%20button.png" alt="Apple Music" className="w-full h-full object-contain" />
+          </button>
+        )}
       </div>
 
       {/* Volume Control */}
       <div className="flex items-center space-x-3 mb-6">
         <button
           onClick={toggleMute}
-          className="text-gray-400 hover:text-white transition-colors"
+          className={`${styles.serviceControl}`}
           aria-label={muted ? 'Unmute' : 'Mute'}
         >
           {muted || volume === 0 ? (

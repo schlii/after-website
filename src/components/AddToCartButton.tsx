@@ -3,6 +3,7 @@
 import { type FC } from 'react'
 import { useCart } from '../contexts/CartContext'
 import { type PlainProduct } from '../../types/PlainProduct'
+import css from '@/components/ContactForm.module.css'
 
 interface Props {
   product: PlainProduct
@@ -26,7 +27,8 @@ export const AddToCartButton: FC<Props> = ({ product, variantId, className, styl
     })
   }
 
+  const btnClass = className ? `${css.sendBtn} ${className}` : css.sendBtn
   return (
-    <button onClick={handleAdd} className={className} style={style}>add to cart</button>
+    <button onClick={handleAdd} className={btnClass} style={style}>add to cart</button>
   )
 }

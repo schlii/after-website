@@ -115,18 +115,21 @@ const AppleMusicPlayer: FC<AppleMusicPlayerProps> = ({ showPlaylist = false }) =
       )}
       <div className={styles.nowPlaying}>
         <span className={styles.trackTitle}>{currentTrack?.title || '—'}</span>
-        <a
-          href="https://open.spotify.com/artist/7KfMR05zRrWyhQimnYa8li?si=47d20decf6c74f09" /* band artist link */
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.spotifyBtn}
-          style={{ ['--label-offset' as any]: '1px' }}
-        >
-          <span className={styles.spotifyLabel}>listen on spotify</span>
-        </a>
+        {/* Removed old textual Spotify button */}
       </div>
 
       <div className={styles.controls}>
+        {/* Spotify icon button */}
+        <a
+          href={currentTrack?.spotifyUrl || 'https://open.spotify.com/artist/7KfMR05zRrWyhQimnYa8li'}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.serviceControl}
+          aria-label="Open in Spotify"
+        >
+          <img src="/spotify%20button.png" alt="Spotify" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+        </a>
+
         <button
           className={styles.control}
           aria-label="Previous"
@@ -151,6 +154,27 @@ const AppleMusicPlayer: FC<AppleMusicPlayerProps> = ({ showPlaylist = false }) =
         >
           <NextIcon />
         </button>
+
+        {/* Apple Music icon button */}
+        {currentTrack?.appleMusicUrl ? (
+          <a
+            href={currentTrack.appleMusicUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.serviceControl}
+            aria-label="Open in Apple Music"
+          >
+            <img src="/apple%20button.png" alt="Apple Music" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          </a>
+        ) : (
+          <button
+            disabled
+            className={`${styles.serviceControl} opacity-50 cursor-not-allowed`}
+            aria-label="Open in Apple Music"
+          >
+            <img src="/apple%20button.png" alt="Apple Music" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          </button>
+        )}
       </div>
 
       <div className={styles.progressWrapper}>

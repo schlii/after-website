@@ -40,6 +40,13 @@ export const SiteGridLayout: FC<SiteGridLayoutProps> = ({ children }) => {
           ))}
         </ul>
       </nav>
+
+      <footer className={styles.siteFooter}>
+        <p>© After 2025</p>
+        <p>
+          Website by <a href="https://instagram.com/bicflame" target="_blank" rel="noreferrer">bicflame</a>
+        </p>
+      </footer>
     </main>
   )
 }

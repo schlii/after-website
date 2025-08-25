@@ -2,6 +2,7 @@
 
 import { type FC, useState } from 'react'
 import { type PlainProductVariant } from '../../types/PlainProduct'
+import css from '@/components/ContactForm.module.css'
 
 interface Props {
   variants: PlainProductVariant[]
@@ -19,10 +20,21 @@ export const VariantSelector: FC<Props> = ({ variants, onSelect }) => {
   if (variants.length <= 1) return null // no variants to choose
 
   return (
-    <select value={selected} onChange={handleChange} style={{ marginBottom: '0.5rem', width: '100%' }}>
+    <select
+      value={selected}
+      onChange={handleChange}
+      className={css.inputCapsule}
+      style={{
+        margin: '0  auto 0.5rem',
+        width: '75%',
+        maxWidth: 220,
+        padding: '0.4rem 0.5rem',
+        display: 'block'
+      }}
+    >
       {variants.map((v) => (
         <option key={v.id} value={v.id} disabled={!v.available}>
-          {v.title} – ${v.price}
+          {v.title}
         </option>
       ))}
     </select>

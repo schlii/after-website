@@ -1,25 +1,26 @@
 import { SiteGridLayout } from '@/components/SiteGridLayout'
 import pgStyles from '@/styles/SiteGrid.module.css'
 import grid from './MerchGrid.module.css'
+import { shopifyHelpers } from 'lib/shopify'
+import { serialiseProducts } from 'lib/serialiseShopify'
+import { ProductGrid } from '@/components/ProductGrid'
 
-export default function MerchPage() {
+export const revalidate = 300 // 5-minute ISR
+
+export default async function MerchPage() {
+  const productsRich = await shopifyHelpers.fetchProducts()
+  const products = serialiseProducts(productsRich)
+
   return (
     <SiteGridLayout>
-      {/* Banner */}
-      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.bannerPanel}`}></section>
-
-      {/* Product panels */}
-      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.productPanel1}`}></section>
-      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.productPanel2}`}></section>
-      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.productPanel3}`}></section>
-      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.productPanel4}`}></section>
-      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.productPanel5}`}></section>
-      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.productPanel6}`}></section>
-      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.productPanel7}`}></section>
-      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.productPanel8}`}></section>
-
-      {/* Policy links */}
-      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.policyLinksPanel}`}></section>
+      {/* Single scrollable product panel */}
+      <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.productPanel1}`}> 
+        <div className={pgStyles.panelBox}>
+          <div className={grid.scrollContainer}>
+            <ProductGrid products={products} />
+          </div>
+        </div>
+      </section>
     </SiteGridLayout>
     
   )
