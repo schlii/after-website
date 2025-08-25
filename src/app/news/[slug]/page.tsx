@@ -1,5 +1,6 @@
 import { fetchSanityDocument } from '../../../../lib/sanity-server'
-import { newsPostBySlugQuery } from '../../../../lib/sanity-queries'
+import { fetchSanityDocuments } from '../../../../lib/sanity-fetch'
+import { newsPostsQuery } from '../../../../lib/sanity-queries'
 import type { NewsPost } from '../../../../types/sanity'
 
 interface NewsPostPageProps {
@@ -77,8 +78,10 @@ export default async function NewsPostPage({ params }: NewsPostPageProps) {
 // Generate static params for all news posts at build time
 export async function generateStaticParams() {
   const { data: posts } = await fetchSanityDocuments<NewsPost>(newsPostsQuery)
-  
-  return posts?.map((post) => ({
-    slug: post.slug,
-  })) || []
+
+  return (
+    posts?.map((post) => ({
+      slug: post.slug,
+    })) || []
+  )
 }
