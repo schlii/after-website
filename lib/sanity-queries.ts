@@ -64,7 +64,13 @@ export const globalQuery = groq`
     tagline,
     socialLinks,
     seoDescription,
-    ogImage
+    ogImage,
+    backgroundImages[]{
+      _id,
+      alt,
+      asset,
+      "url": asset->url
+    }
   }
 `
 

@@ -15,7 +15,7 @@ export default async function MerchPage() {
     <SiteGridLayout>
       {/* Single scrollable product panel */}
       <section className={`${pgStyles.panelCommon} ${grid.panel} ${grid.productPanel1}`}> 
-        <div className={pgStyles.panelBox}>
+        <div className={`${pgStyles.panelBox} ${grid.merchBox}`}>
           <div className={grid.scrollContainer}>
             <ProductGrid products={products} />
           </div>

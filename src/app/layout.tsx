@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Providers from "../components/Providers";
-import CartToggleButton from "../components/CartToggleButton";
-import CartSidebar from "../components/CartSidebar";
+import MobileCartBar from "../components/MobileCartBar";
 import { draftMode } from 'next/headers';
 import { VisualEditing } from 'next-sanity';
+import { fetchSanityDocument } from '../../lib/sanity-server';
+import { globalQuery } from '../../lib/sanity-queries';
+import { urlFor } from '@/sanity/lib/image';
+import { BackgroundSlideshow } from '../components/BackgroundSlideshow';
 import "./globals.css";
 import localFont from 'next/font/local';
 
@@ -54,15 +57,24 @@ export default async function RootLayout({
 }>) {
   const { isEnabled: draftEnabled } = await draftMode();
 
+  const { data: globalSettings } = await fetchSanityDocument<any>(globalQuery);
+  const imagesArr = (globalSettings?.backgroundImages ?? []) as any[];
+  const images = imagesArr.map((img) => ({
+    src: urlFor(img).quality(100).url(),
+    alt: img.alt ?? ''
+  }));
+
   return (
     <html lang="en" className={`${aeonikPro.variable} ${aeonikMono.variable}`}>
       <body className="min-h-screen bg-black text-white">
+        {/* Background slideshow behind all content */}
+        {images.length > 0 && <BackgroundSlideshow images={images} />}
         {/* Global providers */}
         <Providers>
-        <CartSidebar />
         <main>
           {children}
         </main>
+        <MobileCartBar />
         </Providers>
         {draftEnabled && <VisualEditing />}
       </body>

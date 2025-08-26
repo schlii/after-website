@@ -33,8 +33,8 @@ export const VariantSelector: FC<Props> = ({ variants, onSelect }) => {
       }}
     >
       {variants.map((v) => (
-        <option key={v.id} value={v.id} disabled={!v.available}>
-          {v.title}
+        <option key={v.id} value={v.id}>
+          {v.title}{v.available ? '' : ' (sold out)'}
         </option>
       ))}
     </select>

@@ -22,12 +22,14 @@ export const AddToCartButton: FC<Props> = ({ product, variantId, className, styl
       id: variant.id,
       productId: product.id,
       title: product.title,
+      variantTitle: variant.title,
       price: variant.price,
       image: product.image?.src ?? null,
     })
   }
 
   const btnClass = className ? `${css.sendBtn} ${className}` : css.sendBtn
+
   return (
     <button onClick={handleAdd} className={btnClass} style={style}>add to cart</button>
   )

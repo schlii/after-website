@@ -23,42 +23,12 @@ export default defineType({
   ],
   fields: [
     defineField({
-      name: 'siteTitle',
-      title: 'Site Title',
-      type: 'string',
-      fieldset: 'general',
-      validation: Rule => Rule.required(),
-    }),
-    defineField({
-      name: 'tagline',
-      title: 'Tagline',
-      type: 'string',
-      fieldset: 'general',
-      validation: Rule => Rule.required(),
-    }),
-    defineField({
-      name: 'socialLinks',
-      title: 'Social Links',
-      type: 'object',
-      fieldset: 'social',
-      fields: [
-        { name: 'facebook', title: 'Facebook', type: 'url' },
-        { name: 'twitter', title: 'Twitter', type: 'url' },
-        { name: 'instagram', title: 'Instagram', type: 'url' },
-        { name: 'youtube', title: 'YouTube', type: 'url' },
-        { name: 'spotify', title: 'Spotify', type: 'url' },
-        { name: 'appleMusic', title: 'Apple Music', type: 'url' },
-        { name: 'bandcamp', title: 'Bandcamp', type: 'url' },
-        { name: 'soundcloud', title: 'SoundCloud', type: 'url' },
-      ],
-    }),
-    defineField({
       name: 'seoDescription',
       title: 'SEO Description',
       type: 'text',
       fieldset: 'seo',
       rows: 3,
-      validation: Rule => Rule.required().max(160),
+      validation: Rule => Rule.max(160),
     }),
     defineField({
       name: 'ogImage',
@@ -74,16 +44,33 @@ export default defineType({
           name: 'alt',
           title: 'Alt Text',
           type: 'string',
-          validation: Rule => Rule.required(),
+          validation: Rule => Rule.optional(),
         },
       ],
-      validation: Rule => Rule.required(),
+      validation: Rule => Rule.optional(),
     }),
+
+    // Background images for homepage slideshow
     defineField({
-      name: 'footerText',
-      title: 'Footer Text',
-      type: 'text',
-      fieldset: 'general',
+      name: 'backgroundImages',
+      title: 'Background Images (Slideshow)',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            {
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+              validation: Rule => Rule.optional(),
+            },
+          ],
+        },
+      ],
+      description:
+        'Add two or more images to enable an 8-second cross-fade slideshow. If only one image is provided it will be used as a static background.',
     }),
     defineField({
       name: 'googleAnalyticsId',
@@ -95,8 +82,7 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: 'siteTitle',
-      subtitle: 'tagline',
+      title: 'seoDescription',
     },
   },
 })

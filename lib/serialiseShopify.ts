@@ -12,7 +12,7 @@ export function serialiseProduct(product: ShopifyProduct): PlainProduct {
     id: v.id,
     title: v.title,
     price: typeof v.price === 'string' ? v.price : (v.price as any)?.amount ?? '0.00',
-    available: v.availableForSale,
+    available: (v as any).available ?? (v as any).availableForSale ?? true,
   })) ?? []
 
   return {

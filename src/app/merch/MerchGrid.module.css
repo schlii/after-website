@@ -24,3 +24,24 @@
   position: relative;
 }
 
+.merchBox {
+}
+
+/* Grain overlay inside merch panel */
+.merchBox {
+  position: relative;
+  /* inherit panelBox background: transparent overlay created with ::after */
+}
+
+.merchBox::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.05;
+  background-image: url('/grain.png');
+  background-size: 200px 200px;
+  background-repeat: repeat;
+}
+

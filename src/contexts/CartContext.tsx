@@ -8,6 +8,7 @@ interface CartItem {
   lineItemId: string
   productId: string
   title: string
+  variantTitle?: string
   quantity: number
   price: string
   image?: string | null
@@ -21,7 +22,7 @@ interface CartState {
 }
 
 interface CartContextValue extends CartState {
-  addItem: (base: Omit<CartItem, 'lineItemId' | 'quantity'>) => Promise<void>
+  addItem: (base: Omit<CartItem, 'lineItemId' | 'quantity'> & { variantTitle?: string }) => Promise<void>
   updateQuantity: (lineItemId: string, delta: number) => Promise<void>
   removeItem: (lineItemId: string) => Promise<void>
   toggle: () => void
@@ -71,6 +72,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       id: li.variant.id,
       productId: li.variant.product?.id ?? '',
       title: li.title,
+      variantTitle: li.variant.title,
       quantity: li.quantity,
       price:
         typeof li.variant.price === 'string'
@@ -87,7 +89,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   }
 
   // ---------- actions ----------
-  const addItem = async (base: Omit<CartItem, 'lineItemId' | 'quantity'>) => {
+  const addItem = async (base: Omit<CartItem, 'lineItemId' | 'quantity'> & { variantTitle?: string }) => {
     // if checkout already exists, check if variant present
     if (state.checkoutId) {
       const existing = state.items.find((i) => i.id === base.id)

@@ -9,7 +9,7 @@ import styles from '@/app/mobile/MobilePage.module.css'
 import site from '@/styles/SiteGrid.module.css'
 
 export default function MobileCartBar () {
-  const { items, checkoutUrl } = useCart()
+  const { items, checkoutUrl, updateQuantity, removeItem } = useCart()
   const [open, setOpen] = useState(false)
   const toggle = () => setOpen(!open)
 
@@ -24,8 +24,8 @@ export default function MobileCartBar () {
       }}>
       {/* toggle button */}
       <div style={{padding:'8px 4px 4px', display:'flex', justifyContent:'center'}}>
-        <button className={css.sendBtn} style={{width:'110px'}} onClick={toggle}>
-          {open ? 'hide cart' : 'view cart'}
+        <button className={css.sendBtn} style={{width:'140px'}} onClick={toggle}>
+          {open ? 'hide cart' : `view cart (${items.reduce((s,i)=>s+i.quantity,0)})`}
         </button>
       </div>
 
@@ -40,16 +40,29 @@ export default function MobileCartBar () {
                   {item.image && (
                     <Image src={item.image} alt={item.title} width={90} height={90} style={{border:'1px solid #000', objectFit:'cover'}} />
                   )}
-                  <div style={{marginLeft:'0.5rem', fontFamily:'PixdorTwo, var(--font-mono)', color:'#000'}}>
+                  <div style={{marginLeft:'0.5rem', flex:1, fontFamily:'PixdorTwo, var(--font-mono)', color:'#000'}}>
                     <p style={{margin:'0 0 0.15rem', fontSize:'0.9rem'}}>{item.title}</p>
-                    <p style={{margin:'0', fontSize:'0.85rem'}}>${typeof item.price==='string'?item.price:(item.price as any).amount}  × {item.quantity}</p>
+                    {item.variantTitle && item.variantTitle !== 'Default Title' && (
+                      <p style={{margin:'0 0 0.15rem', fontSize:'0.85rem', opacity:0.8}}>{item.variantTitle}</p>
+                    )}
+                    <p style={{margin:'0', fontSize:'0.85rem'}}>
+                      ${(()=>{const p=typeof item.price==='string'?parseFloat(item.price):parseFloat((item.price as any).amount);return p.toFixed(0)})()}
+                    </p>
                   </div>
+                  {/* quantity controls */}
+                  <div style={{display:'flex', alignItems:'center', gap:'0.25rem', marginLeft:'0.25rem', fontFamily:'PixdorTwo, var(--font-mono)', color:'#000'}}>
+                    <button onClick={()=>updateQuantity(item.lineItemId??item.id,-1)} style={{padding:'0 6px', fontFamily:'inherit', color:'#000'}}>−</button>
+                    <span style={{minWidth:'1.5rem', textAlign:'center'}}>{item.quantity}</span>
+                    <button onClick={()=>updateQuantity(item.lineItemId??item.id,1)} style={{padding:'0 6px', fontFamily:'inherit', color:'#000'}}>＋</button>
+                  </div>
+                  {/* remove */}
+                  <button onClick={()=>removeItem(item.lineItemId??item.id)} style={{marginLeft:'0.5rem', background:'none', border:'none', color:'#000', textDecoration:'underline', cursor:'pointer', fontFamily:'PixdorTwo, var(--font-mono)', fontSize:'0.8rem'}}>remove</button>
                 </div>
               ))}
 
               <p style={{marginTop:'0.5rem', fontFamily:'PixdorTwo, var(--font-mono)', fontWeight:600, textAlign:'right', color:'#000'}}>
                 subtotal: $
-                {items.reduce((s,i)=>{const p=typeof i.price==='string'?parseFloat(i.price):parseFloat((i.price as any).amount);return s+p*i.quantity},0).toFixed(2)}
+                {items.reduce((s,i)=>{const p=typeof i.price==='string'?parseFloat(i.price):parseFloat((i.price as any).amount);return s+p*i.quantity},0).toFixed(0)}
               </p>
 
               {checkoutUrl && (
