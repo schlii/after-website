@@ -1,6 +1,7 @@
 'use client'
 
 import { useCart } from '@/contexts/CartContext'
+import { usePathname } from 'next/navigation'
 import css from '@/components/ContactForm.module.css'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -9,6 +10,12 @@ import styles from '@/app/mobile/MobilePage.module.css'
 import site from '@/styles/SiteGrid.module.css'
 
 export default function MobileCartBar () {
+  const pathname = usePathname()
+  // Hide the cart bar entirely inside Sanity Studio routes
+  if (pathname?.startsWith('/studio')) {
+    return null
+  }
+
   const { items, checkoutUrl, updateQuantity, removeItem } = useCart()
   const [open, setOpen] = useState(false)
   const toggle = () => setOpen(!open)
