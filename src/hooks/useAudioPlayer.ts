@@ -84,6 +84,8 @@ export function useAudioPlayer({
   // Initialize audio element
   useEffect(() => {
     audioRef.current = new Audio()
+    // Enable CORS so Apple preview URLs can play on mobile Safari/Chrome
+    audioRef.current.crossOrigin = 'anonymous'
     const audio = audioRef.current
 
     // Load persisted state
@@ -110,6 +112,29 @@ export function useAudioPlayer({
       }
     }
   }, [])
+
+  // Safety timeout: if the audio element stays in loading state for too long, surface an error
+  useEffect(() => {
+    if (!state.loading) return
+
+    const timeoutId = setTimeout(() => {
+      setState(prev => {
+        if (!prev.loading) return prev // already resolved
+        return {
+          ...prev,
+          loading: false,
+          isPlaying: false,
+          error: {
+            code: 'MEDIA_ERR_NETWORK',
+            message: 'Track failed to load. Check connection and try again.',
+            timestamp: new Date(),
+          },
+        }
+      })
+    }, 10000) // 10-second watchdog
+
+    return () => clearTimeout(timeoutId)
+  }, [state.loading])
 
   // Shuffle function
   const shuffleArray = useCallback((array: Track[]): Track[] => {
