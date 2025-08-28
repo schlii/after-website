@@ -245,7 +245,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ className }) => {
             className="p-2 text-gray-400 hover:text-white transition-colors"
             aria-label="Open in Spotify"
           >
-            <img src="/spotify%20button.png" alt="Spotify" className="w-full h-full object-contain" />
+            <img src="/spotify-button.png" alt="Spotify" className="w-full h-full object-contain" />
           </a>
         ) : (
           <button
@@ -253,7 +253,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ className }) => {
             className={`${styles.serviceControl} opacity-50 cursor-not-allowed`}
             aria-label="Open in Spotify"
           >
-            <img src="/spotify%20button.png" alt="Spotify" className="w-full h-full object-contain" />
+            <img src="/spotify-button.png" alt="Spotify" className="w-full h-full object-contain" />
           </button>
         )}
 
@@ -307,7 +307,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ className }) => {
             className="p-2 text-gray-400 hover:text-white transition-colors"
             aria-label="Open in Apple Music"
           >
-            <img src="/apple%20button.png" alt="Apple Music" className="w-full h-full object-contain" />
+            <img src="/apple-button.png" alt="Apple Music" className="w-full h-full object-contain" />
           </a>
         ) : (
           <button
@@ -315,7 +315,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ className }) => {
             className={`${styles.serviceControl} opacity-50 cursor-not-allowed`}
             aria-label="Open in Apple Music"
           >
-            <img src="/apple%20button.png" alt="Apple Music" className="w-full h-full object-contain" />
+            <img src="/apple-button.png" alt="Apple Music" className="w-full h-full object-contain" />
           </button>
         )}
       </div>
