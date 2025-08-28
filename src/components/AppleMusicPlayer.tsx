@@ -1,6 +1,7 @@
 'use client'
 
 import { FC, useCallback } from 'react'
+import Image from 'next/image'
 import styles from './AppleMusicPlayer.module.css'
 import { useGlobalAudioPlayer } from '@/contexts/GlobalAudioPlayerContext'
 import AudioVisualizer from '@/components/AudioVisualizer'
@@ -132,19 +133,13 @@ const AppleMusicPlayer: FC<AppleMusicPlayerProps> = ({ showPlaylist = false }) =
           className={styles.serviceControl}
           aria-label="Open in Spotify"
         >
-          <img 
-            src="/spotify-button.png?v=1" 
-            alt="Spotify" 
-            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-            onError={(e) => {
-              // Fallback for mobile image loading issues
-              const target = e.target as HTMLImageElement
-              target.style.display = 'none'
-              const parent = target.parentElement
-              if (parent) {
-                parent.innerHTML = '<span style="font-size: 12px; color: #1db954;">Spotify</span>'
-              }
-            }}
+          <Image
+            src="/spotify-button.png"
+            alt="Spotify"
+            width={40}
+            height={40}
+            style={{ objectFit: 'contain', width: '100%', height: '100%' }}
+            priority
           />
         </a>
 
@@ -192,19 +187,13 @@ const AppleMusicPlayer: FC<AppleMusicPlayerProps> = ({ showPlaylist = false }) =
             className={styles.serviceControl}
             aria-label="Open in Apple Music"
           >
-            <img 
-              src="/apple-button.png?v=1" 
-              alt="Apple Music" 
-              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-              onError={(e) => {
-                // Fallback for mobile image loading issues
-                const target = e.target as HTMLImageElement
-                target.style.display = 'none'
-                const parent = target.parentElement
-                if (parent) {
-                  parent.innerHTML = '<span style="font-size: 12px; color: #fc3c44;">Apple</span>'
-                }
-              }}
+            <Image
+              src="/apple-button.png"
+              alt="Apple Music"
+              width={40}
+              height={40}
+              style={{ objectFit: 'contain', width: '100%', height: '100%' }}
+              priority
             />
           </a>
         ) : (
@@ -213,19 +202,13 @@ const AppleMusicPlayer: FC<AppleMusicPlayerProps> = ({ showPlaylist = false }) =
             className={`${styles.serviceControl} opacity-50 cursor-not-allowed`}
             aria-label="Open in Apple Music"
           >
-            <img 
-              src="/apple-button.png?v=1" 
-              alt="Apple Music" 
-              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-              onError={(e) => {
-                // Fallback for mobile image loading issues
-                const target = e.target as HTMLImageElement
-                target.style.display = 'none'
-                const parent = target.parentElement
-                if (parent) {
-                  parent.innerHTML = '<span style="font-size: 12px; color: #fc3c44; opacity: 0.5;">Apple</span>'
-                }
-              }}
+            <Image
+              src="/apple-button.png"
+              alt="Apple Music"
+              width={40}
+              height={40}
+              style={{ objectFit: 'contain', width: '100%', height: '100%' }}
+              priority
             />
           </button>
         )}
