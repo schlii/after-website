@@ -254,8 +254,12 @@ export function useAudioPlayer({
     audio.src = track.previewUrl
     audio.volume = state.volume
     audio.muted = state.muted
-    
-    if (autoPlay && state.playlist.length > 0) {
+
+    // If player was already playing, continue automatically after source swap
+    if (state.isPlaying) {
+      audio.load()
+      audio.play().catch(console.error)
+    } else if (autoPlay && state.playlist.length > 0) {
       audio.play().catch(console.error)
     }
 
