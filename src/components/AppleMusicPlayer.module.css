@@ -342,6 +342,22 @@
   transition: opacity 0.15s ease;
 }
 
+/* Fallback size for browsers that don’t support container-query units */
+.control,
+.serviceControl {
+  width: 36px;
+  height: 36px;
+}
+
+/* Re-enable container-query sizing where it is supported */
+@supports (width: 1cqw) {
+  .control,
+  .serviceControl {
+    width: clamp(32px, 4cqw, 40px);
+    height: clamp(32px, 4cqw, 40px);
+  }
+}
+
 /* Loading spinner animation */
 @keyframes spin {
   from {
