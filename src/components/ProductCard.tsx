@@ -12,8 +12,9 @@ interface ProductCardProps {
 
 export const ProductCard: FC<ProductCardProps> = ({ product, className }) => {
   const { image: primaryImage, variants } = product
-  const [selectedVariantId, setSelectedVariantId] = useState<string>(variants[0]?.id ?? '')
-  const selectedVariant = variants.find(v => v.id === selectedVariantId) ?? variants[0]
+  const availableVariants = variants.filter(v => v.available)
+  const [selectedVariantId, setSelectedVariantId] = useState<string>(availableVariants[0]?.id ?? variants[0]?.id ?? '')
+  const selectedVariant = variants.find(v => v.id === selectedVariantId) ?? availableVariants[0] ?? variants[0]
   const rawPrice = selectedVariant?.price ?? '0'
   const price = Number.parseFloat(rawPrice).toFixed(0)
 

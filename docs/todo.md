@@ -26,7 +26,7 @@
 ## TODO
 A concise, actionable checklist. Update items as they are completed.
 
-- [ ] Ensure mobile/tablet devices are redirected to `/mobile` reliably on Vercel; add canonical tag on /mobile pages.
+- [x] Ensure mobile/tablet devices are redirected to `/mobile` reliably on Vercel; add canonical tag on /mobile pages.
 - [ ] Investigate Shopify add-to-cart failure for sold-out variants; disable button or display error when inventory ≤ 0.
 - [ ] Establish performance baseline (Lighthouse on key pages, bundle size via `next build --profile`).
 - [ ] Set up Jest + React Testing Library and add first test for mobile redirect middleware.

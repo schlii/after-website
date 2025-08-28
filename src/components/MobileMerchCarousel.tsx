@@ -48,7 +48,7 @@ const MobileMerchCarousel: FC<Props> = ({ products }) => {
       <div style={{ overflow:'hidden', width:'100%' }}>
         <div style={{ display:'flex', transition:'transform 0.4s ease', transform:`translateX(-${index*100}%)` }}>
           {products.map((p, idx)=>{
-            const v=p.variants[0]
+            const v = p.variants.filter(variant => variant.available)[0] ?? p.variants[0]
             return (
               <div key={p.id} style={{ flex:'0 0 100%', display:'flex', flexDirection:'column', alignItems:'center' }}>
                 {p.image && (
@@ -57,16 +57,20 @@ const MobileMerchCarousel: FC<Props> = ({ products }) => {
                 <p style={{ margin:'0.5rem 0 0', fontFamily:'PixdorTwo, var(--font-mono)', fontSize:'1.15rem', color:'#000' }}>
                   {p.title} <span style={{ opacity:0.6 }}>|</span> ${Number.parseFloat(v?.price ?? '0').toFixed(0)}
                 </p>
-                {p.variants.length>1 && (
-                  <select
-                    value={index===idx? (variantId ?? p.variants[0].id):p.variants[0].id}
-                    onChange={(e)=>setVariantId(e.target.value)}
-                    className={css.inputCapsule}
-                    style={{ marginTop:'0.4rem', fontFamily:'PixdorTwo, var(--font-mono)', color:'#000', fontSize:'1rem' }}
-                  >
-                    {p.variants.map((vv)=>(<option key={vv.id} value={vv.id}>{vv.title}</option>))}
-                  </select>
-                )}
+                {(() => {
+                  // Filter to only available variants
+                  const availableVariants = p.variants.filter(vv => vv.available)
+                  return availableVariants.length > 1 && (
+                    <select
+                      value={index===idx? (variantId ?? availableVariants[0].id):availableVariants[0].id}
+                      onChange={(e)=>setVariantId(e.target.value)}
+                      className={css.inputCapsule}
+                      style={{ marginTop:'0.4rem', fontFamily:'PixdorTwo, var(--font-mono)', color:'#000', fontSize:'1rem' }}
+                    >
+                      {availableVariants.map((vv)=>(<option key={vv.id} value={vv.id}>{vv.title}</option>))}
+                    </select>
+                  )
+                })()}
               </div>
             )
           })}
@@ -75,7 +79,7 @@ const MobileMerchCarousel: FC<Props> = ({ products }) => {
 
       {/* swipe hints can be optional, no arrow buttons */}
       {/* add to cart */}
-      <AddToCartButton product={product} variantId={variantId ?? product.variants[0]?.id} className={css.sendBtn} style={{minWidth:'125px', padding:'0.5rem 0.75rem', marginTop:'1rem', marginBottom:'1rem', whiteSpace:'nowrap', textAlign:'center', display:'block'}} />
+      <AddToCartButton product={product} variantId={variantId ?? product.variants.filter(v => v.available)[0]?.id ?? product.variants[0]?.id} className={css.sendBtn} style={{minWidth:'125px', padding:'0.5rem 0.75rem', marginTop:'1rem', marginBottom:'1rem', whiteSpace:'nowrap', textAlign:'center', display:'block'}} />
     </div>
   )
 }

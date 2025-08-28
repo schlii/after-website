@@ -14,11 +14,12 @@ interface ProductDetailClientProps {
  * Handles variant selection and Add-to-Cart interaction.
  */
 export const ProductDetailClient: FC<ProductDetailClientProps> = ({ product }) => {
+  const availableVariants = product.variants.filter(v => v.available)
   const [selectedVariantId, setSelectedVariantId] = useState<string>(
-    product.variants[0]?.id ?? ''
+    availableVariants[0]?.id ?? product.variants[0]?.id ?? ''
   )
 
-  const selectedVariant = product.variants.find((v) => v.id === selectedVariantId) ?? product.variants[0]
+  const selectedVariant = product.variants.find((v) => v.id === selectedVariantId) ?? availableVariants[0] ?? product.variants[0]
   const price = selectedVariant?.price ?? product.price
 
   return (

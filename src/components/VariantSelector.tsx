@@ -10,14 +10,17 @@ interface Props {
 }
 
 export const VariantSelector: FC<Props> = ({ variants, onSelect }) => {
-  const [selected, setSelected] = useState<string>(variants[0]?.id ?? '')
+  // Filter to only available variants
+  const availableVariants = variants.filter(v => v.available)
+  const [selected, setSelected] = useState<string>(availableVariants[0]?.id ?? '')
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelected(e.target.value)
     onSelect(e.target.value)
   }
 
-  if (variants.length <= 1) return null // no variants to choose
+  // Don't show selector if only one or no available variants
+  if (availableVariants.length <= 1) return null
 
   return (
     <select
@@ -32,9 +35,9 @@ export const VariantSelector: FC<Props> = ({ variants, onSelect }) => {
         display: 'block'
       }}
     >
-      {variants.map((v) => (
+      {availableVariants.map((v) => (
         <option key={v.id} value={v.id}>
-          {v.title}{v.available ? '' : ' (sold out)'}
+          {v.title}
         </option>
       ))}
     </select>
