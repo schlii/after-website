@@ -341,3 +341,13 @@
   justify-content: center;
   transition: opacity 0.15s ease;
 }
+
+/* Loading spinner animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

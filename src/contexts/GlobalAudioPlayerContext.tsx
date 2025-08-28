@@ -12,15 +12,31 @@ export const AudioPlayerProvider: FC<{ children: ReactNode }> = ({ children }) =
   const [playlist, setPlaylist] = useState<Track[]>([])
 
   // Instantiate audio player hook once
-  const audio = useAudioPlayer({ playlist, autoPlay: true })
+  // Note: autoPlay disabled for mobile compatibility - browsers block autoplay without user interaction
+  const audio = useAudioPlayer({ playlist, autoPlay: false })
 
   // Fetch Apple Music tracks once on mount
   useEffect(() => {
     const fetchTracks = async () => {
       try {
         const res = await fetch('/api/itunes/artist-tracks')
+        
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}: ${res.statusText}`)
+        }
+        
         const json = await res.json()
-        if (!json.success) return
+        
+        if (!json.success) {
+          console.warn('iTunes API returned error:', json.error?.message || 'Unknown error')
+          return
+        }
+        
+        if (!json.data || !Array.isArray(json.data)) {
+          console.warn('No track data received from iTunes API')
+          return
+        }
+        
         const newPlaylist: Track[] = (json.data as NormalizedItunesTrack[]).map((t) => ({
           id: t.id,
           title: t.title,
@@ -31,9 +47,12 @@ export const AudioPlayerProvider: FC<{ children: ReactNode }> = ({ children }) =
           artworkUrl: t.artworkUrl,
           appleMusicUrl: t.trackViewUrl || `https://music.apple.com/us/song/${t.id}`,
         }))
+        
         setPlaylist(newPlaylist)
+        console.log(`Loaded ${newPlaylist.length} tracks from iTunes API`)
       } catch (err) {
         console.error('GlobalAudioPlayerContext: failed to fetch tracks', err)
+        // Could set an error state here to show in UI if needed
       }
     }
     fetchTracks()

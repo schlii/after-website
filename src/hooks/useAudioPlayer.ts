@@ -262,9 +262,25 @@ export function useAudioPlayer({
     try {
       await audio.play()
     } catch (error) {
-      console.error('Failed to play audio:', error)
+      // Handle mobile browser autoplay restrictions
+      if (error instanceof Error && error.name === 'NotAllowedError') {
+        const mobileError: PlayerError = {
+          code: 'MEDIA_ERR_ABORTED',
+          message: 'Tap the play button to start audio (mobile browser restriction)',
+          timestamp: new Date(),
+        }
+        setState(prev => ({ 
+          ...prev, 
+          loading: false, 
+          isPlaying: false, 
+          error: mobileError 
+        }))
+        onError?.(mobileError)
+      } else {
+        console.error('Failed to play audio:', error)
+      }
     }
-  }, [state.currentTrack])
+  }, [state.currentTrack, onError])
 
   const pause = useCallback(() => {
     const audio = audioRef.current

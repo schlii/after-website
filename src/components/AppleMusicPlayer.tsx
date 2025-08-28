@@ -102,7 +102,12 @@ const AppleMusicPlayer: FC<AppleMusicPlayerProps> = ({ showPlaylist = false }) =
   }
 
   if (!tracks.length) {
-    return <div className={styles.player}>Loading...</div>
+    return <div className={styles.player}>Loading tracks...</div>
+  }
+
+  // Show mobile-friendly error messages
+  if (audioLoading && !currentTrack) {
+    return <div className={styles.player}>Loading audio...</div>
   }
 
   return (
@@ -127,7 +132,20 @@ const AppleMusicPlayer: FC<AppleMusicPlayerProps> = ({ showPlaylist = false }) =
           className={styles.serviceControl}
           aria-label="Open in Spotify"
         >
-          <img src="/spotify%20button.png" alt="Spotify" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          <img 
+            src="/spotify%20button.png" 
+            alt="Spotify" 
+            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            onError={(e) => {
+              // Fallback for mobile image loading issues
+              const target = e.target as HTMLImageElement
+              target.style.display = 'none'
+              const parent = target.parentElement
+              if (parent) {
+                parent.innerHTML = '<span style="font-size: 12px; color: #1db954;">Spotify</span>'
+              }
+            }}
+          />
         </a>
 
         <button
@@ -143,8 +161,18 @@ const AppleMusicPlayer: FC<AppleMusicPlayerProps> = ({ showPlaylist = false }) =
           onClick={togglePlay}
           aria-label={isPlaying ? 'Pause' : 'Play'}
           disabled={audioLoading}
+          style={{ position: 'relative' }}
         >
-          {isPlaying ? <PauseIcon /> : <PlayIcon />}
+          {audioLoading ? (
+            <div style={{ 
+              width: '14px', 
+              height: '14px', 
+              border: '2px solid currentColor', 
+              borderTop: '2px solid transparent', 
+              borderRadius: '50%', 
+              animation: 'spin 1s linear infinite' 
+            }} />
+          ) : isPlaying ? <PauseIcon /> : <PlayIcon />}
         </button>
         <button
           className={styles.control}
@@ -164,7 +192,20 @@ const AppleMusicPlayer: FC<AppleMusicPlayerProps> = ({ showPlaylist = false }) =
             className={styles.serviceControl}
             aria-label="Open in Apple Music"
           >
-            <img src="/apple%20button.png" alt="Apple Music" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            <img 
+              src="/apple%20button.png" 
+              alt="Apple Music" 
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+              onError={(e) => {
+                // Fallback for mobile image loading issues
+                const target = e.target as HTMLImageElement
+                target.style.display = 'none'
+                const parent = target.parentElement
+                if (parent) {
+                  parent.innerHTML = '<span style="font-size: 12px; color: #fc3c44;">Apple</span>'
+                }
+              }}
+            />
           </a>
         ) : (
           <button
@@ -172,7 +213,20 @@ const AppleMusicPlayer: FC<AppleMusicPlayerProps> = ({ showPlaylist = false }) =
             className={`${styles.serviceControl} opacity-50 cursor-not-allowed`}
             aria-label="Open in Apple Music"
           >
-            <img src="/apple%20button.png" alt="Apple Music" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            <img 
+              src="/apple%20button.png" 
+              alt="Apple Music" 
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+              onError={(e) => {
+                // Fallback for mobile image loading issues
+                const target = e.target as HTMLImageElement
+                target.style.display = 'none'
+                const parent = target.parentElement
+                if (parent) {
+                  parent.innerHTML = '<span style="font-size: 12px; color: #fc3c44; opacity: 0.5;">Apple</span>'
+                }
+              }}
+            />
           </button>
         )}
       </div>
