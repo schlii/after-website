@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-// Simple mobile detection regex (iOS, Android, etc.)
-const mobileRegex = /iphone|ipod|ipad|android|blackberry|bb10|mini|windows\sce|palm/i
+// Broader device detection regex to include common mobile & tablet user-agents.
+// Covers: Android phones/tablets, iOS devices, Kindle/Silk, Windows Phone, Opera Mini/Mobi, Blackberry, etc.
+const mobileRegex = /android|webos|iphone|ip(ad|od)|blackberry|bb10|playbook|kindle|silk|opera mini|opera mobi|iemobile|windows phone|mobile/i
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl

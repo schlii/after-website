@@ -1,4 +1,14 @@
 import React from 'react'
+import type { Metadata } from 'next'
+
+// Add canonical link for /mobile pages to avoid duplicate content issues
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? ''
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: siteUrl ? `${siteUrl.replace(/\/$/, '')}/mobile` : '/mobile',
+  },
+}
 
 // Disable ISR so that presentation overlays and fresh content work as on desktop
 export const revalidate = 0
