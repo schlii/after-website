@@ -133,7 +133,7 @@ const AppleMusicPlayer: FC<AppleMusicPlayerProps> = ({ showPlaylist = false }) =
           aria-label="Open in Spotify"
         >
           <img 
-            src="/spotify-button.png" 
+            src="/spotify-button.png?v=1" 
             alt="Spotify" 
             style={{ width: '100%', height: '100%', objectFit: 'contain' }}
             onError={(e) => {
@@ -193,7 +193,7 @@ const AppleMusicPlayer: FC<AppleMusicPlayerProps> = ({ showPlaylist = false }) =
             aria-label="Open in Apple Music"
           >
             <img 
-              src="/apple-button.png" 
+              src="/apple-button.png?v=1" 
               alt="Apple Music" 
               style={{ width: '100%', height: '100%', objectFit: 'contain' }}
               onError={(e) => {
@@ -214,7 +214,7 @@ const AppleMusicPlayer: FC<AppleMusicPlayerProps> = ({ showPlaylist = false }) =
             aria-label="Open in Apple Music"
           >
             <img 
-              src="/apple-button.png" 
+              src="/apple-button.png?v=1" 
               alt="Apple Music" 
               style={{ width: '100%', height: '100%', objectFit: 'contain' }}
               onError={(e) => {

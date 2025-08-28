@@ -92,6 +92,12 @@
   color: #c9d6ff;
 }
 
+/* Remove gradient / blur masks behind heading and nav */
+.siteHeading::before,
+.siteNav::before {
+  content: none !important;
+}
+
 .siteFooter {
   width: clamp(320px, 80vmin, 1024px);
   margin: 0.75rem auto 1rem;
