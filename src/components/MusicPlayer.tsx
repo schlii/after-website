@@ -246,7 +246,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ className }) => {
             className="p-2 text-gray-400 hover:text-white transition-colors"
             aria-label="Open in Spotify"
           >
-            <Image src="/spotify-button.png" alt="Spotify" width={40} height={40} className="w-full h-full object-contain" />
+            <Image src="/spotify-button.png" alt="Spotify" width={40} height={40} className="w-full h-full object-contain" unoptimized />
           </a>
         ) : (
           <button
@@ -254,7 +254,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ className }) => {
             className={`${styles.serviceControl} opacity-50 cursor-not-allowed`}
             aria-label="Open in Spotify"
           >
-            <Image src="/spotify-button.png" alt="Spotify" width={40} height={40} className="w-full h-full object-contain" />
+            <Image src="/spotify-button.png" alt="Spotify" width={40} height={40} className="w-full h-full object-contain" unoptimized />
           </button>
         )}
 
@@ -308,7 +308,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ className }) => {
             className="p-2 text-gray-400 hover:text-white transition-colors"
             aria-label="Open in Apple Music"
           >
-            <Image src="/apple-button.png" alt="Apple Music" width={40} height={40} className="w-full h-full object-contain" />
+            <Image src="/apple-button.png" alt="Apple Music" width={40} height={40} className="w-full h-full object-contain" unoptimized />
           </a>
         ) : (
           <button
@@ -316,7 +316,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ className }) => {
             className={`${styles.serviceControl} opacity-50 cursor-not-allowed`}
             aria-label="Open in Apple Music"
           >
-            <Image src="/apple-button.png" alt="Apple Music" width={40} height={40} className="w-full h-full object-contain" />
+            <Image src="/apple-button.png" alt="Apple Music" width={40} height={40} className="w-full h-full object-contain" unoptimized />
           </button>
         )}
       </div>
