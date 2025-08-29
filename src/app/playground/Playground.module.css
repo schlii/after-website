@@ -132,6 +132,27 @@
   z-index: -1;
 }
 
+/* Image fit modifiers */
+.panelImageCover {
+  object-fit: cover;
+}
+
+.panelImageContain {
+  object-fit: contain;
+}
+
+.panelImageFill {
+  object-fit: fill;
+}
+
+.panelImageScaleDown {
+  object-fit: scale-down;
+}
+
+.panelImageNone {
+  object-fit: none;
+}
+
 /* Modifier: tune glow for image-background panels */
 .panelImageVariant {
   --panel-glow-blur: 2cqw;
@@ -174,8 +195,7 @@
 
 .tourLine1 {
   margin: 0;
-  text-transform: uppercase;
-  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  font-size: clamp(0.7rem, 1.5vw, 2rem);
   opacity: 0.8;
 }
 

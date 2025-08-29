@@ -6,6 +6,11 @@ const uaMobileRegex = /android|webos|iphone|ip(ad|od)|blackberry|bb10|playbook|k
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
+  // Skip obvious static asset requests (files containing a dot, e.g. .png, .js, .css)
+  if (pathname.includes('.')) {
+    return NextResponse.next()
+  }
+
   // Skip middleware for assets, API routes, and already-mobile paths
   if (pathname.startsWith('/mobile') || pathname.startsWith('/_next') || pathname.startsWith('/api')) {
     return NextResponse.next()

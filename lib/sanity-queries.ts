@@ -77,7 +77,11 @@ export const globalQuery = groq`
 // Home Page
 export const homeQuery = groq`
   *[_type == "home"][0] {
-    heroImage,
+    heroImage {
+      asset,
+      alt,
+      fitMode
+    },
     heroHeading,
     heroSubheading
   }

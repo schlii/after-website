@@ -17,6 +17,23 @@ export default defineType({
           type: 'string',
           validation: Rule => Rule.required(),
         },
+        {
+          name: 'fitMode',
+          title: 'Image Fit Mode',
+          type: 'string',
+          description: 'How the image should fit within the hero panel',
+          options: {
+            list: [
+              { title: 'Cover (default)', value: 'cover' },
+              { title: 'Contain', value: 'contain' },
+              { title: 'Fill (stretch)', value: 'fill' },
+              { title: 'Scale Down', value: 'scale-down' },
+              { title: 'None', value: 'none' }
+            ],
+            layout: 'dropdown'
+          },
+          initialValue: 'cover'
+        },
       ],
       validation: Rule => Rule.required(),
     }),

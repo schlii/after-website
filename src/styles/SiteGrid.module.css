@@ -3,7 +3,7 @@
 
 .tourLine1 {
   margin: 0;
-  text-transform: uppercase;
+  text-transform: none;
   font-size: clamp(1rem, 2vw, 1.2rem);
   color: #000000;
   font-family: 'PixdorTwo', var(--font-mono);
@@ -96,6 +96,37 @@
 .siteHeading::before,
 .siteNav::before {
   content: none !important;
+}
+
+/* Base panel image style */
+.panelImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* Image fit modifiers for hero image */
+.panelImageCover {
+  object-fit: cover;
+}
+
+.panelImageContain {
+  object-fit: contain;
+}
+
+.panelImageFill {
+  object-fit: fill;
+}
+
+.panelImageScaleDown {
+  object-fit: scale-down;
+}
+
+.panelImageNone {
+  object-fit: none;
 }
 
 .siteFooter {

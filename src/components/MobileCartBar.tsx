@@ -4,7 +4,7 @@ import { useCart } from '@/contexts/CartContext'
 import { usePathname } from 'next/navigation'
 import css from '@/components/ContactForm.module.css'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import styles from '@/app/mobile/MobilePage.module.css'
 import site from '@/styles/SiteGrid.module.css'
@@ -17,18 +17,66 @@ export default function MobileCartBar () {
   }
 
   const { items, checkoutUrl, updateQuantity, removeItem } = useCart()
+
+  // Detect desktop viewport (min-width 1024px)
+  const [isDesktop, setIsDesktop] = useState(false)
+
+  useEffect(() => {
+    const mql = window.matchMedia('(min-width: 1024px)')
+    const handleMatch = (e: MediaQueryList | MediaQueryListEvent) => {
+      // `matches` exists on both initial MediaQueryList and events
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+      setIsDesktop(('matches' in e ? e.matches : (e as MediaQueryList).matches))
+    }
+    handleMatch(mql)
+    // Newer browsers
+    mql.addEventListener?.('change', handleMatch)
+    return () => {
+      mql.removeEventListener?.('change', handleMatch)
+    }
+  }, [])
+
   const [open, setOpen] = useState(false)
   const toggle = () => setOpen(!open)
 
-  const barHeight = open ? '60vh' : '56px'
+  const barHeight = open ? '60vh' : '56px' // mobile default
+
+  const commonStyles: React.CSSProperties = {
+    background: '#dfe4ea',
+    border: '1px solid #8d96a0',
+    boxShadow: '0 -2px 4px rgba(0,0,0,0.2)',
+    transition: 'height 0.3s ease',
+    zIndex: 2000,
+    display: 'flex',
+    flexDirection: 'column'
+  }
+
+  const containerStyle: React.CSSProperties = isDesktop
+    ? {
+        ...commonStyles,
+        position: 'fixed',
+        right: '20px',
+        bottom: 0,
+        width: '360px',
+        height: open ? 'auto' : '56px',
+        maxHeight: '60vh',
+        borderTopLeftRadius: '8px',
+        borderTopRightRadius: '8px',
+        overflow: 'hidden',
+        transition: 'max-height 0.3s ease, height 0.3s ease'
+      }
+    : {
+        ...commonStyles,
+        position: 'fixed',
+        left: 0,
+        bottom: 0,
+        width: '100%',
+        height: barHeight,
+        borderTop: '1px solid #8d96a0'
+      }
 
   return (
-    <div
-      style={{
-        position:'fixed', left:0, bottom:0, width:'100%', height:barHeight,
-        background:'#dfe4ea', borderTop:'1px solid #8d96a0', boxShadow:'0 -2px 4px rgba(0,0,0,0.2)', transition:'height 0.3s ease', zIndex:2000,
-        display:'flex', flexDirection:'column'
-      }}>
+    <div style={containerStyle}>
       {/* toggle button */}
       <div style={{padding:'8px 4px 4px', display:'flex', justifyContent:'center'}}>
         <button className={css.sendBtn} style={{width:'140px'}} onClick={toggle}>

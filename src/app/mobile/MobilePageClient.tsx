@@ -17,12 +17,13 @@ import MobileCartBar from '@/components/MobileCartBar'
 interface Props {
   heroImageUrl?: string | null
   heroImageAlt?: string | null
+  tourHeading?: string | null
   tourDates: TourDateEntry[] | null
   merch: PlainProduct[]
   aboutText: string[]
 }
 
-const MobilePageClient: React.FC<Props> = ({ heroImageUrl, heroImageAlt, tourDates, merch, aboutText }) => {
+const MobilePageClient: React.FC<Props> = ({ heroImageUrl, heroImageAlt, tourHeading, tourDates, merch, aboutText }) => {
   return (
     <>
     <main className={styles.container}>
@@ -42,7 +43,7 @@ const MobilePageClient: React.FC<Props> = ({ heroImageUrl, heroImageAlt, tourDat
       {/* Tour Dates */}
       <div className={`${styles.mobilePanel} ${styles.mobilePanelGray}`}>
         <div className={`${site.panelBox} ${styles.grainBox}`}>
-          <h2 className={styles.sectionHeading}>tour w/ kitty craft</h2>
+          <h2 className={styles.sectionHeading}>{tourHeading || 'upcoming tour'}</h2>
           <TourDatesPanel dates={tourDates} compact />
         </div>
       </div>

@@ -6,7 +6,7 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: process.env.NODE_ENV === 'production',
+  useCdn: false, // Temporarily disable CDN to test fitMode changes
   token: process.env.SANITY_API_WRITE_TOKEN,
   stega: {
     enabled: process.env.NODE_ENV !== 'production',

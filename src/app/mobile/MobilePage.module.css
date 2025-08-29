@@ -42,8 +42,12 @@
 
 .heroImage {
   width: 100%;
-  height: auto;
+  /* enforce square container */
+  aspect-ratio: 1 / 1;
+  /* fit whole image inside without cropping */
+  object-fit: contain;
   border-radius: 8px;
+  display: block;
 }
 
 .tourSection {
@@ -137,6 +141,7 @@
   font-size: 1.25rem;
   text-align: center;
   margin: 0.25rem 0 0.75rem;
-  text-transform: lowercase;
   color: #000000;
+  text-transform: none;
 }
+

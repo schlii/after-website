@@ -140,6 +140,7 @@ const AppleMusicPlayer: FC<AppleMusicPlayerProps> = ({ showPlaylist = false }) =
             height={40}
             style={{ objectFit: 'contain', width: '100%', height: '100%' }}
             priority
+            unoptimized
           />
         </a>
 
@@ -194,6 +195,7 @@ const AppleMusicPlayer: FC<AppleMusicPlayerProps> = ({ showPlaylist = false }) =
               height={40}
               style={{ objectFit: 'contain', width: '100%', height: '100%' }}
               priority
+              unoptimized
             />
           </a>
         ) : (
@@ -209,6 +211,7 @@ const AppleMusicPlayer: FC<AppleMusicPlayerProps> = ({ showPlaylist = false }) =
               height={40}
               style={{ objectFit: 'contain', width: '100%', height: '100%' }}
               priority
+              unoptimized
             />
           </button>
         )}

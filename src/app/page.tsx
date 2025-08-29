@@ -1,4 +1,5 @@
 import React from 'react'
+import { stegaClean } from 'next-sanity'
 // Disable ISR on this page so that Sanity Presentation overlays work correctly
 export const revalidate = 0
 import { SiteGridLayout } from '@/components/SiteGridLayout'
@@ -20,7 +21,12 @@ interface TourDate {
 }
 
 interface HomePageData {
-  heroImage: any
+  heroImage: {
+    _type: 'image'
+    asset: any
+    alt?: string
+    fitMode?: 'cover' | 'contain' | 'fill' | 'scale-down' | 'none'
+  }
   heroHeading?: string
   heroSubheading?: string
 }
@@ -31,6 +37,24 @@ export default async function HomePage() {
     fetchSanityDocument<{ introHeading?: string }>(tourQuery),
     fetchSanityDocuments<TourDate>(`${tourDatesQuery} | order(date asc)`),
   ])
+
+  // Map fit mode to CSS class after stripping zero-width stega characters
+  const getFitModeClass = (rawFit?: string) => {
+    const fitMode = stegaClean(rawFit || 'cover') as string
+
+    switch (fitMode) {
+      case 'contain':
+        return styles.panelImageContain
+      case 'fill':
+        return styles.panelImageFill
+      case 'scale-down':
+        return styles.panelImageScaleDown
+      case 'none':
+        return styles.panelImageNone
+      default:
+        return styles.panelImageCover
+    }
+  }
 
   return (
     <SiteGridLayout>
@@ -45,7 +69,7 @@ export default async function HomePage() {
           <img
             src={urlFor(homeData.heroImage).width(1024).height(800).url()}
             alt={homeData.heroImage.alt || 'Hero'}
-            className={styles.panelImage}
+            className={`${styles.panelImage} ${getFitModeClass(homeData.heroImage.fitMode)}`}
           />
         )}
         <section className={`${styles.panelCommon} ${styles.panelImageVariant} ${styles.hero}`}>
