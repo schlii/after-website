@@ -1,0 +1,48 @@
+/* HeroSection.module.css */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroImage {
+  object-fit: cover;
+  transition: filter 0.3s ease;
+}
+
+.hero:hover .heroImage {
+  filter: blur(4px) brightness(50%);
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  transition: background 0.3s ease;
+}
+
+.hero:hover .heroOverlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.altText {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-family: var(--font-aeonik-pro, "Aeonik Pro", sans-serif);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  text-align: center;
+}
+
+.hero:hover .altText {
+  opacity: 1;
+}

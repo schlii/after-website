@@ -1,5 +1,6 @@
 import { type FC, type ReactNode } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import styles from '@/styles/SiteGrid.module.css'
 
 interface SiteGridLayoutProps {
@@ -20,7 +21,16 @@ interface SiteGridLayoutProps {
 export const SiteGridLayout: FC<SiteGridLayoutProps> = ({ children }) => {
   return (
     <main className={styles.pageWrapper}>
-      <header className={styles.siteHeading}>After</header>
+      <header className={styles.siteHeading}>
+        <Image
+          src="/after-heading-vec-black.svg"
+          alt="After logo"
+          width={1024}
+          height={200}
+          priority
+          className={styles.siteHeadingImage}
+        />
+      </header>
       <div className={styles.siteContainer}>{children}</div>
       <nav className={styles.siteNav}>
         <ul className={styles.navLinks}>

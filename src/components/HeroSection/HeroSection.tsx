@@ -1,4 +1,5 @@
 import { type FC } from 'react'
+import styles from './HeroSection.module.css'
 import Image from 'next/image'
 import { type SiteSettings } from '../../../types/sanity'
 import { urlFor } from '@/sanity/lib/image'
@@ -12,7 +13,7 @@ export const HeroSection: FC<HeroSectionProps> = ({ siteSettings }) => {
   const socialEntries = socialLinks ? Object.entries(socialLinks).filter(([_, url]) => url) : []
 
   return (
-    <section className="relative h-screen flex items-center justify-center">
+    <section className={styles.hero}>
       {/* Background Image */}
       {siteSettings?.heroImage && (
         <div className="absolute inset-0 z-0">
@@ -20,11 +21,18 @@ export const HeroSection: FC<HeroSectionProps> = ({ siteSettings }) => {
             src={urlFor(siteSettings.heroImage).url()}
             alt="After Band Hero"
             fill
-            className="object-cover"
+            className={styles.heroImage}
             priority
           />
-          <div className="absolute inset-0 bg-black/50" /> {/* Overlay */}
+          <div className={styles.heroOverlay} /> {/* Overlay */}
         </div>
+      )}
+      {siteSettings?.heroImage?.alt && (
+        <span
+          className={styles.altText}
+        >
+          {siteSettings.heroImage.alt}
+        </span>
       )}
 
       {/* Content */}

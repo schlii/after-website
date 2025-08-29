@@ -13,14 +13,17 @@
 .siteHeading {
   width: clamp(320px, 80vmin, 1024px);
   margin: 0.25rem auto 1rem;
-  font-family: var(--font-sans);
-  font-weight: 700;
-  font-size: 6rem;
-  line-height: 1;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
-  color: rgba(255,255,255,1);
   z-index: 0;
+}
+
+.siteHeadingImage {
+  height: clamp(40px, 8vmin, 120px); /* Responsive to viewport height */
+  width: auto;
+  object-fit: contain;
 }
 
 .siteHeading::before {
@@ -98,6 +101,16 @@
   content: none !important;
 }
 
+/* Hide playground development grid outline/background */
+.siteContainer {
+  background: transparent !important;
+  outline: none !important;
+}
+
+.siteContainer::before {
+  content: none !important;
+}
+
 /* Base panel image style */
 .panelImage {
   position: absolute;
@@ -105,6 +118,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: filter 0.3s ease;
   z-index: -1;
 }
 
@@ -127,6 +141,36 @@
 
 .panelImageNone {
   object-fit: none;
+}
+
+/* ───── Hero hover effects ───── */
+.heroWrapper {
+  position: relative;
+}
+
+.heroWrapper:hover .panelImage {
+  filter: blur(4px) brightness(50%);
+}
+
+.heroAltText {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-family: var(--font-sans, "Aeonik Pro", sans-serif);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  text-align: center;
+  z-index: 1;
+}
+
+.heroWrapper:hover .heroAltText {
+  opacity: 1;
 }
 
 .siteFooter {

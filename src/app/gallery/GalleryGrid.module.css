@@ -71,3 +71,26 @@
 .arrowNext::before {
   transform: rotate(45deg);
 }
+
+.thumbArrowLeft,
+.thumbArrowRight {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.8rem;
+  line-height: 1;
+  z-index: 4;
+}
+
+.thumbArrowLeft { left: -3.5rem; }
+.thumbArrowRight { right: -3.5rem; }

@@ -64,13 +64,17 @@ export default async function HomePage() {
 
       {/* Hero Panel */}
       <div className={styles.heroWrapper}>
-        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
         {homeData?.heroImage && (
-          <img
-            src={urlFor(homeData.heroImage).width(1024).height(800).url()}
-            alt={homeData.heroImage.alt || 'Hero'}
-            className={`${styles.panelImage} ${getFitModeClass(homeData.heroImage.fitMode)}`}
-          />
+          <>
+            <img
+              src={urlFor(homeData.heroImage).width(1024).height(800).url()}
+              alt={homeData.heroImage.alt || 'Hero'}
+              className={`${styles.panelImage} ${getFitModeClass(homeData.heroImage.fitMode)}`}
+            />
+            {homeData.heroImage.alt && (
+              <span className={styles.heroAltText}>{homeData.heroImage.alt}</span>
+            )}
+          </>
         )}
         <section className={`${styles.panelCommon} ${styles.panelImageVariant} ${styles.hero}`}>
           <h2>{homeData?.heroHeading || 'Hero Area'}</h2>
