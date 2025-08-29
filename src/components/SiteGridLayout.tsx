@@ -29,6 +29,7 @@ export const SiteGridLayout: FC<SiteGridLayoutProps> = ({ children }) => {
             { href: '/tour', label: 'tour' },
             { href: '/merch', label: 'merch' },
             { href: '/music', label: 'music' },
+            { href: '/gallery', label: 'gallery' },
             { href: '/contact', label: 'contact' },
             { href: '/about', label: 'about' },
           ].map(({ href, label }) => (

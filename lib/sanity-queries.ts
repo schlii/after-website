@@ -152,3 +152,13 @@ export const bandInfoQuery = groq`
     bio2
   }
 `
+
+export const galleryQuery = groq`
+  *[_type == "gallery"][0] {
+    images[] {
+      asset,
+      alt,
+      fitMode
+    }
+  }
+`

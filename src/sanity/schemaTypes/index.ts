@@ -9,6 +9,7 @@ import merchPage from './merch-page'
 import tourPage from './tour-page'
 import contactPage from './contact-page'
 import musicPage from './music-page'
+import galleryPage from './gallery-page'
 import appleMusicSettings from './apple-music-settings'
 import user from './user'
 import youtube from './youtube'
@@ -24,6 +25,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     tourPage,
     contactPage,
     musicPage,
+    galleryPage,
     appleMusicSettings,
     user,
     youtube,
