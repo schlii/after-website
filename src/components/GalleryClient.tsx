@@ -4,6 +4,7 @@ import { useState, FC } from 'react'
 import styles from '@/styles/SiteGrid.module.css'
 import grid from '@/app/gallery/GalleryGrid.module.css'
 import { urlFor } from '@/sanity/lib/image'
+import playerStyles from '@/components/AppleMusicPlayer.module.css'
 
 interface GalleryImage {
   asset: any
@@ -31,10 +32,11 @@ export const GalleryClient: FC<GalleryClientProps> = ({ images }) => {
   const maxPage = Math.max(0, Math.ceil(total / pageSize) - 1)
   const currentPage = Math.floor(currentOffset / pageSize)
 
-  const pageSlice = images.slice(currentOffset, currentOffset + pageSize)
-  // Duplicate fill logic
-  while (pageSlice.length < pageSize && pageSlice.length > 0) {
-    pageSlice.push(pageSlice[0])
+  // Build slice of exactly 4 thumbnails, wrapping around gallery length
+  const pageSlice: GalleryImage[] = []
+  for (let i = 0; i < pageSize; i++) {
+    const idx = (currentOffset + i) % total
+    pageSlice.push(images[idx])
   }
 
   const goPrev = () => {
@@ -116,8 +118,28 @@ export const GalleryClient: FC<GalleryClientProps> = ({ images }) => {
 
       {total > pageSize && (
         <>
-          <button className={grid.arrowPrev} aria-label="Previous" onClick={goPrev} />
-          <button className={grid.arrowNext} aria-label="Next" onClick={goNext} />
+          <button
+            className={`${playerStyles.control} ${grid.arrowPrev}`}
+            aria-label="Previous"
+            onClick={goPrev}
+            style={{ position: 'absolute', left: '11cqw', top: '36rem', transform: 'translateY(-50%)' }}
+          >
+            <svg width="14" height="16" viewBox="0 0 14 16" fill="currentColor" aria-hidden="true">
+              <polygon points="14,0 6,8 14,16" />
+              <rect x="0" y="0" width="2" height="16" />
+            </svg>
+          </button>
+          <button
+            className={`${playerStyles.control} ${grid.arrowNext}`}
+            aria-label="Next"
+            onClick={goNext}
+            style={{ position: 'absolute', right: '11cqw', top: '36rem', transform: 'translateY(-50%)' }}
+          >
+            <svg width="14" height="16" viewBox="0 0 14 16" fill="currentColor" aria-hidden="true">
+              <polygon points="0,0 8,8 0,16" />
+              <rect x="12" y="0" width="2" height="16" />
+            </svg>
+          </button>
         </>
       )}
     </>

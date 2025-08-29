@@ -31,21 +31,25 @@
 .arrowPrev,
 .arrowNext {
   position: absolute;
-  top: 32.5rem; /* adjust if needed */
+  top: 33.5rem; /* roughly center of thumbnail row */
+  transform: translateY(-50%);
   width: 2.5rem;
   height: 2.5rem;
-  background: rgba(255, 255, 255, 0.15);
-  border: 2px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid #ffffffaa;
   cursor: pointer;
-  z-index: 2;
+  z-index: 3;
 }
 
 .arrowPrev {
-  left: 1rem;
+  left: 2cqw;
 }
 
 .arrowNext {
-  right: 1rem;
+  right: 2cqw;
 }
 
 .arrowPrev::before,
