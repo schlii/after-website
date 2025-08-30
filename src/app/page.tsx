@@ -67,6 +67,9 @@ export default async function HomePage() {
         <CartToggleButton />
       </div>
 
+      {/* Mobile banner above hero */}
+      <img src="/outboundgif.gif" alt="" className={styles.mobileBanner} />
+
       {/* Hero Panel */}
       <div className={styles.heroWrapper}>
         {homeData?.heroImage && (

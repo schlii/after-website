@@ -214,3 +214,18 @@
   content: '';
 }
 */
+
+@media (max-width: 768px) {
+  .mobileBanner {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobileBanner {
+    display: none;
+  }
+}
