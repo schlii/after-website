@@ -17,11 +17,11 @@ interface CircleGroupConfig {
 }
 
 const circleGroups: CircleGroupConfig[] = [
-  { id: 1, rows: 3, cols: 12, size: 8, opacity: 0.5, duration: 25, delay: 0, direction: 'right', yOffset: 15, style: 'filled' },
+  { id: 1, rows: 3, cols: 12, size: 8, opacity: 0.5, duration: 25, delay: 0, direction: 'right', yOffset: 5, style: 'filled' },
   { id: 2, rows: 6, cols: 8, size: 14, opacity: 0.4, duration: 30, delay: 5, direction: 'left', yOffset: 40, style: 'outline', strokeWidth: 2 },
   { id: 3, rows: 4, cols: 10, size: 6, opacity: 0.7, duration: 20, delay: 8, direction: 'right', yOffset: 70, style: 'filled' },
   { id: 4, rows: 8, cols: 6, size: 12, opacity: 0.45, duration: 35, delay: 12, direction: 'left', yOffset: 25, style: 'outline', strokeWidth: 1.5 },
-  { id: 5, rows: 2, cols: 15, size: 10, opacity: 0.6, duration: 28, delay: 15, direction: 'right', yOffset: 60, style: 'outline', strokeWidth: 1 },
+  { id: 5, rows: 2, cols: 15, size: 10, opacity: 0.6, duration: 28, delay: 15, direction: 'right', yOffset: 90, style: 'outline', strokeWidth: 1 },
 ]
 
 interface GroupWithSeed extends CircleGroupConfig { seed: number }
@@ -65,8 +65,11 @@ const CircleOverlay: React.FC = () => {
     const groupWidth = group.cols * spacing + 40
     const groupHeight = group.rows * spacing + 40
 
-    const maxTop = Math.max(0, windowSize.h - groupHeight)
-    const topPix = group.seed * maxTop
+    // Position vertically based on the yOffset percentage.
+    // yOffset = 0   → start completely above the viewport
+    // yOffset = 50  → centred vertically
+    // yOffset = 100 → end completely below the viewport
+    const topPix = (group.yOffset / 100) * windowSize.h - groupHeight / 2
     const startX = group.direction === 'right' ? -groupWidth : windowSize.w + 50
     const endX = group.direction === 'right' ? windowSize.w + 50 : -groupWidth
 

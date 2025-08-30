@@ -4,12 +4,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* Scalable site container adhering to 1024 × 800 mock-up */
 .siteContainer {
-  width: clamp(320px, 80vmin, 1024px);
+  width: clamp(320px, 80vw, 1024px);
   aspect-ratio: 1024 / 800;
 
   /* Enable container query units so internal gaps scale with width */

@@ -41,7 +41,6 @@ export const SiteGridLayout: FC<SiteGridLayoutProps> = ({ children }) => {
             { href: '/music', label: 'music' },
             { href: '/gallery', label: 'gallery' },
             { href: '/contact', label: 'contact' },
-            { href: '/about', label: 'about' },
           ].map(({ href, label }) => (
             <li key={label}>
               <Link href={href} className={styles.navLink} prefetch>
