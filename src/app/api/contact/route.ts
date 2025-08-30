@@ -1,53 +1,52 @@
 import { NextResponse } from 'next/server'
-import nodemailer from 'nodemailer'
-import { contactFormSchema } from 'lib/contactValidation'
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json()
-    const parseResult = contactFormSchema.safeParse(body)
-    if (!parseResult.success) {
+    const { name, email, message } = await req.json()
+    if (!name || !email || !message) {
       return NextResponse.json(
-        { success: false, error: { code: 'VALIDATION_ERROR', message: 'Invalid input' } },
+        { success: false, error: { code: 'INVALID_INPUT', message: 'Missing required fields' } },
         { status: 400 }
       )
     }
 
-    const { name, email, subject, message } = parseResult.data
-
-    // Ensure required SMTP env vars are provided
-    const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, CONTACT_TO_EMAIL } = process.env as Record<string, string | undefined>
-
-    if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !CONTACT_TO_EMAIL) {
-      console.error('Missing SMTP configuration environment variables')
+    const apiKey = process.env.RESEND_API_KEY
+    if (!apiKey) {
+      console.error('Missing RESEND_API_KEY')
       return NextResponse.json(
         { success: false, error: { code: 'CONFIG_ERROR', message: 'Email service not configured' } },
         { status: 500 }
       )
     }
 
-    const transporter = nodemailer.createTransport({
-      host: SMTP_HOST,
-      port: Number(SMTP_PORT),
-      secure: Number(SMTP_PORT) === 465, // true for 465, false for other ports
-      auth: {
-        user: SMTP_USER,
-        pass: SMTP_PASS,
+    const resendResp = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`,
       },
+      body: JSON.stringify({
+        from: 'website@after.band',
+        to: 'support@after.band',
+        subject: `Website contact from ${name}`,
+        text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
+      }),
     })
 
-    await transporter.sendMail({
-      from: email,
-      to: CONTACT_TO_EMAIL,
-      subject: `[Band Website] ${subject}`,
-      text: `Name: ${name}\nEmail: ${email}\n\n${message}`,
-    })
+    if (!resendResp.ok) {
+      const errorText = await resendResp.text()
+      console.error('Resend API error', resendResp.status, errorText)
+      return NextResponse.json(
+        { success: false, error: { code: 'EMAIL_FAIL', message: 'Failed to send email' } },
+        { status: 502 }
+      )
+    }
 
     return NextResponse.json({ success: true })
   } catch (err) {
-    console.error('Contact form submission failed', err)
+    console.error('Contact form error', err)
     return NextResponse.json(
-      { success: false, error: { code: 'SERVER_ERROR', message: 'Failed to send message' } },
+      { success: false, error: { code: 'SERVER_ERROR', message: 'Internal server error' } },
       { status: 500 }
     )
   }

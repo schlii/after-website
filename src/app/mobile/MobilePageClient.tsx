@@ -13,6 +13,7 @@ import type { PlainProduct } from '../../../types/PlainProduct'
 import type { TourDateEntry } from '@/components/TourDatesPanel'
 import MobileMerchCarousel from '@/components/MobileMerchCarousel'
 import MobileCartBar from '@/components/MobileCartBar'
+import MobileGalleryCarousel from '@/components/MobileGalleryCarousel'
 
 interface Props {
   heroImageUrl?: string | null
@@ -21,9 +22,10 @@ interface Props {
   tourDates: TourDateEntry[] | null
   merch: PlainProduct[]
   aboutText: string[]
+  galleryImages: any[]
 }
 
-const MobilePageClient: React.FC<Props> = ({ heroImageUrl, heroImageAlt, tourHeading, tourDates, merch, aboutText }) => {
+const MobilePageClient: React.FC<Props> = ({ heroImageUrl, heroImageAlt, tourHeading, tourDates, merch, aboutText, galleryImages }) => {
   return (
     <>
     <main className={styles.container}>
@@ -47,6 +49,11 @@ const MobilePageClient: React.FC<Props> = ({ heroImageUrl, heroImageAlt, tourHea
           <TourDatesPanel dates={tourDates} compact />
         </div>
       </div>
+
+      {/* Gallery Carousel */}
+      {galleryImages?.length ? (
+        <MobileGalleryCarousel images={galleryImages} />
+      ) : null}
 
       {/* Merch */}
       <div className={styles.mobilePanel}>
