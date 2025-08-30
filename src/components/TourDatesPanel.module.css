@@ -69,7 +69,7 @@
 
 .tix {
   flex: none;
-  width: 130px;
+  width: 100px;
   text-align: center;
   background: #8c949b;
   border: 1px solid #a3abb2;
@@ -119,5 +119,5 @@
 
 .compact .tix {
   font-size: 0.8rem;
-  width: 90px; /* reduced width for mobile to allow more capsule space */
+  width: 80px; /* reduced width for mobile to allow more capsule space */
 }

@@ -13,6 +13,9 @@ import galleryPage from './gallery-page'
 import appleMusicSettings from './apple-music-settings'
 import user from './user'
 import youtube from './youtube'
+import newsPage from './news-page'
+import textColor from './text-color'
+import textAlign from './text-align'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -27,6 +30,9 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     musicPage,
     galleryPage,
     appleMusicSettings,
+    textColor,
+    textAlign,
+    newsPage,
     user,
     youtube,
   ],

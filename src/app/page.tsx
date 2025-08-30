@@ -6,8 +6,8 @@ import { SiteGridLayout } from '@/components/SiteGridLayout'
 import styles from '@/styles/SiteGrid.module.css'
 import CartToggleButton from '@/components/CartToggleButton'
 import AppleMusicPlayerClient from '@/components/AppleMusicPlayerClient'
-import { homeQuery, tourQuery, tourDatesQuery } from 'lib/sanity-queries'
-import TourDatesPanel from '@/components/TourDatesPanel'
+import { homeQuery, tourQuery, tourDatesQuery, newsPageQuery } from 'lib/sanity-queries'
+import TabbedInfoPanel from '@/components/TabbedInfoPanel'
 import { fetchSanityDocuments, fetchSanityDocument } from 'lib/sanity-fetch'
 import { urlFor } from '@/sanity/lib/image'
 
@@ -26,16 +26,21 @@ interface HomePageData {
     asset: any
     alt?: string
     fitMode?: 'cover' | 'contain' | 'fill' | 'scale-down' | 'none'
+    linkUrl?: string
+  }
+  heroHoverGif?: {
+    asset: any
   }
   heroHeading?: string
   heroSubheading?: string
 }
 
 export default async function HomePage() {
-  const [ { data: homeData }, { data: tourData }, { data: tourDates } ] = await Promise.all([
+  const [ { data: homeData }, { data: tourData }, { data: tourDates }, { data: newsPage } ] = await Promise.all([
     fetchSanityDocument<HomePageData>(homeQuery),
     fetchSanityDocument<{ introHeading?: string }>(tourQuery),
     fetchSanityDocuments<TourDate>(`${tourDatesQuery} | order(date asc)`),
+    fetchSanityDocument<{ panelHeading?: string; panelContent: any }>(newsPageQuery),
   ])
 
   // Map fit mode to CSS class after stripping zero-width stega characters
@@ -71,8 +76,21 @@ export default async function HomePage() {
               alt={homeData.heroImage.alt || 'Hero'}
               className={`${styles.panelImage} ${getFitModeClass(homeData.heroImage.fitMode)}`}
             />
-            {homeData.heroImage.alt && (
-              <span className={styles.heroAltText}>{homeData.heroImage.alt}</span>
+            {homeData.heroHoverGif && (
+              <img
+                src={urlFor(homeData.heroHoverGif).url()}
+                alt=""
+                className={styles.hoverGif}
+              />
+            )}
+
+            {homeData.heroImage.linkUrl && (
+              <a
+                href={homeData.heroImage.linkUrl}
+                target="_blank"
+                rel="noreferrer"
+                className={styles.heroLink}
+              />
             )}
           </>
         )}
@@ -84,10 +102,7 @@ export default async function HomePage() {
       {/* Tour info panel */}
       <section className={`${styles.panelCommon} ${styles.panel}`}>
         <div className={`${styles.panelBox} ${styles.tourBox}`}>
-          <header className={styles.tourHeader}>
-            <p className={styles.tourLine1}>{tourData?.introHeading || 'upcoming tour'}</p>
-          </header>
-          <TourDatesPanel dates={tourDates} compact />
+          <TabbedInfoPanel tourDates={tourDates} newsRich={newsPage?.panelContent || null} compact />
         </div>
       </section>
 

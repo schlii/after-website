@@ -29,8 +29,8 @@ const MobilePageClient: React.FC<Props> = ({ heroImageUrl, heroImageAlt, tourHea
   return (
     <>
     <main className={styles.container}>
-      {/* Heading */}
-      <h1 className={styles.heading}>After</h1>
+      {/* Heading SVG */}
+      <img src="/after-heading-vec-black.svg" alt="After logo" className={styles.headingImg} />
 
       {/* Music Player */}
       <div className={`${styles.mobilePanel} ${styles.mobilePanelBlue}`}>

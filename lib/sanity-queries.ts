@@ -80,8 +80,10 @@ export const homeQuery = groq`
     heroImage {
       asset,
       alt,
-      fitMode
+      fitMode,
+      linkUrl
     },
+    heroHoverGif,
     heroHeading,
     heroSubheading
   }
@@ -97,6 +99,14 @@ export const aboutQuery = groq`
   }
 `
 
+// Tour Page metadata
+export const tourQuery = groq`
+  *[_type == "tour"][0] {
+    introHeading,
+    photoImages
+  }
+`
+
 // Apple Music Settings
 export const appleMusicSettingsQuery = groq`
   *[_type == "appleMusicSettings"][0] {
@@ -106,18 +116,21 @@ export const appleMusicSettingsQuery = groq`
   }
 `
 
-// Contact Submissions
-export const contactSubmissionsQuery = groq`
-  *[_type == "contact-submission"] | order(date desc) {
-    _id,
-    name,
-    email,
-    message,
-    date,
-    status
+// Contact Page
+export const contactQuery = groq`
+  *[_type == "contact"][0] {
+    formIntro
   }
 `
 
+// Music Page
+export const musicQuery = groq`
+  *[_type == "music"][0] {
+    playlistHeading
+  }
+`
+
+// Merch Page
 export const merchQuery = groq`
   *[_type == "merch"][0] {
     bannerImage,
@@ -125,25 +138,15 @@ export const merchQuery = groq`
   }
 `
 
-export const tourQuery = groq`
-  *[_type == "tour"][0] {
-    introHeading,
-    photoImages
+// News Page (panel content)
+export const newsPageQuery = groq`
+  *[_type == "newsPage"][0] {
+    panelHeading,
+    panelContent
   }
 `
 
-export const contactQuery = groq`
-  *[_type == "contact"][0] {
-    formIntro
-  }
-`
-
-export const musicQuery = groq`
-  *[_type == "music"][0] {
-    playlistHeading
-  }
-`
-
+// Band Info Page
 export const bandInfoQuery = groq`
   *[_type == "bandInfo"][0] {
     bandImage1,
@@ -153,6 +156,7 @@ export const bandInfoQuery = groq`
   }
 `
 
+// Gallery Page
 export const galleryQuery = groq`
   *[_type == "gallery"][0] {
     images[] {

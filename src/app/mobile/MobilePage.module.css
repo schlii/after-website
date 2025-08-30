@@ -35,6 +35,15 @@
   content: none !important;
 }
 
+/* SVG logo heading image */
+.headingImg {
+  width: 70%;           /* smaller relative size */
+  max-width: 320px;     /* limit absolute size */
+  height: auto;
+  margin: 0.5rem auto -1rem; /* center horizontally */
+  display: block;
+}
+
 .playerSection {
   display: flex;
   justify-content: center;

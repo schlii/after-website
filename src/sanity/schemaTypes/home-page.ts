@@ -14,8 +14,7 @@ export default defineType({
         {
           name: 'alt',
           title: 'Alt Text',
-          type: 'string',
-          validation: Rule => Rule.required(),
+          type: 'string'
         },
         {
           name: 'fitMode',
@@ -34,6 +33,12 @@ export default defineType({
           },
           initialValue: 'cover'
         },
+        {
+          name: 'linkUrl',
+          title: 'Link URL',
+          type: 'url',
+          description: 'Optional. When set, clicking the hero image navigates to this URL.',
+        },
       ],
       validation: Rule => Rule.required(),
     }),
@@ -46,6 +51,13 @@ export default defineType({
       name: 'heroSubheading',
       title: 'Hero Subheading',
       type: 'string',
+    }),
+    defineField({
+      name: 'heroHoverGif',
+      title: 'Hero Hover GIF',
+      type: 'image',
+      description: 'Transparent animated GIF that fades in when the hero panel is hovered',
+      options: { accept: 'image/gif' }
     }),
   ],
   preview: {
