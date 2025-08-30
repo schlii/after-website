@@ -20,6 +20,16 @@ const ptComponents = {
     textAlign: ({ children, value }: any) => (
       <span style={{ display: 'block', textAlign: value?.align || 'left' }}>{children}</span>
     ),
+    link: ({children, value}: any) => {
+      const { href = '#', openInNewTab } = value || {}
+      const rel = openInNewTab ? 'noopener noreferrer' : undefined
+      const target = openInNewTab ? '_blank' : undefined
+      return (
+        <a href={href} target={target} rel={rel} style={{ color: '#0000EE', textDecoration: 'underline' }}>
+          {children}
+        </a>
+      )
+    },
   },
   block: {
     h1: ({ children }: any) => <h3 style={{ fontSize: '1rem', margin: '0 0 .2rem' }}>{children}</h3>,
@@ -56,7 +66,7 @@ const TabbedInfoPanel: React.FC<Props> = ({ tourDates, newsPosts, newsRich, maxR
   const renderNews = () => {
     if (newsRich?.length) {
       return (
-        <div className={styles.content}>
+        <div className={`${styles.content} ${styles.newsRichBox}`}>
           <PortableText value={newsRich} components={ptComponents} />
         </div>
       )
@@ -86,13 +96,13 @@ const TabbedInfoPanel: React.FC<Props> = ({ tourDates, newsPosts, newsRich, maxR
     <div className={styles.container}>
       <div className={styles.tabHeader}>
         <button
-          className={`${styles.tabButton} ${activeTab === 'tour' ? styles.tabButtonActive : ''}`}
+          className={`${styles.tabButton} ${activeTab === 'tour' ? styles.tabButtonActive : styles.tabButtonInactive}`}
           onClick={() => setActiveTab('tour')}
         >
           tour
         </button>
         <button
-          className={`${styles.tabButton} ${activeTab === 'news' ? styles.tabButtonActive : ''}`}
+          className={`${styles.tabButton} ${activeTab === 'news' ? styles.tabButtonActive : styles.tabButtonInactive}`}
           onClick={() => setActiveTab('news')}
         >
           news

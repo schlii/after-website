@@ -34,6 +34,25 @@ export default defineType({
             annotations: [
               { type: 'textColor' },
               { type: 'textAlign' },
+              {
+                name: 'link',
+                type: 'object',
+                title: 'Link',
+                fields: [
+                  {
+                    name: 'href',
+                    title: 'URL',
+                    type: 'url',
+                    validation: Rule => Rule.uri({ allowRelative: true, scheme: ['http','https','mailto'] }),
+                  },
+                  {
+                    name: 'openInNewTab',
+                    title: 'Open in new tab',
+                    type: 'boolean',
+                    initialValue: false,
+                  },
+                ],
+              },
             ],
           },
         },

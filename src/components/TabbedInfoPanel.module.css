@@ -29,6 +29,7 @@
   cursor: pointer;
   color: #000000;
   transition: background 0.2s ease;
+  transform: translateY(2px);   /* shifts content down 1 px */
 }
 
 .tabButtonActive {
@@ -36,9 +37,14 @@
   border-color: #000000;
 }
 
+.tabButtonInactive {
+  opacity: 0.6;
+}
+
 .content {
   flex: 1 1 0;
   min-height: 0;
+  color: #000000; /* default text color */
 }
 
 .newsList {
@@ -65,4 +71,31 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.newsRichBox {
+  background: #dddddd;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  overflow-y: auto;
+  max-height: 100%;
+  position: relative;
+}
+
+.newsRichBox::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/grain.png');
+  background-size: 200px 200px;
+  background-repeat: repeat;
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.newsRichBox > * {
+  position: relative;
+  z-index: 1;
 }
