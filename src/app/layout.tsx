@@ -8,6 +8,7 @@ import { fetchSanityDocument } from '../../lib/sanity-server';
 import { globalQuery } from '../../lib/sanity-queries';
 import { urlFor } from '@/sanity/lib/image';
 import { BackgroundSlideshow } from '../components/BackgroundSlideshow';
+import CircleOverlay from '../components/CircleOverlay';
 import "./globals.css";
 import localFont from 'next/font/local';
 
@@ -69,6 +70,8 @@ export default async function RootLayout({
       <body className="min-h-screen bg-black text-white">
         {/* Background slideshow behind all content */}
         {images.length > 0 && <BackgroundSlideshow images={images} />}
+        {/* Animated circle overlay */}
+        <CircleOverlay />
         {/* Global providers */}
         <Providers>
         <main>
