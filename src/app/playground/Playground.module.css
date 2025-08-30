@@ -9,7 +9,7 @@
 
 /* Scalable site container adhering to 1024 × 800 mock-up */
 .siteContainer {
-  width: clamp(320px, 80vmin, 1024px);
+  width: clamp(320px, 80vw, 1024px);
   aspect-ratio: 1024 / 800;
 
   /* Enable container query units so internal gaps scale with width */
@@ -25,6 +25,14 @@
   background: rgba(255, 255, 255, 0.05); /* subtle visual aid */
   outline: 1px dashed rgba(255, 255, 255, 0.15);
   position: relative;
+}
+
+@media (max-height: 800px) {
+  .siteContainer { width: clamp(320px, 70vw, 1024px); }
+}
+
+@media (max-height: 700px) {
+  .siteContainer { width: clamp(320px, 60vw, 1024px); }
 }
 
 /* Hero wrapper spans the grid area and hosts background image + panel */
