@@ -119,5 +119,5 @@
 
 .compact .tix {
   font-size: 0.8rem;
-  width: 110px;
+  width: 90px; /* reduced width for mobile to allow more capsule space */
 }
