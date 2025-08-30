@@ -16,10 +16,13 @@ interface Props {
   compact?: boolean
 }
 
-function formatDate(dateStr: string): string {
+function formatDate(dateStr: string, showYear = true): string {
   const d = new Date(dateStr)
   if (Number.isNaN(d.getTime())) return dateStr
-  return d.toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' })
+  const options: Intl.DateTimeFormatOptions = showYear
+    ? { year: 'numeric', month: '2-digit', day: '2-digit' }
+    : { month: '2-digit', day: '2-digit' }
+  return d.toLocaleDateString(undefined, options)
 }
 
 const TourDatesPanel: React.FC<Props> = ({ dates, maxRows, compact = false }) => {
@@ -32,7 +35,7 @@ const TourDatesPanel: React.FC<Props> = ({ dates, maxRows, compact = false }) =>
         return (
         <div key={_id} className={styles.row}>
           <div className={styles.capsule}>
-            <span className={styles.date}>{formatDate(date)}</span>
+            <span className={styles.date}>{formatDate(date, !compact)}</span>
             <span className={styles.divider} />
             <span className={styles.location}>{loc}</span>
           </div>
