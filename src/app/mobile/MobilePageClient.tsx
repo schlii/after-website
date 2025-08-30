@@ -37,6 +37,9 @@ const MobilePageClient: React.FC<Props> = ({ heroImageUrl, heroImageAlt, tourHea
         <AppleMusicPlayerClient />
       </div>
 
+      {/* Outbound GIF banner */}
+      <img src="/outboundgif.gif" alt="" className={styles.mobileBanner} />
+
       {/* Hero Image */}
       {heroImageUrl && (
         <img src={heroImageUrl} alt={heroImageAlt ?? 'Hero'} className={styles.heroImage} />
