@@ -10,7 +10,7 @@ export const TourSection: FC<TourSectionProps> = ({ tourDates }) => {
   const upcomingShows = tourDates?.filter(date => date.status === 'upcoming') || []
 
   return (
-    <section className="py-16 px-4 md:px-8 bg-gray-50">
+    <section className="py-16 px-4 md:px-8 bg-gray-50" style={{ aspectRatio: '16 / 9', maxHeight: '100vh' }}>
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold">Upcoming Shows</h2>

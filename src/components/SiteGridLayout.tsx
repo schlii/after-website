@@ -1,4 +1,6 @@
-import { type FC, type ReactNode } from 'react'
+'use client'
+
+import { type FC, type ReactNode, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import styles from '@/styles/SiteGrid.module.css'
@@ -19,8 +21,32 @@ interface SiteGridLayoutProps {
  * while allowing each route to decide which elements occupy the grid.
  */
 export const SiteGridLayout: FC<SiteGridLayoutProps> = ({ children }) => {
+  const scaleRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const designW = 1024
+    const designH = 1065
+    const margin = 1.05 // 5 % breathing room
+
+    const applyScale = () => {
+      const sX = window.innerWidth / designW
+      const sY = window.innerHeight / (designH * margin)
+      const scale = Math.min(sX, sY, 1)
+      if (scaleRef.current !== null) {
+        const vOffset = Math.max((window.innerHeight - designH * scale) / 2, 0)
+        scaleRef.current.style.transform = `translateX(-50%) scale(${scale})`
+        scaleRef.current.style.top = `${vOffset}px`
+      }
+    }
+
+    applyScale()
+    window.addEventListener('resize', applyScale)
+    return () => { window.removeEventListener('resize', applyScale) }
+  }, [])
+
   return (
     <main className={styles.pageWrapper}>
+      <div ref={scaleRef} className={styles.siteScale}>
       <header className={styles.siteHeading}>
         <Image
           src="/after-heading-vec-black.svg"
@@ -57,6 +83,7 @@ export const SiteGridLayout: FC<SiteGridLayoutProps> = ({ children }) => {
           Website by <a href="https://instagram.com/bicflame" target="_blank" rel="noreferrer">bicflame</a>
         </p>
       </footer>
+      </div>
     </main>
   )
 }

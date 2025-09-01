@@ -1,6 +1,18 @@
 /* Production grid styles proxying the playground module */
 @import '../app/playground/Playground.module.css';
 
+.pageWrapper {
+  /* existing */
+}
+
+.siteScale {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform-origin: top center;
+  /* width and other vars already declared above */
+}
+
 .tourLine1 {
   margin: 0;
   text-transform: none;
@@ -11,7 +23,7 @@
 
 /* Persistent heading above site container */
 .siteHeading {
-  width: clamp(320px, 80vmin, 1024px);
+  width: clamp(320px, 80vw, 1024px);
   margin: 0.25rem auto 1rem;
   display: flex;
   justify-content: center;
@@ -47,7 +59,7 @@
 
 /* ──────────  Site navigation (outside grid) ────────── */
 .siteNav {
-  width: clamp(320px, 80vmin, 1024px);
+  width: clamp(320px, 80vw, 1024px);
   margin: 1.5cqh auto 0;
   display: flex;
   justify-content: center;
@@ -197,7 +209,7 @@
 }
 
 .siteFooter {
-  width: clamp(320px, 80vmin, 1024px);
+  width: clamp(320px, 80vw, 1024px);
   margin: 0.75rem auto 1rem;
   font-family: var(--font-mono);
   font-size: 0.9rem;

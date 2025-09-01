@@ -13,7 +13,7 @@
      1. Start at 80% of viewport width (80vw)
      2. Also compute the width that corresponds to 80dvh when maintaining the 1024/800 aspect ratio → 80dvh × 1.28
      3. Choose the smaller of the two with min(), then clamp to 1024-px maximum. */
-  width: clamp(320px, min(80vw, calc(80dvh * 1.28)), 1024px);
+  width: clamp(320px, 80vw, 1024px);
   aspect-ratio: 1024 / 800;
 
   /* Enable container query units so internal gaps scale with width */
@@ -253,7 +253,7 @@
 
 /* ──────────  Site navigation (outside grid) ────────── */
 .siteNav {
-  width: clamp(320px, 80vmin, 1024px);
+  width: clamp(320px, 80vw, 1024px);
   margin: 1.5cqh auto 0;
   display: flex;
   justify-content: center; /* center links */
