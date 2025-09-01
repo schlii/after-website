@@ -33,7 +33,8 @@ export const SiteGridLayout: FC<SiteGridLayoutProps> = ({ children }) => {
       const sY = window.innerHeight / (designH * margin)
       const scale = Math.min(sX, sY, 1)
       if (scaleRef.current !== null) {
-        const vOffset = Math.max((window.innerHeight - designH * scale) / 2, 0)
+        const barH = 56 // collapsed mobile cart bar height on desktop
+        const vOffset = Math.max((window.innerHeight - designH * scale - barH) / 2, 0)
         scaleRef.current.style.transform = `translateX(-50%) scale(${scale})`
         scaleRef.current.style.top = `${vOffset}px`
       }

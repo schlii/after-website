@@ -11,8 +11,8 @@ export default function CartSidebar() {
       style={{
         position: 'fixed',
         top: 0,
-        right: isOpen ? 0 : 'calc(-1 * clamp(260px, 28vw, 320px))',
-        width: 'clamp(260px, 28vw, 320px)',
+        right: isOpen ? 0 : 'calc(-1 * clamp(220px, 24vw, 300px))',
+        width: 'clamp(220px, 24vw, 300px)',
         height: '100vh',
         background: '#111',
         color: '#fff',

@@ -15,7 +15,7 @@ export const revalidate = 0
 
 import MobilePageClient from './MobilePageClient'
 
-import { homeQuery, tourDatesQuery, aboutQuery, tourQuery, galleryQuery } from 'lib/sanity-queries'
+import { homeQuery, tourDatesQuery, aboutQuery, tourQuery, galleryQuery, newsPageQuery } from 'lib/sanity-queries'
 import { fetchSanityDocument, fetchSanityDocuments } from 'lib/sanity-fetch'
 import { urlFor } from '@/sanity/lib/image'
 import { shopifyHelpers } from 'lib/shopify'
@@ -38,12 +38,14 @@ export default async function MobilePage() {
     { data: tourDates },
     { data: tourData },
     { data: galleryData },
+    { data: newsPage },
   ] = await Promise.all([
     fetchSanityDocument<HomePageData>(homeQuery),
     fetchSanityDocument<AboutPageData>(aboutQuery),
     fetchSanityDocuments<any>(`${tourDatesQuery} | order(date asc)`),
     fetchSanityDocument<{ introHeading?: string }>(tourQuery),
     fetchSanityDocument<{ images: any[] }>(galleryQuery),
+    fetchSanityDocument<any>(newsPageQuery),
   ])
 
   // Fetch first 6 Shopify products (limit for mobile page)
@@ -64,6 +66,8 @@ export default async function MobilePage() {
       merch={merch}
       galleryImages={galleryData?.images ?? []}
       aboutText={aboutData?.text1 ? aboutData.text1.map((block: any) => block.children?.[0]?.text) : []}
+      newsPosts={null}
+      newsRich={newsPage?.panelContent ?? []}
     />
   )
 }

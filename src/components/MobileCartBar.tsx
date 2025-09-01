@@ -20,7 +20,7 @@ export default function MobileCartBar () {
 
   // Fluid dimension tokens
   const collapsedHeight = 'clamp(44px, 6vh, 56px)'
-  const desktopWidth = 'clamp(260px, 28vw, 360px)'
+  const desktopWidth = 'clamp(220px, 24vw, 300px)'
 
   // Detect desktop viewport (min-width 1024px)
   const [isDesktop, setIsDesktop] = useState(false)
@@ -83,7 +83,7 @@ export default function MobileCartBar () {
     <div style={containerStyle}>
       {/* toggle button */}
       <div style={{padding:'8px 4px 4px', display:'flex', justifyContent:'center'}}>
-        <button className={css.sendBtn} style={{width:'140px'}} onClick={toggle}>
+        <button className={css.sendBtn} style={{minWidth:'110px', whiteSpace:'nowrap', padding:'4px 0'}} onClick={toggle}>
           {open ? 'hide cart' : `view cart (${items.reduce((s,i)=>s+i.quantity,0)})`}
         </button>
       </div>

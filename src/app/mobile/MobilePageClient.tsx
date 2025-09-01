@@ -4,14 +4,15 @@ import styles from './MobilePage.module.css'
 import site from '@/styles/SiteGrid.module.css'
 // mobile panel chrome class
 import AppleMusicPlayerClient from '@/components/AppleMusicPlayerClient'
-import TourDatesPanel from '@/components/TourDatesPanel'
+import TabbedInfoPanel from '@/components/TabbedInfoPanel'
 import { ProductGrid } from '@/components/ProductGrid'
 import { ContactForm } from '@/components/ContactForm'
 import React from 'react'
 
 import type { PlainProduct } from '../../../types/PlainProduct'
 import type { TourDateEntry } from '@/components/TourDatesPanel'
-import MobileMerchCarousel from '@/components/MobileMerchCarousel'
+import type { NewsListItem } from '@/components/TabbedInfoPanel'
+import MobileMerchStack from '@/components/MobileMerchStack'
 import MobileCartBar from '@/components/MobileCartBar'
 import MobileGalleryCarousel from '@/components/MobileGalleryCarousel'
 
@@ -23,9 +24,11 @@ interface Props {
   merch: PlainProduct[]
   aboutText: string[]
   galleryImages: any[]
+  newsPosts: NewsListItem[] | null
+  newsRich: any[] | null
 }
 
-const MobilePageClient: React.FC<Props> = ({ heroImageUrl, heroImageAlt, tourHeading, tourDates, merch, aboutText, galleryImages }) => {
+const MobilePageClient: React.FC<Props> = ({ heroImageUrl, heroImageAlt, tourHeading, tourDates, merch, aboutText, galleryImages, newsPosts, newsRich }) => {
   return (
     <>
     <main className={styles.container}>
@@ -48,8 +51,7 @@ const MobilePageClient: React.FC<Props> = ({ heroImageUrl, heroImageAlt, tourHea
       {/* Tour Dates */}
       <div className={`${styles.mobilePanel} ${styles.mobilePanelGray}`}>
         <div className={`${site.panelBox} ${styles.grainBox}`}>
-          <h2 className={styles.sectionHeading}>{tourHeading || 'upcoming tour'}</h2>
-          <TourDatesPanel dates={tourDates} compact />
+          <TabbedInfoPanel tourDates={tourDates} newsPosts={newsPosts} newsRich={newsRich} compact />
         </div>
       </div>
 
@@ -61,7 +63,7 @@ const MobilePageClient: React.FC<Props> = ({ heroImageUrl, heroImageAlt, tourHea
       {/* Merch */}
       <div className={styles.mobilePanel}>
         <div className={`${site.panelBox} ${styles.grainBox}`}>
-          <MobileMerchCarousel products={merch} />
+          <MobileMerchStack products={merch} />
         </div>
       </div>
 
