@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Providers from "../components/Providers";
 import MobileCartBar from "../components/MobileCartBar";
+import PageLoader from "../components/PageLoader";
 import { draftMode } from 'next/headers';
 import { VisualEditing } from 'next-sanity';
 import { fetchSanityDocument } from '../../lib/sanity-server';
@@ -72,6 +73,7 @@ export default async function RootLayout({
         {images.length > 0 && <BackgroundSlideshow images={images} />}
         {/* Animated circle overlay */}
         <CircleOverlay />
+        <PageLoader />
         {/* Global providers */}
         <Providers>
         <main>
