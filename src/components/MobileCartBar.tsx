@@ -18,6 +18,10 @@ export default function MobileCartBar () {
 
   const { items, checkoutUrl, updateQuantity, removeItem } = useCart()
 
+  // Fluid dimension tokens
+  const collapsedHeight = 'clamp(44px, 6vh, 56px)'
+  const desktopWidth = 'clamp(260px, 28vw, 360px)'
+
   // Detect desktop viewport (min-width 1024px)
   const [isDesktop, setIsDesktop] = useState(false)
 
@@ -39,7 +43,7 @@ export default function MobileCartBar () {
   const [open, setOpen] = useState(false)
   const toggle = () => setOpen(!open)
 
-  const barHeight = open ? '60vh' : '56px' // mobile default
+  const barHeight = open ? '60vh' : collapsedHeight // mobile default
 
   const commonStyles: React.CSSProperties = {
     background: '#dfe4ea',
@@ -57,8 +61,8 @@ export default function MobileCartBar () {
         position: 'fixed',
         right: '20px',
         bottom: 0,
-        width: '360px',
-        height: open ? 'auto' : '56px',
+        width: desktopWidth,
+        height: open ? 'auto' : collapsedHeight,
         maxHeight: '60vh',
         borderTopLeftRadius: '8px',
         borderTopRightRadius: '8px',

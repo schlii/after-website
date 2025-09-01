@@ -26,6 +26,7 @@
   align-items: center;
   gap: 1rem;
   flex: 0 0 auto;
+  flex-wrap: wrap; /* allow items to wrap on narrow widths */
 }
 
 .capsule {
@@ -69,7 +70,7 @@
 
 .tix {
   flex: none;
-  width: 100px;
+  width: clamp(80px, 22vw, 100px); /* fluid width with current 100px max */
   text-align: center;
   background: #8c949b;
   border: 1px solid #a3abb2;
@@ -119,5 +120,5 @@
 
 .compact .tix {
   font-size: 0.8rem;
-  width: 80px; /* reduced width for mobile to allow more capsule space */
+  width: clamp(70px, 28vw, 80px); /* fluid smaller width */
 }
