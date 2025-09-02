@@ -11,7 +11,7 @@
   scrollbar-width: thin;
   scrollbar-color: rgba(0,0,0,0.4) transparent;
   /* Increase bottom padding so footer isn't hidden behind cart bar */
-  padding-bottom: calc(4rem + clamp(44px, 6vh, 56px));
+  padding-bottom: calc(10rem + clamp(44px, 6vh, 56px));
 }
 
 .container::-webkit-scrollbar {
