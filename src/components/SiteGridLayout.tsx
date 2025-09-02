@@ -26,7 +26,7 @@ export const SiteGridLayout: FC<SiteGridLayoutProps> = ({ children }) => {
   useEffect(() => {
     const designW = 1024
     const designH = 1065
-    const margin = 1.05 // 5 % breathing room
+    const margin = 1.01 // 2 % breathing room – allows slightly larger scale on laptops
 
     const applyScale = () => {
       const sX = window.innerWidth / designW
@@ -34,7 +34,7 @@ export const SiteGridLayout: FC<SiteGridLayoutProps> = ({ children }) => {
       const scale = Math.min(sX, sY, 1)
       if (scaleRef.current !== null) {
         const barH = 56 // collapsed mobile cart bar height on desktop
-        const extra = 40 // move slightly lower on laptops
+        const extra = 45 // move slightly lower on laptops
         const vOffset = Math.max((window.innerHeight - designH * scale - barH) / 2 + extra, 0)
         scaleRef.current.style.transform = `translateX(-50%) scale(${scale})`
         scaleRef.current.style.top = `${vOffset}px`
