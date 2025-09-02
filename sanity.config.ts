@@ -14,6 +14,10 @@ import {apiVersion, dataset, projectId} from './src/sanity/env'
 import {schema} from './src/sanity/schemaTypes'
 import {structure} from './src/sanity/structure'
 import {bandTheme} from './src/sanity/theme'
+import { env } from 'process'
+
+// derive site url (must not end with slash)
+const siteUrl = (env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000').replace(/\/$/, '')
 
 export default defineConfig({
   basePath: '/studio',
@@ -31,13 +35,13 @@ export default defineConfig({
     // Presentation tool enables Visual Editing previews
     presentationTool({
       previewUrl: {
-        initial: 'http://localhost:3000',
+        initial: siteUrl,
         previewMode: {
-          enable: '/api/draft/enable',
-          disable: '/api/draft/disable',
+          enable: `${siteUrl}/api/draft/enable`,
+          disable: `${siteUrl}/api/draft/disable`,
         },
       },
-      allowOrigins: ['http://localhost:*'],
+      allowOrigins: [siteUrl, 'http://localhost:*'],
     }),
   ],
 })
